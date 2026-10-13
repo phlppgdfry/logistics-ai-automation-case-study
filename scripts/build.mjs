@@ -100,7 +100,9 @@ const numbers = {
     [`sc.${x.id}.cash`, eur(x.result.cashBenefitYear)]])),
   "sens.top": sens[0].label, "sens.topLow": eur(sens[0].low), "sens.topHigh": eur(sens[0].high),
 };
-writeIfChanged("site/data/business-case.json", `${JSON.stringify({ values: v, result: bc, scenarios: sc, sensitivity: sens, numbers }, null, 1)}\n`);
+// Rounded, so the file is identical across Node versions (last-digit float differences otherwise fail CI).
+const round = (key, x) => (typeof x === "number" ? Math.round(x * 1e4) / 1e4 : x);
+writeIfChanged("site/data/business-case.json", `${JSON.stringify({ values: v, result: bc, scenarios: sc, sensitivity: sens, numbers }, round, 1)}\n`);
 
 const MARK = /<!--n:([\w.-]+)-->([\s\S]*?)<!--\/n-->/g;
 const unknown = new Set();

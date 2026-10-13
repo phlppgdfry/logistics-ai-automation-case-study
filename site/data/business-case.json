@@ -33,14 +33,14 @@
   "wismoPerDay": 243.2,
   "podPerDay": 70.4,
   "inScopePerDay": 313.6,
-  "avgAht": 3.775510204081632,
+  "avgAht": 3.7755,
   "baselineMinPerDay": 1184,
   "baselineHoursYear": 4972.8,
-  "baselineCostYear": 238694.40000000002,
-  "savedMinPerDay": 912.3199999999999,
-  "capacityHoursYear": 3831.7439999999997,
+  "baselineCostYear": 238694.4,
+  "savedMinPerDay": 912.32,
+  "capacityHoursYear": 3831.744,
   "capacityValueYear": 183923.712,
-  "capacityFte": 2.39484,
+  "capacityFte": 2.3948,
   "cashBenefitYear": 113984,
   "buildCost": 40700,
   "creditsYear": 717696,
@@ -50,12 +50,12 @@
   "cashflows": [
    -40700,
    35415.04,
-   92407.04000000001,
-   92407.04000000001
+   92407.04,
+   92407.04
   ],
-  "npv3y": 144671.53401412384,
+  "npv3y": 144671.534,
   "paybackMonths": 13,
-  "costPerAutoReply": 0.49642194540153717
+  "costPerAutoReply": 0.4964
  },
  "scenarios": [
   {
@@ -66,14 +66,14 @@
     "wismoPerDay": 243.2,
     "podPerDay": 70.4,
     "inScopePerDay": 313.6,
-    "avgAht": 3.775510204081632,
+    "avgAht": 3.7755,
     "baselineMinPerDay": 1184,
     "baselineHoursYear": 4972.8,
-    "baselineCostYear": 238694.40000000002,
-    "savedMinPerDay": 912.3199999999999,
-    "capacityHoursYear": 3831.7439999999997,
+    "baselineCostYear": 238694.4,
+    "savedMinPerDay": 912.32,
+    "capacityHoursYear": 3831.744,
     "capacityValueYear": 183923.712,
-    "capacityFte": 2.39484,
+    "capacityFte": 2.3948,
     "cashBenefitYear": 113984,
     "buildCost": 40700,
     "creditsYear": 717696,
@@ -83,12 +83,12 @@
     "cashflows": [
      -40700,
      35415.04,
-     92407.04000000001,
-     92407.04000000001
+     92407.04,
+     92407.04
     ],
-    "npv3y": 144671.53401412384,
+    "npv3y": 144671.534,
     "paybackMonths": 13,
-    "costPerAutoReply": 0.49642194540153717
+    "costPerAutoReply": 0.4964
    }
   },
   {
@@ -101,14 +101,14 @@
     "wismoPerDay": 243.2,
     "podPerDay": 70.4,
     "inScopePerDay": 313.6,
-    "avgAht": 3.775510204081632,
+    "avgAht": 3.7755,
     "baselineMinPerDay": 1184,
     "baselineHoursYear": 4972.8,
-    "baselineCostYear": 238694.40000000002,
-    "savedMinPerDay": 912.3199999999999,
-    "capacityHoursYear": 3831.7439999999997,
+    "baselineCostYear": 238694.4,
+    "savedMinPerDay": 912.32,
+    "capacityHoursYear": 3831.744,
     "capacityValueYear": 183923.712,
-    "capacityFte": 2.39484,
+    "capacityFte": 2.3948,
     "cashBenefitYear": 51984,
     "buildCost": 40700,
     "creditsYear": 717696,
@@ -117,13 +117,13 @@
     "runCostYear": 21576.96,
     "cashflows": [
      -40700,
-     4415.040000000001,
+     4415.04,
      30407.04,
      30407.04
     ],
-    "npv3y": 13595.224508459072,
+    "npv3y": 13595.2245,
     "paybackMonths": 27,
-    "costPerAutoReply": 0.49642194540153717
+    "costPerAutoReply": 0.4964
    }
   },
   {
@@ -137,14 +137,14 @@
     "wismoPerDay": 243.2,
     "podPerDay": 70.4,
     "inScopePerDay": 313.6,
-    "avgAht": 3.775510204081632,
+    "avgAht": 3.7755,
     "baselineMinPerDay": 1184,
     "baselineHoursYear": 4972.8,
-    "baselineCostYear": 238694.40000000002,
-    "savedMinPerDay": 739.8399999999999,
+    "baselineCostYear": 238694.4,
+    "savedMinPerDay": 739.84,
     "capacityHoursYear": 3107.328,
     "capacityValueYear": 149151.744,
-    "capacityFte": 1.94208,
+    "capacityFte": 1.9421,
     "cashBenefitYear": 113984,
     "buildCost": 40700,
     "creditsYear": 717696,
@@ -154,10 +154,10 @@
     "cashflows": [
      -40700,
      35415.04,
-     92407.04000000001,
-     92407.04000000001
+     92407.04,
+     92407.04
     ],
-    "npv3y": 144671.53401412384,
+    "npv3y": 144671.534,
     "paybackMonths": 13,
     "costPerAutoReply": null
    }
@@ -172,14 +172,14 @@
     "wismoPerDay": 243.2,
     "podPerDay": 70.4,
     "inScopePerDay": 313.6,
-    "avgAht": 3.775510204081632,
+    "avgAht": 3.7755,
     "baselineMinPerDay": 1184,
     "baselineHoursYear": 4972.8,
-    "baselineCostYear": 238694.40000000002,
+    "baselineCostYear": 238694.4,
     "savedMinPerDay": 818.24,
     "capacityHoursYear": 3436.608,
     "capacityValueYear": 164957.184,
-    "capacityFte": 2.1478800000000002,
+    "capacityFte": 2.1479,
     "cashBenefitYear": 113984,
     "buildCost": 40700,
     "creditsYear": 717696,
@@ -189,12 +189,12 @@
     "cashflows": [
      -40700,
      35415.04,
-     92407.04000000001,
-     92407.04000000001
+     92407.04,
+     92407.04
     ],
-    "npv3y": 144671.53401412384,
+    "npv3y": 144671.534,
     "paybackMonths": 13,
-    "costPerAutoReply": 0.49642194540153717
+    "costPerAutoReply": 0.4964
    }
   },
   {
@@ -207,15 +207,15 @@
     "wismoPerDay": 243.2,
     "podPerDay": 70.4,
     "inScopePerDay": 313.6,
-    "avgAht": 3.775510204081632,
+    "avgAht": 3.7755,
     "baselineMinPerDay": 1184,
     "baselineHoursYear": 4972.8,
-    "baselineCostYear": 238694.40000000002,
+    "baselineCostYear": 238694.4,
     "savedMinPerDay": 586.72,
     "capacityHoursYear": 2464.224,
-    "capacityValueYear": 118282.75200000001,
-    "capacityFte": 1.54014,
-    "cashBenefitYear": 94462.68000000001,
+    "capacityValueYear": 118282.752,
+    "capacityFte": 1.5401,
+    "cashBenefitYear": 94462.68,
     "buildCost": 40700,
     "creditsYear": 717696,
     "creditCostYear": 7176.96,
@@ -223,13 +223,13 @@
     "runCostYear": 21576.96,
     "cashflows": [
      -40700,
-     25654.380000000005,
+     25654.38,
      72885.72,
      72885.72
     ],
-    "npv3y": 103400.84720317024,
+    "npv3y": 103400.8472,
     "paybackMonths": 15,
-    "costPerAutoReply": 0.9928438908030743
+    "costPerAutoReply": 0.9928
    }
   }
  ],
@@ -237,74 +237,74 @@
   {
    "key": "hireAvoidedCost",
    "label": "Loaded cost of that hire",
-   "low": 111902.45663770766,
-   "high": 177440.61139054009,
-   "range": 65538.15475283243,
-   "base": 144671.53401412384
+   "low": 111902.4566,
+   "high": 177440.6114,
+   "range": 65538.1548,
+   "base": 144671.534
   },
   {
    "key": "consultantDays",
    "label": "Consultant days (discovery → pilot → handover)",
-   "low": 151471.53401412384,
-   "high": 137871.53401412384,
+   "low": 151471.534,
+   "high": 137871.534,
    "range": 13600,
-   "base": 144671.53401412384
+   "base": 144671.534
   },
   {
    "key": "adminDaysPerMonth",
    "label": "Functional admin (rules, templates, test set, monitoring)",
-   "low": 150856.56678351876,
-   "high": 138486.50124472898,
-   "range": 12370.065538789786,
-   "base": 144671.53401412384
+   "low": 150856.5668,
+   "high": 138486.5012,
+   "range": 12370.0655,
+   "base": 144671.534
   },
   {
    "key": "creditPrice",
    "label": "Price per Copilot credit (pay-as-you-go)",
-   "low": 149295.4645125235,
-   "high": 140047.60351572421,
-   "range": 9247.860996799282,
-   "base": 144671.53401412384
+   "low": 149295.4645,
+   "high": 140047.6035,
+   "range": 9247.861,
+   "base": 144671.534
   },
   {
    "key": "shareWismo",
    "label": "Share 'where is my delivery'",
-   "low": 146645.79647411467,
-   "high": 142697.27155413298,
-   "range": 3948.52491998169,
-   "base": 144671.53401412384
+   "low": 146645.7965,
+   "high": 142697.2716,
+   "range": 3948.5249,
+   "base": 144671.534
   },
   {
    "key": "emailsPerDay",
    "label": "Emails into the customer service mailbox",
-   "low": 141579.00217192504,
-   "high": 140047.60351572421,
-   "range": 1531.3986562008213,
-   "base": 144671.53401412384
+   "low": 141579.0022,
+   "high": 140047.6035,
+   "range": 1531.3987,
+   "base": 144671.534
   },
   {
    "key": "ahtWismoMin",
    "label": "Handling time per status email today",
-   "low": 144304.520347508,
-   "high": 144671.53401412384,
-   "range": 367.0136666158505,
-   "base": 144671.53401412384
+   "low": 144304.5203,
+   "high": 144671.534,
+   "range": 367.0137,
+   "base": 144671.534
   },
   {
    "key": "autoShare",
    "label": "In-scope emails answered automatically (steady state)",
-   "low": 144671.53401412384,
-   "high": 144671.53401412384,
+   "low": 144671.534,
+   "high": 144671.534,
    "range": 0,
-   "base": 144671.53401412384
+   "base": 144671.534
   },
   {
    "key": "reviewMinPerDraft",
    "label": "Review time per prepared draft",
-   "low": 144671.53401412384,
-   "high": 144671.53401412384,
+   "low": 144671.534,
+   "high": 144671.534,
    "range": 0,
-   "base": 144671.53401412384
+   "base": 144671.534
   }
  ],
  "numbers": {
