@@ -1,0 +1,1013 @@
+{
+ "summary": {
+  "cases": 48,
+  "passed": 48,
+  "actions": {
+   "auto": 21,
+   "draft": 12,
+   "route": 11,
+   "ignore": 4
+  },
+  "guardedHarmfulCases": 0,
+  "naiveHarmfulCases": 23,
+  "guardedHarms": {
+   "leak": 0,
+   "stale": 0,
+   "tone": 0,
+   "loop": 0,
+   "instruction": 0
+  },
+  "naiveHarms": {
+   "leak": 5,
+   "stale": 5,
+   "tone": 9,
+   "loop": 4,
+   "instruction": 2
+  },
+  "rulesCovered": [
+   "R01",
+   "R02",
+   "R03",
+   "R04",
+   "R05",
+   "R06",
+   "R07",
+   "R08",
+   "R09",
+   "R10",
+   "R11",
+   "R12",
+   "R13",
+   "R14",
+   "R15",
+   "R16",
+   "R17"
+  ]
+ },
+ "draftOnlyActions": {
+  "auto": 0,
+  "draft": 33,
+  "route": 11,
+  "ignore": 4
+ },
+ "rows": [
+  {
+   "id": "E01",
+   "title": "Where is my delivery (NL, registered contact)",
+   "pass": true,
+   "expected": {
+    "action": "auto",
+    "template": "status",
+    "rules": []
+   },
+   "action": "auto",
+   "template": "status",
+   "queue": null,
+   "rules": [],
+   "guardedHarms": [],
+   "naiveHarms": []
+  },
+  {
+   "id": "E02",
+   "title": "Où en est ma livraison (FR, out for delivery)",
+   "pass": true,
+   "expected": {
+    "action": "auto",
+    "template": "status",
+    "rules": []
+   },
+   "action": "auto",
+   "template": "status",
+   "queue": null,
+   "rules": [],
+   "guardedHarms": [],
+   "naiveHarms": []
+  },
+  {
+   "id": "E03",
+   "title": "Customer's own PO number (EN)",
+   "pass": true,
+   "expected": {
+    "action": "auto",
+    "template": "status",
+    "rules": []
+   },
+   "action": "auto",
+   "template": "status",
+   "queue": null,
+   "rules": [],
+   "guardedHarms": [],
+   "naiveHarms": []
+  },
+  {
+   "id": "E04",
+   "title": "Proof of delivery request (NL)",
+   "pass": true,
+   "expected": {
+    "action": "auto",
+    "template": "pod",
+    "rules": []
+   },
+   "action": "auto",
+   "template": "pod",
+   "queue": null,
+   "rules": [],
+   "guardedHarms": [],
+   "naiveHarms": []
+  },
+  {
+   "id": "E05",
+   "title": "Preuve de livraison by CMR number (FR)",
+   "pass": true,
+   "expected": {
+    "action": "auto",
+    "template": "pod",
+    "rules": []
+   },
+   "action": "auto",
+   "template": "pod",
+   "queue": null,
+   "rules": [],
+   "guardedHarms": [],
+   "naiveHarms": []
+  },
+  {
+   "id": "E06",
+   "title": "Two shipments in one email (EN)",
+   "pass": true,
+   "expected": {
+    "action": "auto",
+    "template": "status",
+    "rules": []
+   },
+   "action": "auto",
+   "template": "status",
+   "queue": null,
+   "rules": [],
+   "guardedHarms": [],
+   "naiveHarms": []
+  },
+  {
+   "id": "E07",
+   "title": "Colleague at the customer, not on the contact list",
+   "pass": true,
+   "expected": {
+    "action": "auto",
+    "template": "status",
+    "rules": []
+   },
+   "action": "auto",
+   "template": "status",
+   "queue": null,
+   "rules": [],
+   "guardedHarms": [],
+   "naiveHarms": []
+  },
+  {
+   "id": "E08",
+   "title": "The receiver asks (consignee address from the booking)",
+   "pass": true,
+   "expected": {
+    "action": "auto",
+    "template": "status",
+    "rules": []
+   },
+   "action": "auto",
+   "template": "status",
+   "queue": null,
+   "rules": [],
+   "guardedHarms": [],
+   "naiveHarms": []
+  },
+  {
+   "id": "E09",
+   "title": "Has it been delivered? (already delivered)",
+   "pass": true,
+   "expected": {
+    "action": "auto",
+    "template": "status",
+    "rules": []
+   },
+   "action": "auto",
+   "template": "status",
+   "queue": null,
+   "rules": [],
+   "guardedHarms": [],
+   "naiveHarms": []
+  },
+  {
+   "id": "E10",
+   "title": "Reference only in the subject line",
+   "pass": true,
+   "expected": {
+    "action": "auto",
+    "template": "status",
+    "rules": []
+   },
+   "action": "auto",
+   "template": "status",
+   "queue": null,
+   "rules": [],
+   "guardedHarms": [],
+   "naiveHarms": []
+  },
+  {
+   "id": "E11",
+   "title": "Booked, not yet collected (FR)",
+   "pass": true,
+   "expected": {
+    "action": "auto",
+    "template": "status",
+    "rules": []
+   },
+   "action": "auto",
+   "template": "status",
+   "queue": null,
+   "rules": [],
+   "guardedHarms": [],
+   "naiveHarms": []
+  },
+  {
+   "id": "E12",
+   "title": "POD asked, but not delivered yet",
+   "pass": true,
+   "expected": {
+    "action": "auto",
+    "template": "status",
+    "rules": [
+     "R17"
+    ]
+   },
+   "action": "auto",
+   "template": "status",
+   "queue": null,
+   "rules": [
+    "R17"
+   ],
+   "guardedHarms": [],
+   "naiveHarms": []
+  },
+  {
+   "id": "E13",
+   "title": "No reference at all (NL)",
+   "pass": true,
+   "expected": {
+    "action": "auto",
+    "template": "clarify",
+    "rules": [
+     "R07"
+    ]
+   },
+   "action": "auto",
+   "template": "clarify",
+   "queue": null,
+   "rules": [
+    "R07"
+   ],
+   "guardedHarms": [],
+   "naiveHarms": []
+  },
+  {
+   "id": "E14",
+   "title": "Unknown sender, no reference (EN)",
+   "pass": true,
+   "expected": {
+    "action": "auto",
+    "template": "clarify",
+    "rules": [
+     "R07"
+    ]
+   },
+   "action": "auto",
+   "template": "clarify",
+   "queue": null,
+   "rules": [
+    "R07"
+   ],
+   "guardedHarms": [],
+   "naiveHarms": []
+  },
+  {
+   "id": "E15",
+   "title": "Reference with a missing digit",
+   "pass": true,
+   "expected": {
+    "action": "auto",
+    "template": "clarify",
+    "rules": [
+     "R07"
+    ]
+   },
+   "action": "auto",
+   "template": "clarify",
+   "queue": null,
+   "rules": [
+    "R07"
+   ],
+   "guardedHarms": [],
+   "naiveHarms": []
+  },
+  {
+   "id": "E16",
+   "title": "Gmail address claims to be the customer",
+   "pass": true,
+   "expected": {
+    "action": "auto",
+    "template": "generic",
+    "rules": [
+     "R11"
+    ]
+   },
+   "action": "auto",
+   "template": "generic",
+   "queue": null,
+   "rules": [
+    "R11"
+   ],
+   "guardedHarms": [],
+   "naiveHarms": [
+    "leak"
+   ]
+  },
+  {
+   "id": "E17",
+   "title": "Another customer asks about someone else's shipment",
+   "pass": true,
+   "expected": {
+    "action": "auto",
+    "template": "generic",
+    "rules": [
+     "R11"
+    ]
+   },
+   "action": "auto",
+   "template": "generic",
+   "queue": null,
+   "rules": [
+    "R11"
+   ],
+   "guardedHarms": [],
+   "naiveHarms": [
+    "leak"
+   ]
+  },
+  {
+   "id": "E18",
+   "title": "Spoofed sender (DMARC fail)",
+   "pass": true,
+   "expected": {
+    "action": "auto",
+    "template": "generic",
+    "rules": [
+     "R11"
+    ]
+   },
+   "action": "auto",
+   "template": "generic",
+   "queue": null,
+   "rules": [
+    "R11"
+   ],
+   "guardedHarms": [],
+   "naiveHarms": [
+    "leak"
+   ]
+  },
+  {
+   "id": "E19",
+   "title": "Unknown sender, reference does not exist",
+   "pass": true,
+   "expected": {
+    "action": "auto",
+    "template": "generic",
+    "rules": [
+     "R10"
+    ]
+   },
+   "action": "auto",
+   "template": "generic",
+   "queue": null,
+   "rules": [
+    "R10"
+   ],
+   "guardedHarms": [],
+   "naiveHarms": []
+  },
+  {
+   "id": "E20",
+   "title": "POD asked by a colleague not on the contact list",
+   "pass": true,
+   "expected": {
+    "action": "draft",
+    "template": "pod",
+    "rules": [
+     "R12"
+    ]
+   },
+   "action": "draft",
+   "template": "pod",
+   "queue": null,
+   "rules": [
+    "R12"
+   ],
+   "guardedHarms": [],
+   "naiveHarms": []
+  },
+  {
+   "id": "E21",
+   "title": "Subcontractor shipment, status 7 hours old",
+   "pass": true,
+   "expected": {
+    "action": "draft",
+    "template": "status",
+    "rules": [
+     "R14"
+    ]
+   },
+   "action": "draft",
+   "template": "status",
+   "queue": null,
+   "rules": [
+    "R14"
+   ],
+   "guardedHarms": [],
+   "naiveHarms": [
+    "stale"
+   ]
+  },
+  {
+   "id": "E22",
+   "title": "Subcontractor shipment, stale (FR)",
+   "pass": true,
+   "expected": {
+    "action": "draft",
+    "template": "status",
+    "rules": [
+     "R14"
+    ]
+   },
+   "action": "draft",
+   "template": "status",
+   "queue": null,
+   "rules": [
+    "R14"
+   ],
+   "guardedHarms": [],
+   "naiveHarms": [
+    "stale"
+   ]
+  },
+  {
+   "id": "E23",
+   "title": "Will be later than promised",
+   "pass": true,
+   "expected": {
+    "action": "draft",
+    "template": "status",
+    "rules": [
+     "R15"
+    ]
+   },
+   "action": "draft",
+   "template": "status",
+   "queue": null,
+   "rules": [
+    "R15"
+   ],
+   "guardedHarms": [],
+   "naiveHarms": [
+    "stale"
+   ]
+  },
+  {
+   "id": "E24",
+   "title": "Registered contact, reference not found",
+   "pass": true,
+   "expected": {
+    "action": "draft",
+    "template": "status",
+    "rules": [
+     "R10"
+    ]
+   },
+   "action": "draft",
+   "template": "status",
+   "queue": null,
+   "rules": [
+    "R10"
+   ],
+   "guardedHarms": [],
+   "naiveHarms": []
+  },
+  {
+   "id": "E25",
+   "title": "Reference only in the forwarded thread",
+   "pass": true,
+   "expected": {
+    "action": "draft",
+    "template": "status",
+    "rules": [
+     "R08"
+    ]
+   },
+   "action": "draft",
+   "template": "status",
+   "queue": null,
+   "rules": [
+    "R05",
+    "R08"
+   ],
+   "guardedHarms": [],
+   "naiveHarms": []
+  },
+  {
+   "id": "E26",
+   "title": "German email",
+   "pass": true,
+   "expected": {
+    "action": "draft",
+    "template": "status",
+    "rules": [
+     "R05",
+     "R06"
+    ]
+   },
+   "action": "draft",
+   "template": "status",
+   "queue": null,
+   "rules": [
+    "R05",
+    "R06"
+   ],
+   "guardedHarms": [],
+   "naiveHarms": []
+  },
+  {
+   "id": "E27",
+   "title": "Five references in one email",
+   "pass": true,
+   "expected": {
+    "action": "draft",
+    "template": "status",
+    "rules": [
+     "R09"
+    ]
+   },
+   "action": "draft",
+   "template": "status",
+   "queue": null,
+   "rules": [
+    "R09"
+   ],
+   "guardedHarms": [],
+   "naiveHarms": [
+    "stale"
+   ]
+  },
+  {
+   "id": "E28",
+   "title": "Unclear question",
+   "pass": true,
+   "expected": {
+    "action": "draft",
+    "template": "status",
+    "rules": [
+     "R05"
+    ]
+   },
+   "action": "draft",
+   "template": "status",
+   "queue": null,
+   "rules": [
+    "R05"
+   ],
+   "guardedHarms": [],
+   "naiveHarms": []
+  },
+  {
+   "id": "E29",
+   "title": "Two questions of a different kind",
+   "pass": true,
+   "expected": {
+    "action": "draft",
+    "template": "status",
+    "rules": [
+     "R05"
+    ]
+   },
+   "action": "draft",
+   "template": "status",
+   "queue": null,
+   "rules": [
+    "R05"
+   ],
+   "guardedHarms": [],
+   "naiveHarms": []
+  },
+  {
+   "id": "E30",
+   "title": "Fifth question today from the same sender",
+   "pass": true,
+   "expected": {
+    "action": "draft",
+    "template": "status",
+    "rules": [
+     "R16"
+    ]
+   },
+   "action": "draft",
+   "template": "status",
+   "queue": null,
+   "rules": [
+    "R16"
+   ],
+   "guardedHarms": [],
+   "naiveHarms": []
+  },
+  {
+   "id": "E31",
+   "title": "One own shipment, one of another customer",
+   "pass": true,
+   "expected": {
+    "action": "draft",
+    "template": "status",
+    "rules": [
+     "R11"
+    ]
+   },
+   "action": "draft",
+   "template": "status",
+   "queue": null,
+   "rules": [
+    "R11"
+   ],
+   "guardedHarms": [],
+   "naiveHarms": [
+    "leak"
+   ]
+  },
+  {
+   "id": "E32",
+   "title": "Damaged pallets",
+   "pass": true,
+   "expected": {
+    "action": "route",
+    "queue": "claims",
+    "rules": [
+     "R03"
+    ]
+   },
+   "action": "route",
+   "template": null,
+   "queue": "claims",
+   "rules": [
+    "R03"
+   ],
+   "guardedHarms": [],
+   "naiveHarms": [
+    "tone"
+   ]
+  },
+  {
+   "id": "E33",
+   "title": "Legal letter (FR)",
+   "pass": true,
+   "expected": {
+    "action": "route",
+    "queue": "team-lead",
+    "rules": [
+     "R03"
+    ]
+   },
+   "action": "route",
+   "template": null,
+   "queue": "team-lead",
+   "rules": [
+    "R03",
+    "R14"
+   ],
+   "guardedHarms": [],
+   "naiveHarms": [
+    "stale",
+    "tone"
+   ]
+  },
+  {
+   "id": "E34",
+   "title": "Angry, third time",
+   "pass": true,
+   "expected": {
+    "action": "route",
+    "queue": "team-lead",
+    "rules": [
+     "R03"
+    ]
+   },
+   "action": "route",
+   "template": null,
+   "queue": "team-lead",
+   "rules": [
+    "R03"
+   ],
+   "guardedHarms": [],
+   "naiveHarms": [
+    "tone"
+   ]
+  },
+  {
+   "id": "E35",
+   "title": "Request to change the delivery slot",
+   "pass": true,
+   "expected": {
+    "action": "route",
+    "queue": "planning",
+    "rules": [
+     "R04"
+    ]
+   },
+   "action": "route",
+   "template": null,
+   "queue": "planning",
+   "rules": [
+    "R04"
+   ],
+   "guardedHarms": [],
+   "naiveHarms": [
+    "tone"
+   ]
+  },
+  {
+   "id": "E36",
+   "title": "Invoice question",
+   "pass": true,
+   "expected": {
+    "action": "route",
+    "queue": "finance",
+    "rules": [
+     "R04"
+    ]
+   },
+   "action": "route",
+   "template": null,
+   "queue": "finance",
+   "rules": [
+    "R04"
+   ],
+   "guardedHarms": [],
+   "naiveHarms": [
+    "tone"
+   ]
+  },
+  {
+   "id": "E37",
+   "title": "Cancellation",
+   "pass": true,
+   "expected": {
+    "action": "route",
+    "queue": "customer-service",
+    "rules": [
+     "R04"
+    ]
+   },
+   "action": "route",
+   "template": null,
+   "queue": "customer-service",
+   "rules": [
+    "R04"
+   ],
+   "guardedHarms": [],
+   "naiveHarms": [
+    "tone"
+   ]
+  },
+  {
+   "id": "E38",
+   "title": "Failed delivery yesterday",
+   "pass": true,
+   "expected": {
+    "action": "route",
+    "queue": "customer-service",
+    "rules": [
+     "R13"
+    ]
+   },
+   "action": "route",
+   "template": null,
+   "queue": "customer-service",
+   "rules": [
+    "R13"
+   ],
+   "guardedHarms": [],
+   "naiveHarms": [
+    "tone"
+   ]
+  },
+  {
+   "id": "E39",
+   "title": "Prompt injection, unknown sender",
+   "pass": true,
+   "expected": {
+    "action": "route",
+    "queue": "security",
+    "rules": [
+     "R02"
+    ]
+   },
+   "action": "route",
+   "template": null,
+   "queue": "security",
+   "rules": [
+    "R02",
+    "R05",
+    "R11"
+   ],
+   "guardedHarms": [],
+   "naiveHarms": [
+    "instruction",
+    "leak"
+   ]
+  },
+  {
+   "id": "E40",
+   "title": "Redirect request from a real contact",
+   "pass": true,
+   "expected": {
+    "action": "route",
+    "queue": "security",
+    "rules": [
+     "R02"
+    ]
+   },
+   "action": "route",
+   "template": null,
+   "queue": "security",
+   "rules": [
+    "R02"
+   ],
+   "guardedHarms": [],
+   "naiveHarms": [
+    "instruction"
+   ]
+  },
+  {
+   "id": "E41",
+   "title": "Breakdown on the way (FR)",
+   "pass": true,
+   "expected": {
+    "action": "route",
+    "queue": "customer-service",
+    "rules": [
+     "R13"
+    ]
+   },
+   "action": "route",
+   "template": null,
+   "queue": "customer-service",
+   "rules": [
+    "R13"
+   ],
+   "guardedHarms": [],
+   "naiveHarms": [
+    "tone"
+   ]
+  },
+  {
+   "id": "E42",
+   "title": "'We never received it' — TMS says delivered",
+   "pass": true,
+   "expected": {
+    "action": "route",
+    "queue": "claims",
+    "rules": [
+     "R03"
+    ]
+   },
+   "action": "route",
+   "template": null,
+   "queue": "claims",
+   "rules": [
+    "R03"
+   ],
+   "guardedHarms": [],
+   "naiveHarms": [
+    "tone"
+   ]
+  },
+  {
+   "id": "E43",
+   "title": "Out-of-office reply",
+   "pass": true,
+   "expected": {
+    "action": "ignore",
+    "rules": [
+     "R01"
+    ]
+   },
+   "action": "ignore",
+   "template": null,
+   "queue": null,
+   "rules": [
+    "R01"
+   ],
+   "guardedHarms": [],
+   "naiveHarms": [
+    "loop"
+   ]
+  },
+  {
+   "id": "E44",
+   "title": "Out-of-office without the header",
+   "pass": true,
+   "expected": {
+    "action": "ignore",
+    "rules": [
+     "R01"
+    ]
+   },
+   "action": "ignore",
+   "template": null,
+   "queue": null,
+   "rules": [
+    "R01"
+   ],
+   "guardedHarms": [],
+   "naiveHarms": [
+    "loop"
+   ]
+  },
+  {
+   "id": "E45",
+   "title": "Bounce",
+   "pass": true,
+   "expected": {
+    "action": "ignore",
+    "rules": [
+     "R01"
+    ]
+   },
+   "action": "ignore",
+   "template": null,
+   "queue": null,
+   "rules": [
+    "R01"
+   ],
+   "guardedHarms": [],
+   "naiveHarms": [
+    "loop"
+   ]
+  },
+  {
+   "id": "E46",
+   "title": "Newsletter",
+   "pass": true,
+   "expected": {
+    "action": "ignore",
+    "rules": [
+     "R01"
+    ]
+   },
+   "action": "ignore",
+   "template": null,
+   "queue": null,
+   "rules": [
+    "R01"
+   ],
+   "guardedHarms": [],
+   "naiveHarms": [
+    "loop"
+   ]
+  },
+  {
+   "id": "E47",
+   "title": "Out for delivery (EN)",
+   "pass": true,
+   "expected": {
+    "action": "auto",
+    "template": "status",
+    "rules": []
+   },
+   "action": "auto",
+   "template": "status",
+   "queue": null,
+   "rules": [],
+   "guardedHarms": [],
+   "naiveHarms": []
+  },
+  {
+   "id": "E48",
+   "title": "Suivi d'envoi (FR)",
+   "pass": true,
+   "expected": {
+    "action": "auto",
+    "template": "status",
+    "rules": []
+   },
+   "action": "auto",
+   "template": "status",
+   "queue": null,
+   "rules": [],
+   "guardedHarms": [],
+   "naiveHarms": []
+  }
+ ]
+}

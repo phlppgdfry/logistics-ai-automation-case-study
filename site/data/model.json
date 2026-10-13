@@ -1,0 +1,248 @@
+{
+ "_note": "Business case assumptions. Every figure is an illustrative assumption — not real company data. Change a value here, run `node scripts/build.mjs`, and every number in docs/ and site/ follows; CI fails if they drift.",
+ "assumptions": {
+  "emailsPerDay": {
+   "value": 640,
+   "unit": "emails/day",
+   "group": "volume",
+   "label": "Emails into the customer service mailbox",
+   "basis": "2-week mailbox sample, docs/01-discover/mailbox-analysis.md"
+  },
+  "workingDays": {
+   "value": 252,
+   "unit": "days/year",
+   "group": "volume",
+   "label": "Working days per year",
+   "basis": "Belgian calendar"
+  },
+  "shareWismo": {
+   "value": 0.38,
+   "unit": "share",
+   "group": "volume",
+   "label": "Share 'where is my delivery'",
+   "basis": "mailbox sample"
+  },
+  "sharePod": {
+   "value": 0.11,
+   "unit": "share",
+   "group": "volume",
+   "label": "Share 'proof of delivery'",
+   "basis": "mailbox sample"
+  },
+  "ahtWismoMin": {
+   "value": 4,
+   "unit": "min",
+   "group": "effort",
+   "label": "Handling time per status email today",
+   "basis": "timed on 60 emails by two agents"
+  },
+  "ahtPodMin": {
+   "value": 3,
+   "unit": "min",
+   "group": "effort",
+   "label": "Handling time per POD email today",
+   "basis": "timed on 30 emails"
+  },
+  "reviewMinPerDraft": {
+   "value": 1,
+   "unit": "min",
+   "group": "effort",
+   "label": "Review time per prepared draft",
+   "basis": "pilot target; measured in week 1–2"
+  },
+  "autoShare": {
+   "value": 0.55,
+   "unit": "share of in-scope",
+   "group": "automation",
+   "label": "In-scope emails answered automatically (steady state)",
+   "basis": "replay of 1,000 sampled emails through the rules"
+  },
+  "draftShare": {
+   "value": 0.3,
+   "unit": "share of in-scope",
+   "group": "automation",
+   "label": "In-scope emails prepared as a draft",
+   "basis": "same replay"
+  },
+  "loadedCostPerHour": {
+   "value": 48,
+   "unit": "€/h",
+   "group": "effort",
+   "label": "Loaded cost of a customer service hour",
+   "basis": "finance, salary + social charges + overhead"
+  },
+  "productiveHoursPerFte": {
+   "value": 1600,
+   "unit": "h/year",
+   "group": "effort",
+   "label": "Productive hours per FTE",
+   "basis": "finance"
+  },
+  "tempHoursAvoided": {
+   "value": 1368,
+   "unit": "h/year",
+   "group": "cash",
+   "label": "Q4 temp hours no longer needed (3 temps × 12 weeks × 38 h)",
+   "basis": "2025 temp invoices"
+  },
+  "tempRatePerHour": {
+   "value": 38,
+   "unit": "€/h",
+   "group": "cash",
+   "label": "Temp agency rate",
+   "basis": "agency contract"
+  },
+  "hireAvoidedHours": {
+   "value": 1600,
+   "unit": "h/year",
+   "group": "cash",
+   "label": "Planned extra hire for 2027 growth, not made",
+   "basis": "2027 budget: +1 FTE customer service"
+  },
+  "hireAvoidedCost": {
+   "value": 62000,
+   "unit": "€/year",
+   "group": "cash",
+   "label": "Loaded cost of that hire",
+   "basis": "finance"
+  },
+  "consultantDays": {
+   "value": 32,
+   "unit": "days",
+   "group": "build",
+   "label": "Consultant days (discovery → pilot → handover)",
+   "basis": "plan in docs/06-rollout"
+  },
+  "consultantDayRate": {
+   "value": 850,
+   "unit": "€/day",
+   "group": "build",
+   "label": "Consultant day rate",
+   "basis": "market rate"
+  },
+  "integrationCost": {
+   "value": 9500,
+   "unit": "€",
+   "group": "build",
+   "label": "TMS vendor: API access + custom connector support",
+   "basis": "vendor quote"
+  },
+  "changeCost": {
+   "value": 4000,
+   "unit": "€",
+   "group": "build",
+   "label": "Training, team time for the test set, champions",
+   "basis": "estimate"
+  },
+  "creditsPerEmail": {
+   "value": 2,
+   "unit": "credits",
+   "group": "run",
+   "label": "Copilot credits to read one email (one generative step)",
+   "basis": "Copilot Studio billing rates, Oct 2026 — verify"
+  },
+  "creditsPerInScopeEmail": {
+   "value": 5,
+   "unit": "credits",
+   "group": "run",
+   "label": "Extra credits per in-scope email (one agent action: TMS look-up)",
+   "basis": "Copilot Studio billing rates, Oct 2026 — verify"
+  },
+  "creditPrice": {
+   "value": 0.01,
+   "unit": "€/credit",
+   "group": "run",
+   "label": "Price per Copilot credit (pay-as-you-go)",
+   "basis": "list price ≈ $0.01; prepaid packs are cheaper"
+  },
+  "flowLicencePerYear": {
+   "value": 1800,
+   "unit": "€/year",
+   "group": "run",
+   "label": "Power Automate licence for the unattended flow",
+   "basis": "list price, illustrative"
+  },
+  "apiFeePerYear": {
+   "value": 3000,
+   "unit": "€/year",
+   "group": "run",
+   "label": "TMS API subscription",
+   "basis": "vendor quote"
+  },
+  "adminDaysPerMonth": {
+   "value": 2,
+   "unit": "days/month",
+   "group": "run",
+   "label": "Functional admin (rules, templates, test set, monitoring)",
+   "basis": "internal"
+  },
+  "adminDayCost": {
+   "value": 400,
+   "unit": "€/day",
+   "group": "run",
+   "label": "Internal day cost",
+   "basis": "finance"
+  },
+  "discountRate": {
+   "value": 0.08,
+   "unit": "per year",
+   "group": "finance",
+   "label": "Discount rate",
+   "basis": "finance"
+  },
+  "year1BenefitFactor": {
+   "value": 0.5,
+   "unit": "share",
+   "group": "finance",
+   "label": "Year 1 benefit (pilot in draft-only mode, then ramp-up)",
+   "basis": "rollout plan"
+  }
+ },
+ "sensitivity": [
+  "emailsPerDay",
+  "shareWismo",
+  "ahtWismoMin",
+  "autoShare",
+  "reviewMinPerDraft",
+  "hireAvoidedCost",
+  "consultantDays",
+  "creditPrice",
+  "adminDaysPerMonth"
+ ],
+ "scenarios": [
+  {
+   "id": "plan",
+   "label": "Plan",
+   "overrides": {}
+  },
+  {
+   "id": "no-hire",
+   "label": "The 2027 hire happens anyway",
+   "overrides": {
+    "hireAvoidedCost": 0
+   }
+  },
+  {
+   "id": "draft-only",
+   "label": "Draft-only forever (no automatic replies)",
+   "overrides": {
+    "autoShare": 0,
+    "draftShare": 0.85
+   }
+  },
+  {
+   "id": "slow-review",
+   "label": "Reviewing a draft takes 2 minutes",
+   "overrides": {
+    "reviewMinPerDraft": 2
+   }
+  },
+  {
+   "id": "half-auto",
+   "label": "Only half the planned automatic share",
+   "overrides": {
+    "autoShare": 0.275
+   }
+  }
+ ]
+}

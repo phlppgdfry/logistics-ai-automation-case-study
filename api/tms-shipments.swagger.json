@@ -1,0 +1,99 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Corlaan TMS — Shipment Status (read-only)",
+    "description": "Read-only shipment status API used by the 'Corlaan TMS' custom connector. Fictional contract written for this case. OpenAPI 2.0 because Power Platform custom connectors import OpenAPI 2.0 definitions.",
+    "version": "1.0.0"
+  },
+  "host": "api.tms.corlaan.example",
+  "basePath": "/v1",
+  "schemes": ["https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "securityDefinitions": {
+    "oauth2": {
+      "type": "oauth2",
+      "flow": "application",
+      "tokenUrl": "https://login.microsoftonline.com/corlaan.example/oauth2/v2.0/token",
+      "scopes": { "api://tms-corlaan/shipments.read": "Read shipment status. No write scope exists for this client." }
+    }
+  },
+  "security": [{ "oauth2": ["api://tms-corlaan/shipments.read"] }],
+  "paths": {
+    "/shipments/{shipmentId}": {
+      "get": {
+        "operationId": "GetShipment",
+        "summary": "Get one shipment by Corlaan shipment number",
+        "x-ms-visibility": "important",
+        "parameters": [
+          { "name": "shipmentId", "in": "path", "required": true, "type": "string", "pattern": "^CL-20\\d{2}-\\d{7}$", "x-ms-summary": "Shipment number" }
+        ],
+        "responses": {
+          "200": { "description": "Shipment found", "schema": { "$ref": "#/definitions/Shipment" } },
+          "401": { "description": "Missing or invalid token", "schema": { "$ref": "#/definitions/Problem" } },
+          "404": { "description": "No shipment with this number", "schema": { "$ref": "#/definitions/Problem" } },
+          "429": { "description": "Rate limit (60 requests/minute per client). See Retry-After.", "headers": { "Retry-After": { "type": "integer" } }, "schema": { "$ref": "#/definitions/Problem" } },
+          "503": { "description": "TMS unavailable", "schema": { "$ref": "#/definitions/Problem" } }
+        }
+      }
+    },
+    "/shipments": {
+      "get": {
+        "operationId": "SearchShipments",
+        "summary": "Find a shipment by CMR number, or by customer reference within one account",
+        "description": "Exactly one of `cmr` or `customerReference` is required. `customerReference` is only unique per account, so `accountId` is required with it.",
+        "parameters": [
+          { "name": "cmr", "in": "query", "required": false, "type": "string", "pattern": "^\\d{7}$", "x-ms-summary": "CMR number" },
+          { "name": "customerReference", "in": "query", "required": false, "type": "string", "x-ms-summary": "Customer reference" },
+          { "name": "accountId", "in": "query", "required": false, "type": "string", "pattern": "^A-\\d{3}$", "x-ms-summary": "Account" }
+        ],
+        "responses": {
+          "200": { "description": "Zero or one match", "schema": { "type": "object", "required": ["items"], "properties": { "items": { "type": "array", "maxItems": 1, "items": { "$ref": "#/definitions/Shipment" } } } } },
+          "400": { "description": "Invalid combination of parameters", "schema": { "$ref": "#/definitions/Problem" } },
+          "401": { "description": "Missing or invalid token", "schema": { "$ref": "#/definitions/Problem" } },
+          "429": { "description": "Rate limit", "headers": { "Retry-After": { "type": "integer" } }, "schema": { "$ref": "#/definitions/Problem" } }
+        }
+      }
+    },
+    "/accounts/by-sender": {
+      "get": {
+        "operationId": "GetAccountsForSender",
+        "summary": "Which accounts is this email address linked to, and how",
+        "parameters": [
+          { "name": "email", "in": "query", "required": true, "type": "string", "format": "email", "x-ms-summary": "Sender address" }
+        ],
+        "responses": {
+          "200": { "description": "Links (may be empty)", "schema": { "type": "object", "required": ["links"], "properties": { "links": { "type": "array", "items": { "$ref": "#/definitions/AccountLink" } } } } },
+          "401": { "description": "Missing or invalid token", "schema": { "$ref": "#/definitions/Problem" } }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Shipment": {
+      "type": "object",
+      "required": ["id", "accountId", "status", "carrier", "pickupDate", "lastEvent"],
+      "properties": {
+        "id": { "type": "string", "example": "CL-2026-0412345" },
+        "accountId": { "type": "string", "example": "A-100" },
+        "customerReference": { "type": "string", "x-nullable": true },
+        "cmr": { "type": "string", "x-nullable": true },
+        "status": { "type": "string", "enum": ["BOOKED", "PICKED_UP", "IN_TRANSIT", "OUT_FOR_DELIVERY", "DELIVERED", "EXCEPTION"] },
+        "carrier": { "type": "string", "enum": ["own", "subcontractor"] },
+        "carrierName": { "type": "string" },
+        "pallets": { "type": "integer" },
+        "pickupDate": { "type": "string", "format": "date-time" },
+        "promisedSlot": { "$ref": "#/definitions/TimeWindow" },
+        "eta": { "$ref": "#/definitions/TimeWindow" },
+        "deliveredAt": { "type": "string", "format": "date-time" },
+        "receivedBy": { "type": "string", "description": "Personal data. The flow never puts this in a reply." },
+        "lastEvent": { "type": "object", "required": ["code", "at", "location"], "properties": { "code": { "type": "string" }, "at": { "type": "string", "format": "date-time" }, "location": { "type": "string" } } },
+        "exception": { "type": "object", "properties": { "code": { "type": "string", "enum": ["DELIVERY_FAILED", "DELAYED", "DAMAGED"] }, "note": { "type": "string" } } },
+        "consignee": { "type": "object", "description": "Personal or commercial data of the receiver. Used for authorisation only, never in a reply.", "properties": { "name": { "type": "string" }, "address": { "type": "string" }, "email": { "type": "string", "x-nullable": true } } }
+      }
+    },
+    "TimeWindow": { "type": "object", "x-nullable": true, "required": ["from", "to"], "properties": { "from": { "type": "string", "format": "date-time" }, "to": { "type": "string", "format": "date-time" } } },
+    "AccountLink": { "type": "object", "required": ["accountId", "level"], "properties": { "accountId": { "type": "string" }, "level": { "type": "string", "enum": ["contact", "domain"] } } },
+    "Problem": { "type": "object", "required": ["status", "title"], "properties": { "status": { "type": "integer" }, "title": { "type": "string" }, "detail": { "type": "string" } } }
+  }
+}

@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mailbox demo — Corlaan customer email automation</title>
+  <meta name="description" content="Replay 48 customer emails through the guarded design and a naive one, change the business case assumptions, and see the rollout ladder.">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="../">Corlaan · customer email automation</a>
+    <nav aria-label="Sections">
+      <a href="../">Case</a>
+      <a href="https://github.com/phlppgdfry/logistics-ai-automation-case-study">Repository</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap" style="padding-bottom:200px">
+  <div class="demo-bar">
+    <div>
+      <h1 style="font-size:clamp(24px,4vw,34px);margin:0">Mailbox demo</h1>
+      <p class="note" style="margin:4px 0 0">Fictional company and emails. <span class="label-sim">simulated reading</span>: a deterministic stand-in for the Copilot Studio agent; rules, replies and numbers are the real, tested code.</p>
+    </div>
+    <button class="btn-sm" id="btn-tour" type="button">▶ 2-minute tour</button>
+  </div>
+
+  <div class="tabs" role="tablist" aria-label="Demo views">
+    <button role="tab" id="tab-inbox" aria-controls="inbox" aria-selected="true">Inbox</button>
+    <button role="tab" id="tab-tests" aria-controls="tests" aria-selected="false">Test set</button>
+    <button role="tab" id="tab-value" aria-controls="value" aria-selected="false">Business case</button>
+    <button role="tab" id="tab-rollout" aria-controls="rollout" aria-selected="false">Rollout</button>
+  </div>
+
+  <section class="panel active" id="inbox" role="tabpanel" aria-labelledby="tab-inbox">
+    <div class="demo-bar" style="padding-top:0">
+      <div class="seg" id="design-switch"><span>Design</span>
+        <button class="btn-sm" type="button" data-design="guarded" aria-pressed="true">Guarded</button>
+        <button class="btn-sm" type="button" data-design="naive" aria-pressed="false">Naive</button>
+      </div>
+      <div class="seg" id="mode-switch"><span>Mode</span>
+        <button class="btn-sm" type="button" data-mode="graduated" aria-pressed="true">Graduated</button>
+        <button class="btn-sm" type="button" data-mode="draft-only" aria-pressed="false">Draft-only</button>
+      </div>
+    </div>
+    <div class="inbox">
+      <ul class="mail-list" id="mail-list" aria-label="Inbox"></ul>
+      <div id="detail" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <section class="panel" id="tests" role="tabpanel" aria-labelledby="tab-tests">
+    <div class="cols-2" id="tests-summary"></div>
+    <h2 style="margin-top:28px">Every email, expected vs actual</h2>
+    <div class="table-wrap"><table id="tests-table"></table></div>
+  </section>
+
+  <section class="panel" id="value" role="tabpanel" aria-labelledby="tab-value">
+    <p class="note">Illustrative assumptions — not real company data. Defaults come from <code>data/model.json</code>; the same function runs in CI.</p>
+    <div class="cols-2">
+      <div class="card"><h2>Assumptions</h2><div class="sliders" id="sliders"></div>
+        <p style="margin-top:14px"><button class="btn-sm" id="btn-nohire" type="button" aria-pressed="false">The 2027 hire happens anyway</button> <button class="btn-sm" id="btn-reset" type="button">Reset</button></p>
+      </div>
+      <div class="card" id="value-out"></div>
+    </div>
+    <div class="card" style="margin-top:16px"><h2>What moves the 3-year NPV most (±25%)</h2><div class="tornado" id="tornado"></div></div>
+  </section>
+
+  <section class="panel" id="rollout" role="tabpanel" aria-labelledby="tab-rollout">
+    <h2>Trust is earned in steps</h2>
+    <ol class="ladder" id="ladder">
+      <li><strong>0 · Shadow</strong><p>Runs on a copy of the mailbox; outcomes only in the log. Gate: agrees with agents on ≥ 90% of in-scope emails.</p></li>
+      <li><strong>1 · Draft-only</strong><p>Every reply is a draft with a Teams card. Gate: ≥ 95% sent unedited, no data-protection rejections, DPO sign-off.</p></li>
+      <li><strong>2 · Graduated</strong><p>Automatic for plain status and POD to contacts. Weekly review of 20 automatic replies.</p></li>
+      <li><strong>3 · Expand</strong><p>Phase 2: slot changes. Separate design and business case.</p></li>
+    </ol>
+    <p class="note">Going down is one setting, and automatic after a data-protection incident, a harmful reply in the weekly sample or a failed evaluation after a model update.</p>
+    <h2 style="margin-top:24px">KPIs</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>KPI</th><th>Baseline</th><th>Target week 12</th></tr></thead>
+      <tbody>
+        <tr><td>Median first response, status/POD</td><td>2.9 h</td><td>&lt; 15 min auto, &lt; 2 h draft</td></tr>
+        <tr><td>French-language first response</td><td>5.2 h</td><td>equal to NL/EN</td></tr>
+        <tr><td>In-scope emails answered automatically</td><td>0%</td><td><!--n:a.autoShare-->55%<!--/n--></td></tr>
+        <tr><td>Drafts sent unedited</td><td>—</td><td>≥ 85%</td></tr>
+        <tr><td>Repeat emails</td><td>12%</td><td>&lt; 5%</td></tr>
+        <tr><td>Data-protection incidents</td><td>unknown</td><td>0</td></tr>
+      </tbody>
+    </table></div>
+    <h2 style="margin-top:24px" id="limits">What this demo is not</h2>
+    <ul class="checklist">
+      <li>The reading step is a deterministic stand-in with the same JSON contract as the Copilot Studio agent. A real model must pass its own evaluation first.</li>
+      <li>The Copilot Studio agent and the Power Automate flow are a design and a build guide, not exports from a tenant.</li>
+      <li>No real emails, customers, pilot or results. Every figure is an illustrative assumption.</li>
+    </ul>
+  </section>
+</main>
+
+<div class="tour hidden" id="tour" role="dialog" aria-label="Guided tour">
+  <p id="tour-text" aria-live="polite"></p>
+  <div class="tour-actions">
+    <button type="button" data-tour="prev">Back</button>
+    <button type="button" data-tour="next">Next</button>
+    <button type="button" data-tour="close">Close</button>
+  </div>
+</div>
+
+<script type="module" src="../assets/demo.mjs"></script>
+</body>
+</html>

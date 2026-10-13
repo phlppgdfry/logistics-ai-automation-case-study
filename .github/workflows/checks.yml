@@ -1,0 +1,32 @@
+name: Checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Tests (evaluation set, replies, agent contract, API, business case)
+        run: node --test tests/*.test.mjs
+
+      - name: Derived files and quoted numbers match the model and the test set
+        run: |
+          node scripts/build.mjs
+          node scripts/export-eval-csv.mjs
+          git diff --exit-code
+
+      - name: Links
+        run: python3 scripts/check-links.py

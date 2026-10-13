@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Where is my delivery? — AI &amp; automation case study</title>
+  <meta name="description" content="Portfolio case (fictional logistics company): from a mailbox analysis to a Copilot Studio agent, a Power Automate flow on a TMS API, 18 policy rules, a 48-email evaluation set and a business case.">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="./">Corlaan · customer email automation</a>
+    <nav aria-label="Sections">
+      <a href="#problem">Problem</a>
+      <a href="#design">Design</a>
+      <a href="#proof">Proof</a>
+      <a href="#value">Value</a>
+      <a href="demo/">Demo</a>
+      <a href="https://github.com/phlppgdfry/logistics-ai-automation-case-study">Repository</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero wrap">
+    <p class="eyebrow">AI &amp; automation consulting · logistics · Copilot Studio · Power Automate · TMS API</p>
+    <h1>"Where is my delivery?"<br>Answered in minutes, never to the wrong person.</h1>
+    <p class="lede">A fictional Belgian pallet distributor gets <!--n:a.emailsPerDay-->640<!--/n--> customer emails a day, and half of them ask something the transport system already knows. This case takes it from a mailbox analysis to a tested design. A Copilot Studio agent reads each email, a Power Automate flow checks the TMS and <!--n:rules.count-->18<!--/n--> policy rules, and the business case says honestly where the money comes from.</p>
+    <div class="cta-row">
+      <a class="btn primary" href="demo/?tour">Take the 2-minute tour</a>
+      <a class="btn" href="demo/">Open the demo</a>
+      <a class="btn" href="https://github.com/phlppgdfry/logistics-ai-automation-case-study">Read the repository</a>
+    </div>
+    <p class="note">Independent portfolio case study based on a fictional organisation (Corlaan Logistics). It contains no confidential information from any real employer. All figures are illustrative assumptions — not real company data.</p>
+  </section>
+
+  <section class="section" id="problem">
+    <div class="wrap">
+      <h2>The problem</h2>
+      <div class="grid cards-4">
+        <div class="card"><div class="kpi-value"><!--n:a.shareWismo-->38%<!--/n--> + <!--n:a.sharePod-->11%<!--/n--></div><p>of the mailbox asks "where is it?" or "send the proof of delivery"</p></div>
+        <div class="card"><div class="kpi-value"><!--n:bc.baselineHoursYear-->4,973 h<!--/n--></div><p>of agent time a year, mostly spent <em>finding</em> the shipment, not writing</p></div>
+        <div class="card"><div class="kpi-value">2.9 h</div><p>median first response; 5.2 h for French-speaking customers</p></div>
+        <div class="card"><div class="kpi-value">+1 FTE</div><p>requested for 2027. The sponsor's answer: "show me what can be automated first"</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <h2>The journey</h2>
+      <ol class="journey">
+        <li><a href="https://github.com/phlppgdfry/logistics-ai-automation-case-study/blob/main/docs/01-discover/mailbox-analysis.md"><span class="step-no">1</span>Analyse the mailbox</a></li>
+        <li><a href="https://github.com/phlppgdfry/logistics-ai-automation-case-study/blob/main/docs/02-design/to-be-and-architecture.md"><span class="step-no">2</span>Design the solution</a></li>
+        <li><a href="https://github.com/phlppgdfry/logistics-ai-automation-case-study/blob/main/docs/02-design/policy-rules.md"><span class="step-no">3</span>Write the rules</a></li>
+        <li><a href="https://github.com/phlppgdfry/logistics-ai-automation-case-study/blob/main/docs/03-security/threat-model.md"><span class="step-no">4</span>Secure it</a></li>
+        <li><a href="https://github.com/phlppgdfry/logistics-ai-automation-case-study/blob/main/docs/04-test/test-strategy-and-results.md"><span class="step-no">5</span>Test it</a></li>
+        <li><a href="https://github.com/phlppgdfry/logistics-ai-automation-case-study/blob/main/docs/05-business-case/business-case.md"><span class="step-no">6</span>Prove the value</a></li>
+        <li><a href="https://github.com/phlppgdfry/logistics-ai-automation-case-study/blob/main/docs/06-rollout/pilot-and-adoption.md"><span class="step-no">7</span>Roll out in steps</a></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section" id="design">
+    <div class="wrap">
+      <h2>The design in one picture</h2>
+      <figure class="diagram">
+        <img src="assets/architecture.svg" alt="The cloud flow orchestrates: a Copilot Studio agent without tools reads the email, a read-only connector looks up the TMS, policy rules decide between automatic reply, draft and routing, and every outcome is audited." width="960" height="470">
+        <figcaption>The model reads. The rules decide. Only the flow can send, only templates, only to the original sender.</figcaption>
+      </figure>
+      <h3 style="margin-top:28px">Five decisions that shape it</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Decision</th><th>Instead of</th><th>Why</th></tr></thead>
+          <tbody>
+            <tr><td><a href="https://github.com/phlppgdfry/logistics-ai-automation-case-study/blob/main/docs/adr/001-model-proposes-policy-decides.md">The model reads; rules decide</a></td><td>an agent with send and TMS tools</td><td>On the test set, the naive design harms in <!--n:naive.harmful-->23<!--/n--> of <!--n:tests.cases-->48<!--/n--> emails</td></tr>
+            <tr><td><a href="https://github.com/phlppgdfry/logistics-ai-automation-case-study/blob/main/docs/adr/002-copilot-studio-agent-called-from-flow.md">Agent without tools, called from a flow</a></td><td>an autonomous agent with tools, or custom code</td><td>Testable reading, supportable by a 3-person IT team, ready for a phase 2 conversation</td></tr>
+            <tr><td><a href="https://github.com/phlppgdfry/logistics-ai-automation-case-study/blob/main/docs/adr/003-templates-not-free-text.md">Templates, not generated text</a></td><td>friendly free text</td><td>Every sentence approved once, every fact from the TMS</td></tr>
+            <tr><td><a href="https://github.com/phlppgdfry/logistics-ai-automation-case-study/blob/main/docs/adr/004-authorise-every-shipment.md">Authorise every shipment</a></td><td>trusting a plausible sender</td><td>One generic reply for "not found" and "not yours" — the mailbox cannot be probed</td></tr>
+            <tr><td><a href="https://github.com/phlppgdfry/logistics-ai-automation-case-study/blob/main/docs/adr/005-autonomy-ladder.md">Shadow → draft-only → graduated</a></td><td>switching it on</td><td>The team sees every proposed reply first; trust is measured, not assumed</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="proof">
+    <div class="wrap">
+      <h2>Proof, not promises</h2>
+      <div class="grid cards-3">
+        <div class="card"><div class="kpi-value"><!--n:tests.passed-->48<!--/n-->/<!--n:tests.cases-->48<!--/n--></div><p>emails in the evaluation set get the outcome a careful colleague would choose: <!--n:tests.auto-->21<!--/n--> automatic, <!--n:tests.draft-->12<!--/n--> drafts, <!--n:tests.route-->11<!--/n--> routed, <!--n:tests.ignore-->4<!--/n--> ignored</p></div>
+        <div class="card"><div class="kpi-value"><!--n:guarded.harmful-->0<!--/n--> vs <!--n:naive.harmful-->23<!--/n--></div><p>harmful outcomes, guarded vs naive: data leaks, stale answers, wrong tone, reply loops, obeyed instructions</p></div>
+        <div class="card"><div class="kpi-value">CI</div><p>every commit runs the evaluation set, reply scans, the API contract against a mock server, and checks that every number in the docs still matches the model</p></div>
+      </div>
+      <p class="cta-row" style="margin-top:20px"><a class="btn" href="demo/#tests">Replay the test set</a></p>
+    </div>
+  </section>
+
+  <section class="section" id="value">
+    <div class="wrap measure">
+      <h2>The value, honestly</h2>
+      <p>The solution frees <!--n:bc.capacityHoursYear-->3,832 h<!--/n--> a year (<!--n:bc.capacityFte-->2.4 FTE<!--/n-->). Nobody is let go, so only part of that is cash: no Q4 temps, and no extra hire in 2027. That gives a <strong>3-year NPV of <!--n:bc.npv3y-->€144,672<!--/n--></strong> and a payback of <!--n:bc.payback-->13 months<!--/n-->.</p>
+      <p><strong>If the hire happens anyway, the NPV is <!--n:sc.no-hire.npv-->€13,595<!--/n-->.</strong> So the case rests on a management decision, not on the technology, and that decision is on the go/no-go list. Draft-only mode alone already covers the cash. Automatic replies are what make customers wait minutes instead of hours.</p>
+      <p class="cta-row"><a class="btn" href="demo/#value">Change the assumptions</a> <a class="btn" href="https://github.com/phlppgdfry/logistics-ai-automation-case-study/blob/main/docs/05-business-case/business-case.md">Read the business case</a></p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap measure">
+      <h2>What is real and what is simulated</h2>
+      <ul class="checklist">
+        <li><strong>Real, tested code:</strong> the policy rules, the reply templates in three languages, the business case model, the TMS API contract and its mock server. The demo runs the same modules as CI.</li>
+        <li><strong>Simulated:</strong> the language-understanding step. A deterministic stand-in returns the same JSON as the specified Copilot Studio agent.</li>
+        <li><strong>Design and build guide, not built in a tenant:</strong> the Copilot Studio agent and the Power Automate flow.</li>
+        <li><strong>Fictional:</strong> the company, customers, emails, interviews and figures.</li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>Portfolio case study · fictional organisation · figures are illustrative assumptions · <a href="https://github.com/phlppgdfry/logistics-ai-automation-case-study">source on GitHub</a></p>
+  </div>
+</footer>
+</body>
+</html>
