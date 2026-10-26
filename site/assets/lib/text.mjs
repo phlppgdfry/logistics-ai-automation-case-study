@@ -177,6 +177,49 @@ export function understand(email) {
   };
 }
 
+// The other direction: a reading returned by a real model or agent (agent-output.schema.json),
+// completed with what the flow itself knows. The flow screens automated mail from the headers
+// before it calls the agent, and it splits fresh and quoted text (Graph `uniqueBody`).
+export function fromAgentOutput(email, out) {
+  const { fresh } = splitQuoted(email.body);
+  // The platform's content filter (Prompt Shields) refused the email: nothing was read, and the
+  // refusal itself is the strongest instruction signal there is.
+  if (out.blocked) {
+    return { language: "unknown", intent: "unknown", confidence: 0, intentScores: null, sensitive: [], references: [], referencesFromQuoted: false,
+      injection: [`blocked by the content filter (${out.blockedBy.join(", ")})`], automated: automatedMailReason(email), freshText: fresh };
+  }
+  const references = (out.references ?? []).map((r) => {
+    const parsed = extractReferences(r.type === "cmr" ? `CMR ${r.value}` : r.value)[0];
+    return parsed ?? { type: r.type, value: String(r.value).trim() };
+  });
+  return {
+    language: out.language ?? "unknown",
+    intent: out.intent ?? "unknown",
+    confidence: Number(out.confidence ?? 0),
+    intentScores: null,
+    sensitive: [...new Set(out.sensitive ?? [])],
+    references,
+    referencesFromQuoted: Boolean(out.referencesFromQuoted) && references.length > 0,
+    injection: out.instructionSignals ?? [],
+    automated: automatedMailReason(email),
+    freshText: fresh,
+  };
+}
+
+// The ground-truth reading of a held-out email (data/emails-holdout.json → reading), as an understanding.
+export function fromLabels(email) {
+  const r = email.reading;
+  return fromAgentOutput(email, {
+    language: r.language,
+    intent: r.intent,
+    confidence: r.intent === "unknown" ? 0.3 : 0.95,
+    references: r.references.map((value) => ({ type: /^CL-/.test(value) ? "shipment" : /^\d{7}$/.test(value) ? "cmr" : "customer", value })),
+    referencesFromQuoted: r.referencesFromQuoted,
+    sensitive: r.sensitive,
+    instructionSignals: r.instruction ? ["(labelled)"] : [],
+  });
+}
+
 // The same reading in the shape the Copilot Studio agent returns (copilot-studio/agent-output.schema.json).
 export function toAgentOutput(u) {
   return {

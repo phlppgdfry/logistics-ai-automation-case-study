@@ -1,0 +1,10 @@
+{
+  "_note": "Recorded readings replayed by scripts/build.mjs (src/model-eval.mjs). Add a run here after recording it with scripts/eval-model.mjs or scripts/eval-copilot-studio.mjs.",
+  "runs": [
+    { "key": "f-v1", "label": "gpt-4.1-mini, instructions v1", "file": "foundry-gpt-4.1-mini.v1.json" },
+    { "key": "f-v2", "label": "gpt-4.1-mini, instructions v2", "file": "foundry-gpt-4.1-mini.v2.json" },
+    { "key": "f-v3", "label": "gpt-4.1-mini, instructions v3 (run 1)", "file": "foundry-gpt-4.1-mini.v3-run1.json" },
+    { "key": "f-v3-r2", "label": "gpt-4.1-mini, instructions v3 (run 2)", "file": "foundry-gpt-4.1-mini.v3-run2.json" },
+    { "key": "f-v3-r3", "label": "gpt-4.1-mini, instructions v3 (run 3)", "file": "foundry-gpt-4.1-mini.v3-run3.json" }
+  ]
+}

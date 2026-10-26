@@ -13,6 +13,7 @@ import { fileURLToPath } from "node:url";
 import { evaluate, STALE_HOURS, CONFIDENCE_MIN, MAX_REFERENCES, MAX_AUTO_REPLIES_PER_DAY } from "../src/pipeline.mjs";
 import { RULES } from "../src/rules.mjs";
 import { values, compute, scenarios, sensitivity } from "../src/business-case.mjs";
+import { modelEvaluation } from "../src/model-eval.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const read = (p) => JSON.parse(readFileSync(join(ROOT, p), "utf8"));
@@ -51,6 +52,13 @@ writeIfChanged("site/data/evaluation.json", `${JSON.stringify({
     action: r.guarded.action, template: r.guarded.template, queue: r.guarded.queue, rules: r.guarded.rules,
     guardedHarms: r.guardedHarms, naiveHarms: r.naiveHarms })),
 }, null, 1)}\n`);
+
+// 2b. model evaluation: recorded readings (evaluation/runs/) replayed through the same policy gate
+const holdout = read("data/emails-holdout.json");
+const manifest = read("evaluation/runs.json");
+const me = modelEvaluation(data, holdout.emails, manifest.runs.map((r) => ({ ...r, run: read(`evaluation/runs/${r.file}`) })));
+writeIfChanged("site/data/emails-holdout.json", `${JSON.stringify(holdout, null, 1)}\n`);
+writeIfChanged("site/data/model-evaluation.json", `${JSON.stringify(me, null, 1)}\n`);
 
 // 3. rule table
 const ruleTable = [
@@ -98,6 +106,14 @@ const numbers = {
   ...Object.fromEntries(sc.flatMap((x) => [[`sc.${x.id}.npv`, eur(x.result.npv3y)], [`sc.${x.id}.npvK`, k(x.result.npv3y)],
     [`sc.${x.id}.payback`, months(x.result.paybackMonths)], [`sc.${x.id}.capacity`, `${int(x.result.capacityHoursYear)} h`],
     [`sc.${x.id}.cash`, eur(x.result.cashBenefitYear)]])),
+  "ho.cases": holdout.emails.length,
+  ...Object.fromEntries(me.readers.flatMap((r) => [
+    ...(r.result.main ? [[`me.${r.key}.main`, r.result.main.passed], [`me.${r.key}.mainHarm`, r.result.main.harmful]] : []),
+    [`me.${r.key}.ho`, r.result.holdout.passed], [`me.${r.key}.hoHarm`, r.result.holdout.harmful],
+  ])),
+  "me.v3.mainMin": Math.min(...me.readers.filter((r) => r.key.startsWith("f-v3")).map((r) => r.result.main.passed)),
+  "me.v3.mainMax": Math.max(...me.readers.filter((r) => r.key.startsWith("f-v3")).map((r) => r.result.main.passed)),
+  "me.v3.harmMax": Math.max(...me.readers.filter((r) => r.key.startsWith("f-v3")).flatMap((r) => [r.result.main.harmful, r.result.holdout.harmful])),
   "sens.top": sens[0].label, "sens.topLow": eur(sens[0].low), "sens.topHigh": eur(sens[0].high),
 };
 // Rounded, so the file is identical across Node versions (last-digit float differences otherwise fail CI).
