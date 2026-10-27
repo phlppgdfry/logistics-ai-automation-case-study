@@ -62,6 +62,15 @@ const p = (k) => `parameters('${ENV[k][0]} (${ENV[k][1]})')`;
 const params = (...keys) => Object.fromEntries(keys.map((k) => [`${ENV[k][0]} (${ENV[k][1]})`, { defaultValue: ENV[k][3], type: ENV[k][2], metadata: { schemaName: ENV[k][1] } }]));
 
 const t = (c) => `triggerOutputs()?['body/${c}']`;
+
+// crl_Mode is read from Dataverse on every run. A cloud flow keeps the environment-variable value it
+// had when it was last saved or switched on, so a kill switch read as a parameter would not stop a
+// running flow until someone re-saves it (found while testing; see power-platform/README.md).
+const readMode = (runAfter = {}) => dv("ListRecords", {
+  entityName: "environmentvariabledefinitions", $select: "schemaname,defaultvalue", $filter: "schemaname eq 'crl_Mode'",
+  $expand: "environmentvariabledefinition_environmentvariablevalue($select=value)",
+}, runAfter);
+const MODE = "toLower(coalesce(first(first(outputs('Read_mode')?['body/value'])?['environmentvariabledefinition_environmentvariablevalue'])?['value'], first(outputs('Read_mode')?['body/value'])?['defaultvalue'], 'graduated'))";
 const finding = (id, effect, queue, detail) => `addProperty(addProperty(addProperty(addProperty(json('{}'), 'id', '${id}'), 'effect', '${effect}'), 'queue', ${queue === null ? "null" : `'${queue}'`}), 'detail', ${detail})`;
 const when = (cond, id, effect, queue, detail) => `if(${cond}, createArray(${finding(id, effect, queue, detail)}), json('[]'))`;
 
@@ -80,14 +89,19 @@ export function readEmail(S) {
     if(or(${ooo}), 'out-of-office subject', '')))))`.replace(/\s*\n\s*/g, " ");
   const input = `@{string(addProperty(addProperty(addProperty(addProperty(json('{}'), 'subject', coalesce(${t("crl_subject")}, '')), 'freshText', coalesce(${t("crl_freshtext")}, '')), 'quotedText', coalesce(${t("crl_quotedtext")}, '')), 'senderDomain', last(split(${from}, '@'))))}`;
   // the agent answers with JSON; tolerate a code fence around it
-  const answer = `trim(replace(replace(coalesce(body('Agent_reads_the_email')?['lastResponse'], ''), '\`\`\`json', ''), '\`\`\`', ''))`;
+  const answer = `trim(replace(replace(variables('Answer'), '\`\`\`json', ''), '\`\`\`', ''))`;
   const SAFE = '{"language":"unknown","intent":"unknown","confidence":0,"references":[],"referencesFromQuoted":false,"sensitive":[],"instructionSignals":[]}';
+  const BLOCKED = '{"blocked":true,"blockedBy":["content filter (Copilot Studio)"]}';
   return definition(
-    { Email_received: trigger("crl_inboundemail", 1) },
+    // one email at a time: parallel agent calls in a developer environment hit the generative AI rate limit (GenAITool errors)
+    { Email_received: { ...trigger("crl_inboundemail", 1), runtimeConfiguration: { concurrency: { runs: 1 } } } },
     {
       // kill switch: with crl_Mode = off nothing happens; the email stays in the inbox for the team
-      Kill_switch: iff({ equals: [`@toLower(${p("mode")})`, "off"] }, { Stop_automation_is_off: { type: "Terminate", inputs: { runStatus: "Cancelled" } } }),
-      Automated_mail: compose(`@${reason}`, ok("Kill_switch")),
+      Read_mode: readMode(),
+      Kill_switch: iff({ equals: [`@${MODE}`, "off"] }, { Stop_automation_is_off: { type: "Terminate", inputs: { runStatus: "Cancelled" } } }, {}, ok("Read_mode")),
+      Answer_init: init("Answer", "string", "", ok("Kill_switch")),
+      Attempt_init: init("Attempt", "integer", 0, ok("Answer_init")),
+      Automated_mail: compose(`@${reason}`, ok("Attempt_init")),
       Screen: iff({ not: { equals: ["@outputs('Automated_mail')", ""] } },
         {
           Ignore_R01: dv("UpdateOnlyRecord", {
@@ -99,22 +113,31 @@ export function readEmail(S) {
         {
           Which_reader: iff({ equals: [`@${t("crl_reader")}`, OPT.reader.agent] },
             {
-              Agent_reads_the_email: {
-                type: "OpenApiConnectionWebhook",
-                inputs: { host: { connectionName: "shared_microsoftcopilotstudio", operationId: "ExecuteCopilotAsyncV2", apiId: CSAPI }, parameters: { Copilot: AGENT, "body/message": input }, authentication: AUTH },
-                limit: { timeout: "PT5M" },
+              // ask the agent; on the generative-AI rate limit wait a minute and ask again (max. 5 attempts)
+              Ask_until_answered: {
+                type: "Until",
+                expression: `@or(not(contains(variables('Answer'), 'RateLimitReached')), greaterOrEquals(variables('Attempt'), 5))`,
+                limit: { count: 6, timeout: "PT20M" },
+                actions: {
+                  Count_attempt: { type: "IncrementVariable", inputs: { name: "Attempt", value: 1 } },
+                  Agent_reads_the_email: {
+                    type: "OpenApiConnectionWebhook",
+                    inputs: { host: { connectionName: "shared_microsoftcopilotstudio", operationId: "ExecuteCopilotAsyncV2", apiId: CSAPI }, parameters: { Copilot: AGENT, "body/message": input }, authentication: AUTH },
+                    limit: { timeout: "PT5M" },
+                    runAfter: ok("Count_attempt"),
+                  },
+                  // an agent that fails or times out leaves 'AGENT_FAILED': not JSON → safe reading below
+                  Keep_answer: { type: "SetVariable", inputs: { name: "Answer", value: "@{if(equals(actions('Agent_reads_the_email')?['status'], 'Succeeded'), coalesce(body('Agent_reads_the_email')?['lastResponse'], ''), 'AGENT_FAILED')}" }, runAfter: { Agent_reads_the_email: ["Succeeded", "Failed", "TimedOut"] } },
+                  Wait_on_rate_limit: iff({ and: [{ contains: ["@variables('Answer')", "RateLimitReached"] }, { less: ["@variables('Attempt')", 5] }] },
+                    { Wait_a_minute: { type: "Wait", inputs: { interval: { count: 1, unit: "Minute" } } } }, {}, ok("Keep_answer")),
+                },
               },
-              Reading: compose(`@if(startsWith(${answer}, '{'), ${answer}, '${SAFE}')`, ok("Agent_reads_the_email")),
+              Reading: compose(`@if(startsWith(${answer}, '{'), ${answer}, if(contains(${answer}, 'ContentFiltered'), '${BLOCKED}', '${SAFE}'))`, ok("Ask_until_answered")),
               Store_reading: dv("UpdateOnlyRecord", {
                 entityName: S.crl_inboundemail, recordId: `@${t("crl_inboundemailid")}`,
                 "item/crl_agentoutput": "@{outputs('Reading')}", "item/crl_status": OPT.email.read,
-                "item/crl_error": `@{if(startsWith(${answer}, '{'), null, concat('Agent answer was not JSON, safe reading used: ', substring(${answer}, 0, min(length(${answer}), 500))))}`,
+                "item/crl_error": `@{if(startsWith(${answer}, '{'), null, concat(if(contains(${answer}, 'ContentFiltered'), 'Refused by the content filter, routed to security: ', 'Agent answer was not JSON, safe reading used: '), substring(${answer}, 0, min(length(${answer}), 500))))}`,
               }, ok("Reading")),
-              // agent unavailable: a safe reading (unknown, confidence 0) → R05, a colleague reads it
-              Agent_failed_safe_reading: dv("UpdateOnlyRecord", {
-                entityName: S.crl_inboundemail, recordId: `@${t("crl_inboundemailid")}`,
-                "item/crl_agentoutput": SAFE, "item/crl_status": OPT.email.read, "item/crl_error": "Agent call failed or timed out; safe reading used.",
-              }, failed("Agent_reads_the_email")),
             },
             {
               // recorded reading (evaluation replay): the reading is already on the row
@@ -122,7 +145,6 @@ export function readEmail(S) {
             }),
         }, ok("Automated_mail")),
     },
-    params("mode"),
   );
 }
 
@@ -167,8 +189,9 @@ export function decideAndReply(S) {
     when(`and(equals(${intent}, 'pod'), equals(${st}, 'DELIVERED'), not(equals(outputs('Level'), 'contact')))`, "R12", "draft", null, `concat('POD asked by ', outputs('Level'), ' for ', ${s}?['crl_shipmentno'])`),
     when(`and(equals(${intent}, 'pod'), not(equals(${st}, 'DELIVERED')), not(equals(${st}, 'EXCEPTION')))`, "R17", "auto", null, `concat(${s}?['crl_shipmentno'], ' not delivered yet: status instead of POD')`),
     when(`equals(${st}, 'EXCEPTION')`, "R13", "route", "customer-service", `concat(${s}?['crl_shipmentno'], ': ', coalesce(${s}?['crl_exceptioncode'], ''))`),
-    when(`and(contains(createArray('PICKED_UP', 'IN_TRANSIT', 'OUT_FOR_DELIVERY'), ${st}), greater(${hoursSince}, ${p("stale")}))`, "R14", "draft", null, `concat(${s}?['crl_shipmentno'], ': last event ', string(${hoursSince}), ' h ago')`),
-    when(`and(not(equals(${s}?['crl_etato'], null)), not(equals(${s}?['crl_promisedto'], null)), greater(ticks(${s}?['crl_etato']), ticks(${s}?['crl_promisedto'])), not(equals(${st}, 'DELIVERED')))`, "R15", "draft", null, `concat(${s}?['crl_shipmentno'], ': ETA ends after the promised slot')`),
+    // and() evaluates every argument; if() does not, so null dates are guarded with if()
+    when(`if(or(not(contains(createArray('PICKED_UP', 'IN_TRANSIT', 'OUT_FOR_DELIVERY'), ${st})), equals(${s}?['crl_lasteventat'], null)), false, greater(${hoursSince}, ${p("stale")}))`, "R14", "draft", null, `concat(${s}?['crl_shipmentno'], ': last event ', if(equals(${s}?['crl_lasteventat'], null), '?', string(${hoursSince})), ' h ago')`),
+    when(`if(or(equals(${s}?['crl_etato'], null), equals(${s}?['crl_promisedto'], null), equals(${st}, 'DELIVERED')), false, greater(ticks(${s}?['crl_etato']), ticks(${s}?['crl_promisedto'])))`, "R15", "draft", null, `concat(${s}?['crl_shipmentno'], ': ETA ends after the promised slot')`),
   ];
 
   // after the loop
@@ -194,7 +217,7 @@ export function decideAndReply(S) {
   const F = "outputs('Findings')";
   const has = (effect) => `contains(string(${F}), '"effect":"${effect}"')`;
   const strongest = `if(${has("ignore")}, 'ignore', if(${has("route")}, 'route', if(${has("draft")}, 'draft', if(and(equals(length(${F}), 0), equals(${nAllowed}, 0)), 'draft', 'auto'))))`;
-  const draftOnly = `and(equals(outputs('Strongest'), 'auto'), equals(toLower(${p("mode")}), 'draft-only'))`;
+  const draftOnly = `and(equals(outputs('Strongest'), 'auto'), equals(${MODE}, 'draft-only'))`;
   const action = `if(${draftOnly}, 'draft', outputs('Strongest'))`;
   const queues = ["security", "team-lead", "claims", "customer-service", "planning", "finance"];
   const routeQ = (q) => `contains(string(${F}), '"effect":"route","queue":"${q}"')`;
@@ -206,14 +229,15 @@ export function decideAndReply(S) {
 
   // reply text, like compose() in src/compose.mjs, from the template row of the reply language
   const T = "outputs('Templates')";
-  const day = (x) => `formatDateTime(convertFromUtc(${x}, 'Romance Standard Time'), 'ddd d MMM', ${T}?['locale'])`;
+  // .NET writes Dutch month abbreviations with a period ("okt."), Intl in src/compose.mjs without ("okt")
+  const day = (x) => `if(equals(${T}?['locale'], 'nl-BE'), replace(formatDateTime(convertFromUtc(${x}, 'Romance Standard Time'), 'ddd d MMM', 'nl-BE'), '.', ''), formatDateTime(convertFromUtc(${x}, 'Romance Standard Time'), 'ddd d MMM', ${T}?['locale']))`;
   const time = (x) => `formatDateTime(convertFromUtc(${x}, 'Romance Standard Time'), 'HH:mm')`;
   const at = (x) => `concat(${day(x)}, ' ', ${T}?['at'], ' ', ${time(x)})`;
   const sh = (f) => `item()?['shipment']?['${f}']`;
   const win = `concat(${day(sh("etaFrom"))}, ' ', ${T}?['between'], ' ', ${time(sh("etaFrom"))}, ' ', ${T}?['and'], ' ', if(equals(${day(sh("etaFrom"))}, ${day(sh("etaTo"))}), ${time(sh("etaTo"))}, concat(${day(sh("etaTo"))}, ' ', ${time(sh("etaTo"))})))`;
   const safe = (f, expr) => `if(equals(${sh(f)}, null), '', ${expr})`;
   const fill = (text) => `replace(replace(replace(replace(replace(replace(replace(${text}, '{id}', ${sh("id")}), '{customerReference}', coalesce(${sh("customerReference")}, '')), '{pickupDay}', ${safe("pickupDate", day(sh("pickupDate")))}), '{lastEventAt}', ${safe("lastEventAt", at(sh("lastEventAt")))}), '{lastEventLocation}', coalesce(${sh("lastEventLocation")}, '')), '{eta}', ${safe("etaTo", win)}), '{deliveredAt}', ${safe("deliveredAt", at(sh("deliveredAt")))})`;
-  const line = `concat(${fill(`if(empty(coalesce(${sh("customerReference")}, '')), ${T}?['ref'], ${T}?['refCustomer'])`)}, ' ', ${fill(`${T}?[${sh("status")}]`)})`;
+  const line = `concat(${fill(`if(empty(coalesce(${sh("customerReference")}, '')), ${T}?['ref'], ${T}?['refCustomer'])`)}, ' ', ${fill(`coalesce(${T}?[${sh("status")}], '')`)})`;
   const podPart = `if(equals(outputs('Template'), 'pod'), concat(decodeUriComponent('%0A'), if(equals(${sh("status")}, 'DELIVERED'), concat(${T}?['podIntro'], decodeUriComponent('%0A'), 'https://portal.corlaan.example/pod/', ${sh("id")}), ${T}?['podNotYet'])), '')`;
   const NL = "decodeUriComponent('%0A')";
   const body = `if(equals(outputs('Template'), 'clarify'), ${T}?['clarify'], if(equals(outputs('Template'), 'generic'), ${T}?['generic'], join(body('Status_lines'), concat(${NL}, ${NL}))))`;
@@ -227,7 +251,8 @@ export function decideAndReply(S) {
   return definition(
     { Email_read: trigger("crl_inboundemail", 3, { "subscriptionRequest/filteringattributes": "crl_status", "subscriptionRequest/filterexpression": `crl_status eq ${OPT.email.read}` }) },
     {
-      Agent_reading: compose(`@json(coalesce(${t("crl_agentoutput")}, '{}'))`),
+      Read_mode: readMode(),
+      Agent_reading: compose(`@json(coalesce(${t("crl_agentoutput")}, '{}'))`, ok("Read_mode")),
       References: { type: "Select", inputs: { from: `@coalesce(${A}?['references'], json('[]'))`, select: { type: "@item()?['type']", value: `@${normValue}` } }, runAfter: ok("Agent_reading") },
       Lookups_init: init("Lookups", "array", [], ok("References")),
       Shipment_findings_init: init("ShipmentFindings", "array", [], ok("Lookups_init")),
@@ -303,7 +328,7 @@ export function decideAndReply(S) {
         "item/crl_status": OPT.email.error, "item/crl_error": "The decision flow failed; see the run history. Nothing was sent.",
       }, { Save_decision: ["Failed", "Skipped", "TimedOut"] }),
     },
-    params("confidence", "stale", "maxRefs", "maxAuto", "mode", "clock", "freemail"),
+    params("confidence", "stale", "maxRefs", "maxAuto", "clock", "freemail"),
   );
 }
 

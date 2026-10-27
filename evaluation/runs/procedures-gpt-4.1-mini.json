@@ -1,0 +1,22 @@
+{
+  "reader": "Azure AI Foundry",
+  "deployment": "gpt-4.1-mini",
+  "recordedAt": "2026-10-27",
+  "temperature": 0,
+  "answers": {
+    "P01": "Een collega van hetzelfde bedrijf maar niet op de contactlijst mag de status van een zending ontvangen, maar een afleverbewijs (POD) alleen na controle door een collega, omdat de handtekening en naam van de ontvanger persoonlijke gegevens zijn. Zonder deze controle mag het POD niet worden verstrekt. [CS-01]",
+    "P02": "The last TMS event of a shipment on the road may be up to 4 hours old before you must call the carrier first. If it is older than 4 hours, call the carrier before answering the status question. [CS-01]",
+    "P03": "- Ne pas envoyer de statut ni de preuve de livraison en réponse.\n- Transférer l'email au service des réclamations avec le numéro d'envoi.\n- Répondre au client dans les 4 heures ouvrables pour accuser réception, demander des photos des marchandises et de l'emballage, ainsi que le CMR avec la réserve écrite.\n- Informer que les dommages doivent être signalés sur le CMR à la livraison ou dans les 7 jours par écrit s'ils n'étaient pas visibles.\n- Ne jamais admettre la responsabilité ni promettre une compensation par écrit; la décision revient au coordinateur des réclamations. [CS-02]",
+    "P04": "Hidden damage must be reported in writing within 7 days, according to the CMR Convention, article 30. This deadline should be mentioned to the customer. [CS-02]",
+    "P05": "Schadeclaims boven €500 worden goedgekeurd door de operations manager. De claimscoördinator beslist alleen over claims tot €500. [CS-02]",
+    "P06": "You must escalate the email to the team lead because the customer is angry, uses the word \"unacceptable,\" and this is the third time they write. Follow the escalation procedure in CS-03. Do not send a standard template or automatic reply. If possible, call the customer before 16:00 to discuss. Otherwise, reply with an apology, facts, next steps, and your name. [CS-03]",
+    "P07": "Nee, volgens de procedures mag u geen informatie sturen naar een transporteur die niet op de geregistreerde contactlijst staat. Alleen geregistreerde contacten, collega's binnen hetzelfde e-maildomein of de geadresseerde zelf mogen statusinformatie ontvangen. Verzoeken om informatie naar andere adressen te sturen moeten worden doorgegeven aan de security queue en niet beantwoord. [CS-01, CS-03]",
+    "P08": "Een klant kan een levering voor de volgende dag nog verplaatsen als de aanvraag bij planning binnenkomt vóór 14:00 uur. Latere verzoeken worden als \"best effort\" behandeld en planning antwoordt de klant rechtstreeks. Klantenservice voert deze wijzigingen niet zelf uit. [CS-04]",
+    "P09": "No, customer service never confirms a refund or a credit note. Questions about invoices or credit notes should be forwarded to the finance queue, which answers within 2 working days. [CS-04]",
+    "P10": "Op een Duitse mail antwoord je in het Engels, tenzij er een Duitstalige collega beschikbaar is. [CS-03]",
+    "P11": "The procedures do not provide phone numbers or personal contact details. Please ask the team lead for this information.",
+    "P12": "The procedures do not provide information about shipment costs or tariffs. Please ask the team lead or the finance department for pricing details. [CS-04]",
+    "P13": "[refused by the platform: content_filter]",
+    "P14": "The procedures do not address liability of subcontractors under Belgian law for late delivery. Please ask the team lead for guidance on this legal question. [CS-02]"
+  }
+}

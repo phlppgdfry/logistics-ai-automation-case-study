@@ -19,13 +19,14 @@ jobs:
         with:
           node-version: 22
 
-      - name: Tests (evaluation set, replies, agent contract, API, business case)
+      - name: Tests (evaluation set, model replay, replies, agent contract, API, business case, governance, procedures agent)
         run: node --test tests/*.test.mjs
 
-      - name: Derived files and quoted numbers match the model and the test set
+      - name: Derived files, agent definition and quoted numbers match the model, the test set and the recordings
         run: |
           node scripts/build.mjs
           node scripts/export-eval-csv.mjs
+          node scripts/sync-agent.mjs
           git diff --exit-code
 
       - name: Links

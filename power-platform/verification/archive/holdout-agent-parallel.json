@@ -1,0 +1,614 @@
+{
+ "summary": {
+  "batch": "holdout-agent",
+  "at": "2026-10-27 15:43",
+  "reader": "Copilot Studio agent",
+  "emails": 24,
+  "decided": 24,
+  "sameDecision": 24,
+  "sameReply": 24,
+  "expected": 14
+ },
+ "results": [
+  {
+   "id": "H01",
+   "reader": "Copilot Studio agent",
+   "flow": {
+    "status": "Decided",
+    "action": "draft",
+    "template": "status",
+    "queue": null,
+    "rules": "R05,R06",
+    "shipments": "",
+    "reply": null
+   },
+   "reference": {
+    "action": "draft",
+    "template": "status",
+    "queue": null,
+    "rules": "R05,R06",
+    "shipments": "",
+    "reply": null
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": false,
+   "error": "Agent answer was not JSON, safe reading used: An error has occurred.\nError code: GenAIToolPlannerRateLimitReached\nConversation Id: f4ad36ab-5ed4-415c-8fce-54088c5c1eef\nTime (UTC): 2026-10-27T15:42:10.805Z."
+  },
+  {
+   "id": "H02",
+   "reader": "Copilot Studio agent",
+   "flow": {
+    "status": "Decided",
+    "action": "auto",
+    "template": "status",
+    "queue": null,
+    "rules": "",
+    "shipments": "CL-2026-0412390",
+    "reply": "Hello,\n\nYour shipment CL-2026-0412390 (your reference PO 778164) is out for delivery today. Expected arrival: Tue 13 Oct between 10:00 and 12:00.\n\nKind regards,\nCorlaan Logistics Customer Service\n\n— This reply was prepared automatically from our transport system. Simply reply to this email to reach a colleague."
+   },
+   "reference": {
+    "action": "auto",
+    "template": "status",
+    "queue": null,
+    "rules": "",
+    "shipments": "CL-2026-0412390",
+    "reply": "Hello,\n\nYour shipment CL-2026-0412390 (your reference PO 778164) is out for delivery today. Expected arrival: Tue 13 Oct between 10:00 and 12:00.\n\nKind regards,\nCorlaan Logistics Customer Service\n\n— This reply was prepared automatically from our transport system. Simply reply to this email to reach a colleague."
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": null
+  },
+  {
+   "id": "H03",
+   "reader": "Copilot Studio agent",
+   "flow": {
+    "status": "Decided",
+    "action": "auto",
+    "template": "pod",
+    "queue": null,
+    "rules": "",
+    "shipments": "CL-2026-0412380",
+    "reply": "Bonjour,\n\nVotre envoi CL-2026-0412380 (votre référence CMD 30377) a été livré le ven. 9 oct. à 11:05.\nVous trouverez la preuve de livraison via ce lien sécurisé (valable 7 jours) :\nhttps://portal.corlaan.example/pod/CL-2026-0412380\n\nCordialement,\nService clientèle Corlaan Logistics\n\n— Cette réponse a été préparée automatiquement à partir de notre système de transport. Répondez simplement à ce message pour joindre un collègue."
+   },
+   "reference": {
+    "action": "auto",
+    "template": "pod",
+    "queue": null,
+    "rules": "",
+    "shipments": "CL-2026-0412380",
+    "reply": "Bonjour,\n\nVotre envoi CL-2026-0412380 (votre référence CMD 30377) a été livré le ven. 9 oct. à 11:05.\nVous trouverez la preuve de livraison via ce lien sécurisé (valable 7 jours) :\nhttps://portal.corlaan.example/pod/CL-2026-0412380\n\nCordialement,\nService clientèle Corlaan Logistics\n\n— Cette réponse a été préparée automatiquement à partir de notre système de transport. Répondez simplement à ce message pour joindre un collègue."
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": null
+  },
+  {
+   "id": "H04",
+   "reader": "Copilot Studio agent",
+   "flow": {
+    "status": "Decided",
+    "action": "auto",
+    "template": "pod",
+    "queue": null,
+    "rules": "",
+    "shipments": "CL-2026-0412371",
+    "reply": "Beste,\n\nUw zending CL-2026-0412371 (uw referentie ORD 11872) werd geleverd op za 10 okt om 15:20.\nHet afleverbewijs vindt u via deze beveiligde link (7 dagen geldig):\nhttps://portal.corlaan.example/pod/CL-2026-0412371\n\nMet vriendelijke groeten,\nKlantendienst Corlaan Logistics\n\n— Dit antwoord werd automatisch opgesteld uit ons transportsysteem. Antwoord gewoon op deze mail om een collega te bereiken."
+   },
+   "reference": {
+    "action": "auto",
+    "template": "pod",
+    "queue": null,
+    "rules": "",
+    "shipments": "CL-2026-0412371",
+    "reply": "Beste,\n\nUw zending CL-2026-0412371 (uw referentie ORD 11872) werd geleverd op za 10 okt om 15:20.\nHet afleverbewijs vindt u via deze beveiligde link (7 dagen geldig):\nhttps://portal.corlaan.example/pod/CL-2026-0412371\n\nMet vriendelijke groeten,\nKlantendienst Corlaan Logistics\n\n— Dit antwoord werd automatisch opgesteld uit ons transportsysteem. Antwoord gewoon op deze mail om een collega te bereiken."
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": null
+  },
+  {
+   "id": "H05",
+   "reader": "Copilot Studio agent",
+   "flow": {
+    "status": "Decided",
+    "action": "auto",
+    "template": "status",
+    "queue": null,
+    "rules": "",
+    "shipments": "CL-2026-0412377",
+    "reply": "Hello,\n\nYour shipment CL-2026-0412377 (your reference PO 778120) is on its way. Last update: DC Gent, Tue 13 Oct at 07:45. Expected delivery: Wed 14 Oct between 09:00 and 12:00.\n\nKind regards,\nCorlaan Logistics Customer Service\n\n— This reply was prepared automatically from our transport system. Simply reply to this email to reach a colleague."
+   },
+   "reference": {
+    "action": "auto",
+    "template": "status",
+    "queue": null,
+    "rules": "",
+    "shipments": "CL-2026-0412377",
+    "reply": "Hello,\n\nYour shipment CL-2026-0412377 (your reference PO 778120) is on its way. Last update: DC Gent, Tue 13 Oct at 07:45. Expected delivery: Wed 14 Oct between 09:00 and 12:00.\n\nKind regards,\nCorlaan Logistics Customer Service\n\n— This reply was prepared automatically from our transport system. Simply reply to this email to reach a colleague."
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": null
+  },
+  {
+   "id": "H06",
+   "reader": "Copilot Studio agent",
+   "flow": {
+    "status": "Decided",
+    "action": "draft",
+    "template": "status",
+    "queue": null,
+    "rules": "R06",
+    "shipments": "CL-2026-0412470",
+    "reply": "Hello,\n\nYour shipment CL-2026-0412470 (your reference REF 99102) is on its way. Last update: Hub Gent, Tue 13 Oct at 07:30. Expected delivery: Wed 14 Oct between 09:00 and 12:00.\n\nKind regards,\nCorlaan Logistics Customer Service\n\n— This reply was prepared automatically from our transport system. Simply reply to this email to reach a colleague."
+   },
+   "reference": {
+    "action": "draft",
+    "template": "status",
+    "queue": null,
+    "rules": "R06",
+    "shipments": "CL-2026-0412470",
+    "reply": "Hello,\n\nYour shipment CL-2026-0412470 (your reference REF 99102) is on its way. Last update: Hub Gent, Tue 13 Oct at 07:30. Expected delivery: Wed 14 Oct between 09:00 and 12:00.\n\nKind regards,\nCorlaan Logistics Customer Service\n\n— This reply was prepared automatically from our transport system. Simply reply to this email to reach a colleague."
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": null
+  },
+  {
+   "id": "H07",
+   "reader": "Copilot Studio agent",
+   "flow": {
+    "status": "Decided",
+    "action": "auto",
+    "template": "status",
+    "queue": null,
+    "rules": "",
+    "shipments": "CL-2026-0412402",
+    "reply": "Beste,\n\nUw zending CL-2026-0412402 (uw referentie BO 20931) staat gepland voor ophaling op wo 14 okt. Verwachte levering: wo 14 okt tussen 14:00 en 17:00.\n\nMet vriendelijke groeten,\nKlantendienst Corlaan Logistics\n\n— Dit antwoord werd automatisch opgesteld uit ons transportsysteem. Antwoord gewoon op deze mail om een collega te bereiken."
+   },
+   "reference": {
+    "action": "auto",
+    "template": "status",
+    "queue": null,
+    "rules": "",
+    "shipments": "CL-2026-0412402",
+    "reply": "Beste,\n\nUw zending CL-2026-0412402 (uw referentie BO 20931) staat gepland voor ophaling op wo 14 okt. Verwachte levering: wo 14 okt tussen 14:00 en 17:00.\n\nMet vriendelijke groeten,\nKlantendienst Corlaan Logistics\n\n— Dit antwoord werd automatisch opgesteld uit ons transportsysteem. Antwoord gewoon op deze mail om een collega te bereiken."
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": null
+  },
+  {
+   "id": "H08",
+   "reader": "Copilot Studio agent",
+   "flow": {
+    "status": "Decided",
+    "action": "route",
+    "template": null,
+    "queue": "claims",
+    "rules": "R03",
+    "shipments": "CL-2026-0412415",
+    "reply": null
+   },
+   "reference": {
+    "action": "route",
+    "template": null,
+    "queue": "claims",
+    "rules": "R03",
+    "shipments": "CL-2026-0412415",
+    "reply": null
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": null
+  },
+  {
+   "id": "H09",
+   "reader": "Copilot Studio agent",
+   "flow": {
+    "status": "Decided",
+    "action": "route",
+    "template": null,
+    "queue": "claims",
+    "rules": "R03",
+    "shipments": "CL-2026-0412380",
+    "reply": null
+   },
+   "reference": {
+    "action": "route",
+    "template": null,
+    "queue": "claims",
+    "rules": "R03",
+    "shipments": "CL-2026-0412380",
+    "reply": null
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": null
+  },
+  {
+   "id": "H10",
+   "reader": "Copilot Studio agent",
+   "flow": {
+    "status": "Decided",
+    "action": "route",
+    "template": null,
+    "queue": "team-lead",
+    "rules": "R03",
+    "shipments": "CL-2026-0412440",
+    "reply": null
+   },
+   "reference": {
+    "action": "route",
+    "template": null,
+    "queue": "team-lead",
+    "rules": "R03",
+    "shipments": "CL-2026-0412440",
+    "reply": null
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": null
+  },
+  {
+   "id": "H11",
+   "reader": "Copilot Studio agent",
+   "flow": {
+    "status": "Decided",
+    "action": "draft",
+    "template": "status",
+    "queue": null,
+    "rules": "R05,R06",
+    "shipments": "",
+    "reply": null
+   },
+   "reference": {
+    "action": "draft",
+    "template": "status",
+    "queue": null,
+    "rules": "R05,R06",
+    "shipments": "",
+    "reply": null
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": false,
+   "error": "Agent answer was not JSON, safe reading used: An error has occurred.\nError code: GenAIToolPlannerRateLimitReached\nConversation Id: f7d9740f-6cfd-4a69-bbd0-9d62b139e731\nTime (UTC): 2026-10-27T15:42:12.107Z."
+  },
+  {
+   "id": "H12",
+   "reader": "Copilot Studio agent",
+   "flow": {
+    "status": "Decided",
+    "action": "route",
+    "template": null,
+    "queue": "security",
+    "rules": "R02",
+    "shipments": "CL-2026-0412440",
+    "reply": null
+   },
+   "reference": {
+    "action": "route",
+    "template": null,
+    "queue": "security",
+    "rules": "R02",
+    "shipments": "CL-2026-0412440",
+    "reply": null
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": null
+  },
+  {
+   "id": "H13",
+   "reader": "Copilot Studio agent",
+   "flow": {
+    "status": "Decided",
+    "action": "draft",
+    "template": "status",
+    "queue": null,
+    "rules": "R05,R06",
+    "shipments": "",
+    "reply": null
+   },
+   "reference": {
+    "action": "draft",
+    "template": "status",
+    "queue": null,
+    "rules": "R05,R06",
+    "shipments": "",
+    "reply": null
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": false,
+   "error": "Agent answer was not JSON, safe reading used: An error has occurred.\nError code: GenAIToolPlannerRateLimitReached\nConversation Id: eb27d400-ea96-4ddc-9ee2-e6ab49690c60\nTime (UTC): 2026-10-27T15:42:12.137Z."
+  },
+  {
+   "id": "H14",
+   "reader": "Copilot Studio agent",
+   "flow": {
+    "status": "Decided",
+    "action": "auto",
+    "template": "status",
+    "queue": null,
+    "rules": "",
+    "shipments": "CL-2026-0412410",
+    "reply": "Beste,\n\nUw zending CL-2026-0412410 (uw referentie BST 55840) is onderweg. Laatste update: Hub Gent, di 13 okt om 08:40. Verwachte levering: di 13 okt tussen 13:30 en 16:00.\n\nMet vriendelijke groeten,\nKlantendienst Corlaan Logistics\n\n— Dit antwoord werd automatisch opgesteld uit ons transportsysteem. Antwoord gewoon op deze mail om een collega te bereiken."
+   },
+   "reference": {
+    "action": "auto",
+    "template": "status",
+    "queue": null,
+    "rules": "",
+    "shipments": "CL-2026-0412410",
+    "reply": "Beste,\n\nUw zending CL-2026-0412410 (uw referentie BST 55840) is onderweg. Laatste update: Hub Gent, di 13 okt om 08:40. Verwachte levering: di 13 okt tussen 13:30 en 16:00.\n\nMet vriendelijke groeten,\nKlantendienst Corlaan Logistics\n\n— Dit antwoord werd automatisch opgesteld uit ons transportsysteem. Antwoord gewoon op deze mail om een collega te bereiken."
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": null
+  },
+  {
+   "id": "H15",
+   "reader": "Copilot Studio agent",
+   "flow": {
+    "status": "Decided",
+    "action": "auto",
+    "template": "generic",
+    "queue": null,
+    "rules": "R11",
+    "shipments": "",
+    "reply": "Beste,\n\nBedankt voor uw bericht. Om de gegevens van onze klanten te beschermen delen we zendingsinformatie alleen met geregistreerde contactpersonen. U kunt de status volgen via https://portal.corlaan.example, of uw vraag sturen vanaf het e-mailadres dat bij ons gekend is.\n\nMet vriendelijke groeten,\nKlantendienst Corlaan Logistics\n\n— Dit antwoord werd automatisch opgesteld uit ons transportsysteem. Antwoord gewoon op deze mail om een collega te bereiken."
+   },
+   "reference": {
+    "action": "auto",
+    "template": "generic",
+    "queue": null,
+    "rules": "R11",
+    "shipments": "",
+    "reply": "Beste,\n\nBedankt voor uw bericht. Om de gegevens van onze klanten te beschermen delen we zendingsinformatie alleen met geregistreerde contactpersonen. U kunt de status volgen via https://portal.corlaan.example, of uw vraag sturen vanaf het e-mailadres dat bij ons gekend is.\n\nMet vriendelijke groeten,\nKlantendienst Corlaan Logistics\n\n— Dit antwoord werd automatisch opgesteld uit ons transportsysteem. Antwoord gewoon op deze mail om een collega te bereiken."
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": null
+  },
+  {
+   "id": "H16",
+   "reader": "Copilot Studio agent",
+   "flow": {
+    "status": "Decided",
+    "action": "draft",
+    "template": "status",
+    "queue": null,
+    "rules": "R05,R06",
+    "shipments": "",
+    "reply": null
+   },
+   "reference": {
+    "action": "draft",
+    "template": "status",
+    "queue": null,
+    "rules": "R05,R06",
+    "shipments": "",
+    "reply": null
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": false,
+   "error": "Agent answer was not JSON, safe reading used: An error has occurred.\nError code: GenAIToolPlannerRateLimitReached\nConversation Id: c1ab77dd-b6c7-4ecd-800d-0e66060dca70\nTime (UTC): 2026-10-27T15:42:12.118Z."
+  },
+  {
+   "id": "H17",
+   "reader": "Copilot Studio agent",
+   "flow": {
+    "status": "Decided",
+    "action": "draft",
+    "template": "status",
+    "queue": null,
+    "rules": "R05,R06",
+    "shipments": "",
+    "reply": null
+   },
+   "reference": {
+    "action": "draft",
+    "template": "status",
+    "queue": null,
+    "rules": "R05,R06",
+    "shipments": "",
+    "reply": null
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": false,
+   "error": "Agent answer was not JSON, safe reading used: An error has occurred.\nError code: GenAIToolPlannerRateLimitReached\nConversation Id: 3f308446-4af3-4578-aa27-9e843ec9d10b\nTime (UTC): 2026-10-27T15:42:12.086Z."
+  },
+  {
+   "id": "H18",
+   "reader": "Copilot Studio agent",
+   "flow": {
+    "status": "Decided",
+    "action": "draft",
+    "template": "status",
+    "queue": null,
+    "rules": "R05,R06",
+    "shipments": "",
+    "reply": null
+   },
+   "reference": {
+    "action": "draft",
+    "template": "status",
+    "queue": null,
+    "rules": "R05,R06",
+    "shipments": "",
+    "reply": null
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": false,
+   "error": "Agent answer was not JSON, safe reading used: An error has occurred.\nError code: GenAIToolPlannerRateLimitReached\nConversation Id: 5a4af4e0-1094-41b5-9db0-5736439b7763\nTime (UTC): 2026-10-27T15:43:16.274Z."
+  },
+  {
+   "id": "H19",
+   "reader": "Copilot Studio agent",
+   "flow": {
+    "status": "Decided",
+    "action": "draft",
+    "template": "status",
+    "queue": null,
+    "rules": "R05,R06",
+    "shipments": "",
+    "reply": null
+   },
+   "reference": {
+    "action": "draft",
+    "template": "status",
+    "queue": null,
+    "rules": "R05,R06",
+    "shipments": "",
+    "reply": null
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": false,
+   "error": "Agent answer was not JSON, safe reading used: An error has occurred.\nError code: GenAIToolPlannerRateLimitReached\nConversation Id: 7e3dc480-23b9-4279-8ee0-bd5158f37376\nTime (UTC): 2026-10-27T15:43:17.610Z."
+  },
+  {
+   "id": "H20",
+   "reader": "Copilot Studio agent",
+   "flow": {
+    "status": "Decided",
+    "action": "draft",
+    "template": "status",
+    "queue": null,
+    "rules": "R05,R06",
+    "shipments": "",
+    "reply": null
+   },
+   "reference": {
+    "action": "draft",
+    "template": "status",
+    "queue": null,
+    "rules": "R05,R06",
+    "shipments": "",
+    "reply": null
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": false,
+   "error": "Agent answer was not JSON, safe reading used: An error has occurred.\nError code: GenAIToolPlannerRateLimitReached\nConversation Id: 5cde411e-2c2a-4034-b0a1-d3a4a75969e2\nTime (UTC): 2026-10-27T15:43:16.245Z."
+  },
+  {
+   "id": "H21",
+   "reader": "Copilot Studio agent",
+   "flow": {
+    "status": "Decided",
+    "action": "draft",
+    "template": "status",
+    "queue": null,
+    "rules": "R05,R06",
+    "shipments": "",
+    "reply": null
+   },
+   "reference": {
+    "action": "draft",
+    "template": "status",
+    "queue": null,
+    "rules": "R05,R06",
+    "shipments": "",
+    "reply": null
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": false,
+   "error": "Agent answer was not JSON, safe reading used: An error has occurred.\nError code: GenAIToolPlannerRateLimitReached\nConversation Id: 39a5cb60-1bf2-444b-b5fb-41da631147b5\nTime (UTC): 2026-10-27T15:43:15.825Z."
+  },
+  {
+   "id": "H22",
+   "reader": "Copilot Studio agent",
+   "flow": {
+    "status": "Decided",
+    "action": "draft",
+    "template": "status",
+    "queue": null,
+    "rules": "R05,R06",
+    "shipments": "",
+    "reply": null
+   },
+   "reference": {
+    "action": "draft",
+    "template": "status",
+    "queue": null,
+    "rules": "R05,R06",
+    "shipments": "",
+    "reply": null
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": "Agent answer was not JSON, safe reading used: An error has occurred.\nError code: GenAIToolPlannerRateLimitReached\nConversation Id: f6023a77-ea68-4e8b-b152-3bed0d624c44\nTime (UTC): 2026-10-27T15:43:16.622Z."
+  },
+  {
+   "id": "H23",
+   "reader": "Copilot Studio agent",
+   "flow": {
+    "status": "Decided",
+    "action": "ignore",
+    "template": null,
+    "queue": null,
+    "rules": "R01",
+    "shipments": "",
+    "reply": null
+   },
+   "reference": {
+    "action": "ignore",
+    "template": null,
+    "queue": null,
+    "rules": "R01",
+    "shipments": "",
+    "reply": null
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": null
+  },
+  {
+   "id": "H24",
+   "reader": "Copilot Studio agent",
+   "flow": {
+    "status": "Decided",
+    "action": "draft",
+    "template": "status",
+    "queue": null,
+    "rules": "R05,R06",
+    "shipments": "",
+    "reply": null
+   },
+   "reference": {
+    "action": "draft",
+    "template": "status",
+    "queue": null,
+    "rules": "R05,R06",
+    "shipments": "",
+    "reply": null
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": false,
+   "error": "Agent answer was not JSON, safe reading used: An error has occurred.\nError code: GenAIToolPlannerRateLimitReached\nConversation Id: 1c868e12-866f-42d8-b315-18004625e3a1\nTime (UTC): 2026-10-27T15:43:16.351Z."
+  }
+ ]
+}

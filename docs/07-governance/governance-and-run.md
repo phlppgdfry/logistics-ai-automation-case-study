@@ -9,11 +9,14 @@
 | `corlaan-cs-test` | evaluation set, load test, acceptance | IT | vendor test API, test mailbox |
 | `corlaan-cs-prod` | live | nobody builds here; managed solution only | production |
 
-- One solution `CorlaanCustomerEmail` (publisher `cor`): agent, flow, custom connector, Dataverse tables, environment variables, connection references.
-- Promotion dev → test → prod as a **managed** solution, exported and stored in the repo; later via Power Platform pipelines.
+- One solution `CorlaanCustomerEmail` (publisher `crl`): agent, cloud flows, custom connector, Dataverse tables, environment variables, connection references. **Built** in a developer environment: see [power-platform/](../../power-platform/README.md).
+- Promotion dev → test → prod as a **managed** solution with a settings file per environment ([deployment-settings/](../../power-platform/deployment-settings/)): `pac solution import --settings-file test.json`. The settings file holds every environment variable and connection reference, never a secret; a test fails when a new variable has no value for an environment ([tests/governance.test.mjs](../../tests/governance.test.mjs)). Later via Power Platform pipelines, with the same settings files.
 - Every change to a rule or template: change in dev → add/adjust a case in the evaluation set → test → prod. The evaluation set is the regression test.
 
 ## Data loss prevention (production environment)
+
+The policy is a file, [governance/dlp-policy.prod.json](../../power-platform/governance/dlp-policy.prod.json), in the shape of the admin API. A test checks that every connector the flows use is in the business group and that no flow uses an HTTP action, so a flow change that would break the policy fails in CI before it reaches the admin.
+
 
 | Group | Connectors |
 |---|---|
@@ -36,10 +39,10 @@ The default environment gets a stricter policy at the same time: business data c
 
 | Situation | Signal | Action |
 |---|---|---|
-| **Stop everything now** | anyone | set `cor_Mode = off` (IT or team lead). Mail stays in the inbox as before. |
-| Wrong reply sent | complaint, weekly review | `cor_Mode = draft-only`; find the audit row; add the email to the evaluation set; fix the rule; promote; back to graduated after a clean week |
-| TMS down | flow errors, circuit breaker alert | nothing — flow is in draft-only automatically; check vendor status; reset breaker when green |
-| Credits running out | admin center alert at 80% | raise capacity or accept: the flow routes everything to the team when Copilot Studio stops |
+| **Stop everything now** | anyone | set the environment variable `crl_Mode = off` (IT or team lead). Flow CRL-01 stops at its first step; mail stays in the inbox as before. |
+| Wrong reply sent | complaint, weekly review | `crl_Mode = draft-only`; find the audit row; add the email to the evaluation set; fix the rule; promote; back to graduated after a clean week |
+| TMS down | flow errors, circuit breaker alert | nothing — flow is in draft-only automatically; check vendor status; reset breaker when green *(designed; the built flows use the TMS sandbox tables)* |
+| Credits running out | admin center alert at 80% | raise capacity or accept: when the agent call fails, CRL-01 stores a safe reading (unknown, confidence 0), so every email becomes a draft for the team |
 | Model update announced by Microsoft | message center | run the agent evaluation in test; below target → stay on draft-only until fixed |
 | Count mismatch | daily check: emails received ≠ audit rows | look for failed runs; reprocess from the inbox |
 | Secret expiry | 30 days before, IT calendar | rotate in Entra ID, update the connection, test one lookup |

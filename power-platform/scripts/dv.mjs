@@ -32,6 +32,7 @@ export async function api(method, path, body, { solution = CONFIG.solution, head
     let res;
     try {
       res = await fetch(path.startsWith("http") ? path : `${BASE}/${path}`, {
+      signal: AbortSignal.timeout(path.includes("Publish") ? 900_000 : 90_000),
       method,
       headers: {
         Authorization: `Bearer ${token()}`,

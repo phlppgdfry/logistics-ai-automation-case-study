@@ -1,6 +1,6 @@
 # Copilot Studio agent: "Corlaan Mail Reader"
 
-> **Status: design and build guide.** This agent has not been built in a real tenant as part of this case. The browser demo uses [src/text.mjs](../src/text.mjs), a deterministic stand-in with the same output.
+> **Status: built.** The agent exists as code in [agent/](agent/) (a `pac copilot` workspace generated from [instructions.md](instructions.md)) and is published in a developer environment, where cloud flow CRL-01 calls it ([power-platform/](../power-platform/README.md)). Its reading is measured in [docs/04-test/model-evaluation.md](../docs/04-test/model-evaluation.md). The browser demo and CI use [src/text.mjs](../src/text.mjs), a deterministic stand-in with the same output. The build guide below is for building it by hand in your own tenant.
 
 ## Role
 

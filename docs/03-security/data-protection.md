@@ -32,7 +32,7 @@
 | Right | How |
 |---|---|
 | Access | audit log by sender address (90 days) + mailbox as today |
-| Objection | a customer can ask to be excluded: account flag `cor_noautoreply` → all their emails become drafts |
+| Objection | a customer can ask to be excluded: account flag `crl_noautoreply` (design; not in the built tables) → all their emails become drafts |
 | Erasure | mailbox retention as today; audit rows deleted with the 90-day reduction |
 
 ## Screening outcome

@@ -11,6 +11,6 @@
 | **Evidence** | <!--n:tests.passed-->48<!--/n-->/<!--n:tests.cases-->48<!--/n--> evaluation emails correct, 0 harm; naive design harms in <!--n:naive.harmful-->23<!--/n--> · 14 threats with controls · CI enforces docs = model |
 | **Value** | <!--n:bc.capacityHoursYear-->3,832 h<!--/n-->/year freed · NPV <!--n:bc.npv3y-->€144,672<!--/n--> · payback <!--n:bc.payback-->13 months<!--/n--> · **<!--n:sc.no-hire.npv-->€13,595<!--/n--> if the hire happens anyway** |
 | **Rollout** | shadow → draft-only → graduated, measured gates, kill switch |
-| **Not claimed** | tenant build, real traffic, real model evaluation |
+| **Not claimed** | client tenant, real traffic, live mailbox, real TMS |
 
 Demo: https://phlppgdfry.github.io/logistics-ai-automation-case-study/demo/?tour

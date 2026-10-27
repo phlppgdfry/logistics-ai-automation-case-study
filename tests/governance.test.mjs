@@ -52,17 +52,23 @@ test("production starts in draft-only mode and never on the test clock", () => {
   assert.equal(prod.crl_ClockOverride, "");
 });
 
-test("the kill switch: with crl_Mode = off the reading flow stops before it does anything", () => {
+test("the kill switch: crl_Mode is read on every run, and with off the reading flow stops before it does anything", () => {
   const read = definitions.find((d) => d.name.startsWith("CRL-01")).def;
   const first = Object.entries(read.actions).find(([, a]) => !a.runAfter || !Object.keys(a.runAfter).length);
-  assert.equal(first[0], "Kill_switch");
-  assert.match(JSON.stringify(first[1].expression), /off/);
-  assert.equal(first[1].actions.Stop_automation_is_off.type, "Terminate");
+  assert.equal(first[0], "Read_mode");
+  assert.match(JSON.stringify(first[1].inputs.parameters), /crl_Mode/);
+  const kill = read.actions.Kill_switch;
+  assert.deepEqual(Object.keys(kill.runAfter), ["Read_mode"]);
+  assert.match(JSON.stringify(kill.expression), /off/);
+  assert.equal(kill.actions.Stop_automation_is_off.type, "Terminate");
+  // not a workflow parameter: a parameter keeps the value the flow had when it was saved
+  assert.doesNotMatch(JSON.stringify(read.parameters), /crl_Mode/);
 });
 
 test("thresholds are environment variables, not numbers in the flow", () => {
   const decideDef = definitions.find((d) => d.name.startsWith("CRL-02")).def;
   const decide = JSON.stringify(decideDef.actions);
-  for (const schema of ["crl_ConfidenceMin", "crl_StaleHours", "crl_MaxReferences", "crl_MaxAutoRepliesPerDay", "crl_Mode"]) assert.ok(decide.includes(schema) && JSON.stringify(decideDef.parameters).includes(schema), schema);
+  for (const schema of ["crl_ConfidenceMin", "crl_StaleHours", "crl_MaxReferences", "crl_MaxAutoRepliesPerDay"]) assert.ok(decide.includes(schema) && JSON.stringify(decideDef.parameters).includes(schema), schema);
+  assert.ok(decide.includes("crl_Mode"), "draft-only mode is read at run time");
   assert.doesNotMatch(decide, /0\.75|less\([^)]*, 4\)/);
 });

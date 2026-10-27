@@ -2,6 +2,7 @@
 import { createContext, runGuarded, runNaive, harmsOf, evaluate, HARMS } from "./lib/pipeline.mjs";
 import { RULE_BY_ID } from "./lib/rules.mjs";
 import { values, compute, sensitivity } from "./lib/business-case.mjs";
+import { prioritise } from "./lib/prioritise.mjs";
 import { createTour } from "./tour.js";
 
 const $ = (s) => document.querySelector(s);
@@ -9,9 +10,9 @@ const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "
 const eur = (n) => `€${Math.round(n).toLocaleString("en-GB")}`;
 const int = (n) => Math.round(n).toLocaleString("en-GB");
 
-const [tms, mail, model] = await Promise.all(["tms", "emails", "model"].map((f) => fetch(`../data/${f}.json`).then((r) => r.json())));
+const [tms, mail, model, modelEval, holdout, useCases] = await Promise.all(["tms", "emails", "model", "model-evaluation", "emails-holdout", "use-cases"].map((f) => fetch(`../data/${f}.json`).then((r) => r.json())));
 const data = { ...tms, ...mail };
-const state = { id: "E01", design: "guarded", mode: "graduated" };
+const state = { id: "E01", design: "guarded", mode: "graduated", reader: "stand-in" };
 
 const OUTCOME_TEXT = {
   auto: "Sent automatically",
@@ -32,7 +33,7 @@ function showTab(id) {
   if (location.hash !== `#${id}`) history.replaceState(null, "", `${location.search}#${id}`);
 }
 tabs.forEach((t) => t.addEventListener("click", () => showTab(t.getAttribute("aria-controls"))));
-if (["inbox", "tests", "value", "rollout"].includes(location.hash.slice(1))) showTab(location.hash.slice(1));
+if (["inbox", "tests", "value", "reading", "rollout", "workshop"].includes(location.hash.slice(1))) showTab(location.hash.slice(1));
 
 // --- Inbox ------------------------------------------------------------------------------------------
 function results() {
@@ -205,9 +206,59 @@ function renderValue() {
   }).join("") + `<p class="note">Bars: NPV range when one assumption moves ±25%. Line: current NPV (${eur(sens[0].base)}). Range ${eur(lo)} – ${eur(hi)}.</p>`;
 }
 
+// --- Reading: recorded model and agent readings ----------------------------------------------------
+const READERS = modelEval.readers.filter((r) => !/-r[23]$/.test(r.key));
+const runsOf = (prefix) => modelEval.readers.filter((r) => r.key.startsWith(prefix) && r.result.main);
+function renderReading() {
+  const cell = (res, key) => (res ? `${res.passed}/${res.cases}${res.harmful ? ` <span class="harm">· ${res.harmful} harmful</span>` : ""}` : "—");
+  $("#reading-table").innerHTML = `<thead><tr><th>Reader</th><th>Main set (written with the stand-in)</th><th>Held-out set (never tuned on)</th></tr></thead><tbody>${READERS.map((r) => {
+    const v3 = r.key === "f-v3" ? runsOf("f-v3") : null;
+    const main = v3 ? `${Math.min(...v3.map((x) => x.result.main.passed))}–${Math.max(...v3.map((x) => x.result.main.passed))}/${r.result.main.cases} (3 runs)${v3.some((x) => x.result.main.harmful) ? " <span class=\"harm\">harmful</span>" : ""}` : cell(r.result.main);
+    return `<tr><td>${esc(r.label.replace(" (run 1)", ""))}</td><td>${main}</td><td>${cell(r.result.holdout)}</td></tr>`;
+  }).join("")}</tbody>`;
+  const sw = $("#reader-switch");
+  sw.innerHTML = `<span>Reader</span>${READERS.map((r) => `<button class="btn-sm" type="button" data-reader="${r.key}" aria-pressed="${r.key === state.reader}">${esc(r.label.replace(" (run 1)", "").replace("gpt-4.1-mini, instructions", "model v"))}</button>`).join("")}`;
+  const reader = READERS.find((r) => r.key === state.reader) ?? READERS[0];
+  const miss = Object.fromEntries(reader.result.holdout.misses.map((m) => [m.id, m]));
+  const fmt = (o) => `${o.action}${o.queue ? ` → ${o.queue}` : o.template ? ` · ${o.template}` : ""}`;
+  $("#holdout-table").innerHTML = `<thead><tr><th>Email</th><th>Expected</th><th>With this reading</th><th></th></tr></thead><tbody>${holdout.emails.map((e) => {
+    const m = miss[e.id];
+    const got = m ? fmt(m) : fmt(e.expected);
+    const verdict = !m ? '<td class="pass">as expected</td>' : m.harms.length ? `<td class="fail">harmful: ${esc(m.harms.join(", "))}</td>` : m.pass ? '<td class="pass">as expected</td>' : '<td class="note">safe miss</td>';
+    return `<tr><td>${e.id} ${esc(e.title)}</td><td>${fmt(e.expected)}</td><td>${got}</td>${verdict}</tr>`;
+  }).join("")}</tbody>`;
+}
+$("#reader-switch").addEventListener("click", (ev) => {
+  const b = ev.target.closest("[data-reader]");
+  if (!b) return;
+  state.reader = b.dataset.reader;
+  renderReading();
+});
+
+// --- Workshop: use-case prioritisation -------------------------------------------------------------
+const weights = { ...useCases.weights };
+function renderWorkshop() {
+  $("#weights").innerHTML = Object.entries(weights).map(([k, w]) => `<div class="slider"><label for="w-${k}"><span>${esc(k === "risk" ? "risk (5 = low)" : k)}</span><output id="ow-${k}">${Math.round(w * 100)}%</output></label><input type="range" id="w-${k}" min="0" max="1" step="0.05" value="${w}" data-weight="${k}"></div>`).join("") +
+    '<p class="note">Weights are normalised: only their ratio matters.</p>';
+  renderUseCases();
+}
+function renderUseCases() {
+  const ranked = prioritise({ useCases: useCases.useCases, weights });
+  $("#usecase-table").innerHTML = `<thead><tr><th>#</th><th>Use case</th><th>Score</th><th>Decision</th></tr></thead><tbody>${ranked.map((u, i) => `<tr><td>${i + 1}</td><td>${esc(u.name)}${u.gate ? ` <span class="harm">· ${esc(u.gate)}</span>` : ""}</td><td>${u.score.toFixed(2)}</td><td>${esc(u.decision)}</td></tr>`).join("")}</tbody>`;
+}
+$("#weights").addEventListener("input", (ev) => {
+  const k = ev.target.dataset.weight;
+  if (!k) return;
+  weights[k] = Number(ev.target.value);
+  $(`#ow-${k}`).textContent = `${Math.round(weights[k] * 100)}%`;
+  renderUseCases();
+});
+
 // --- Start ------------------------------------------------------------------------------------------
 select(state.id);
 renderTests();
+renderReading();
+renderWorkshop();
 renderSliders();
 renderValue();
 
@@ -223,6 +274,6 @@ const tour = createTour([
   { text: `Over all ${S.cases} emails: the guarded design gets ${S.passed}/${S.cases} right with ${S.guardedHarmfulCases} harmful outcomes. The naive design harms in ${S.naiveHarmfulCases}: leaks, stale answers, status lines to angry customers, reply loops. The same tests run in CI on every commit.`, focus: "#tests-summary", before: () => { setDesign("guarded"); showTab("tests"); } },
   { text: `The business case: ${int(B.capacityHoursYear)} hours a year freed. Only the part that replaces temps and a planned hire is cash. Toggle 'the hire happens anyway' and the NPV collapses, because this case rests on a management decision, not on the AI.`, focus: "#value-out", before: () => { showTab("value"); setNoHire(true); } },
   { text: "That is why rollout starts in shadow and draft-only mode. Draft-only alone already covers the cash. Automation is switched on per step, with measured gates and an automatic way back.", focus: "#ladder", before: () => { setNoHire(false); showTab("rollout"); } },
-  { text: "What is simulated: the reading step is a deterministic stand-in with the agent's JSON contract. The Copilot Studio agent and Power Automate flow are a design and build guide, not a tenant export. Everything is fictional.", focus: "#limits", before: () => showTab("rollout") },
+  { text: "What is real: the agent, the cloud flows, the tables and an app are built in a Power Platform developer environment and decide exactly like this demo. The reading is measured on a real model in the Reading tab. In this demo the reader is a stand-in; the mailbox and TMS are not connected; everything is fictional.", focus: "#limits", before: () => showTab("rollout") },
 ]);
 $("#btn-tour").addEventListener("click", () => tour.start());

@@ -1,0 +1,39 @@
+name: Power Platform solution
+
+# The solution source (power-platform/solution/src) is exported from the developer environment with
+# power-platform/scripts/export-solution.mjs. This workflow proves it packs into an importable
+# solution and keeps the packed zip as a build artifact. Deployment to test and production uses
+# pac solution import with power-platform/deployment-settings/<env>.json and a service principal;
+# that step needs a tenant and is not run from this public repository.
+
+on:
+  push:
+    branches: [main]
+    paths: ["power-platform/**", "copilot-studio/agent/**", ".github/workflows/solution.yml"]
+  pull_request:
+    paths: ["power-platform/**", "copilot-studio/agent/**"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  pack:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Power Platform tools
+        uses: microsoft/powerplatform-actions/actions-install@v1
+
+      - name: Pack the unmanaged solution from source
+        uses: microsoft/powerplatform-actions/pack-solution@v1
+        with:
+          solution-folder: power-platform/solution/src
+          solution-file: out/CorlaanCustomerEmail.zip
+          solution-type: Unmanaged
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: CorlaanCustomerEmail-unmanaged
+          path: out/CorlaanCustomerEmail.zip

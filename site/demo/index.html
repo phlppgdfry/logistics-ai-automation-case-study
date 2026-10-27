@@ -32,7 +32,9 @@
     <button role="tab" id="tab-inbox" aria-controls="inbox" aria-selected="true">Inbox</button>
     <button role="tab" id="tab-tests" aria-controls="tests" aria-selected="false">Test set</button>
     <button role="tab" id="tab-value" aria-controls="value" aria-selected="false">Business case</button>
+    <button role="tab" id="tab-reading" aria-controls="reading" aria-selected="false">Reading</button>
     <button role="tab" id="tab-rollout" aria-controls="rollout" aria-selected="false">Rollout</button>
+    <button role="tab" id="tab-workshop" aria-controls="workshop" aria-selected="false">Workshop</button>
   </div>
 
   <section class="panel active" id="inbox" role="tabpanel" aria-labelledby="tab-inbox">
@@ -69,6 +71,26 @@
     <div class="card" style="margin-top:16px"><h2>What moves the 3-year NPV most (±25%)</h2><div class="tornado" id="tornado"></div></div>
   </section>
 
+  <section class="panel" id="reading" role="tabpanel" aria-labelledby="tab-reading">
+    <h2>Does a real model read as well as the rules need?</h2>
+    <p class="note" style="font-style:normal">The test set proves the rules. This tab measures the <strong>reading</strong>: recorded answers of gpt-4.1-mini (Azure AI Foundry) and of the live Copilot Studio agent, replayed through the same rules, on the main set and on 24 held-out emails nobody tuned on.</p>
+    <div class="table-wrap"><table id="reading-table"></table></div>
+    <h2 style="margin-top:24px">Held-out emails, one by one</h2>
+    <div class="seg" id="reader-switch"><span>Reader</span></div>
+    <div class="table-wrap"><table id="holdout-table"></table></div>
+    <p class="note">Harmful = an automatic reply that should not have gone out. A miss that leads to a draft or a routing is safe: a person looks. Details: <a href="https://github.com/phlppgdfry/logistics-ai-automation-case-study/blob/main/docs/04-test/model-evaluation.md">model evaluation</a>.</p>
+  </section>
+
+  <section class="panel" id="workshop" role="tabpanel" aria-labelledby="tab-workshop">
+    <h2>Which use case first? Value × feasibility × risk</h2>
+    <p class="note" style="font-style:normal">Scores from the discovery workshop (1–5; risk 5 = low risk). The weights are agreed before scoring. Move them and watch the order: the score sorts the list, people make the decision.</p>
+    <div class="cols-2">
+      <div class="card"><h2>Weights</h2><div class="sliders" id="weights"></div></div>
+      <div class="card"><div class="table-wrap"><table id="usecase-table"></table></div></div>
+    </div>
+    <p class="note">Run sheet, canvas and the reasons behind each decision: <a href="https://github.com/phlppgdfry/logistics-ai-automation-case-study/tree/main/docs/08-workshops-and-training">workshops and training</a>.</p>
+  </section>
+
   <section class="panel" id="rollout" role="tabpanel" aria-labelledby="tab-rollout">
     <h2>Trust is earned in steps</h2>
     <ol class="ladder" id="ladder">
@@ -92,8 +114,8 @@
     </table></div>
     <h2 style="margin-top:24px" id="limits">What this demo is not</h2>
     <ul class="checklist">
-      <li>The reading step is a deterministic stand-in with the same JSON contract as the Copilot Studio agent. A real model must pass its own evaluation first.</li>
-      <li>The Copilot Studio agent and the Power Automate flow are a design and a build guide, not exports from a tenant.</li>
+      <li>In this demo the reading step is a deterministic stand-in with the agent's JSON contract. Real readings from Azure AI Foundry and the live Copilot Studio agent are recorded and shown in the <a href="#reading">Reading</a> tab.</li>
+      <li>The agent, three cloud flows, Dataverse tables and a model-driven app are built in a developer environment and decide like this demo (<a href="https://github.com/phlppgdfry/logistics-ai-automation-case-study/blob/main/power-platform/VERIFICATION.md">verification</a>). The shared mailbox and the real TMS are not connected.</li>
       <li>No real emails, customers, pilot or results. Every figure is an illustrative assumption.</li>
     </ul>
   </section>

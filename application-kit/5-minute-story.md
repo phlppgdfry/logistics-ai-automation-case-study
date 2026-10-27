@@ -10,4 +10,4 @@
 
 5. **The money (45 s).** "It frees about 3,800 hours a year. But nobody is fired, so that isn't cash. Cash comes only from not hiring temps and not making the 2027 hire. If the hire happens anyway, the NPV drops from about 145k to 14k. So I put 'confirm the hire is on hold' on the go/no-go list. And draft-only mode already covers the cash, so the rollout can start safely."
 
-6. **What it says about me (30 s).** "I start at the work, not the tool. I decide where AI belongs and where it doesn't. I test before I promise. And I'm honest about what's simulated. The agent and the flow here are a design and a build guide, not a tenant export."
+6. **What it says about me (30 s).** "I start at the work, not the tool. I decide where AI belongs and where it doesn't. I test before I promise. And I'm honest about what's simulated. I built the agent and the flows in a developer environment, measured the reading on a real model, and wrote down what broke."

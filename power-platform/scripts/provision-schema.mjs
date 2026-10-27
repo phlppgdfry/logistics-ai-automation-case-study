@@ -26,8 +26,14 @@ async function ensureSolution(publisherId) {
 async function tableExists(name) {
   return (await get(`EntityDefinitions(LogicalName='${name}')?$select=LogicalName`, { allow: [404] })).status === 200;
 }
+// one metadata call per table instead of one per column (developer environments can be slow)
+const attributeCache = new Map();
 async function attributeExists(table, name) {
-  return (await get(`EntityDefinitions(LogicalName='${table}')/Attributes(LogicalName='${name}')?$select=LogicalName`, { allow: [404] })).status === 200;
+  if (!attributeCache.has(table)) {
+    const r = await get(`EntityDefinitions(LogicalName='${table}')/Attributes?$select=LogicalName`, { solution: null });
+    attributeCache.set(table, new Set(r.json.value.map((a) => a.LogicalName)));
+  }
+  return attributeCache.get(table).has(name);
 }
 
 function attributeMetadata([name, type, display, extra]) {
@@ -108,5 +114,6 @@ for (const t of model.tables) await ensureColumns(t);
 for (const t of model.tables) await ensureLookups(t);
 for (const t of model.tables) await ensureKeys(t);
 await ensureEnvironmentVariables();
-await post("PublishAllXml", {});
+// publish only this solution's tables (a full PublishAllXml also publishes other projects in a shared environment)
+await post("PublishXml", { ParameterXml: `<importexportxml><entities>${model.tables.map((t) => `<entity>${t.name}</entity>`).join("")}</entities></importexportxml>` });
 log("published");

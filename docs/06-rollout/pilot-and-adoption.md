@@ -11,7 +11,7 @@ Nobody — not the team lead, not the sponsor, not the consultant — trusts an 
 | **2. Graduated** | automatic for plain status and POD to contacts; drafts and routing as designed | from week 4 | — (steady state; weekly review continues) |
 | **3. Expand** | phase 2: slot changes, separate design | after 3 months stable | separate business case |
 
-Going back down is one setting (`cor_Mode`) and is **automatic** when: a data-protection incident occurs, the weekly sample shows a harm, or the evaluation set drops below target after a model change.
+Going back down is one setting (`crl_Mode`) and is **automatic** when: a data-protection incident occurs, the weekly sample shows a harm, or the evaluation set drops below target after a model change.
 
 ## Plan (illustrative, 10 weeks)
 

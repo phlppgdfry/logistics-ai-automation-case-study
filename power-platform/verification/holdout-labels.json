@@ -1,0 +1,614 @@
+{
+ "summary": {
+  "batch": "holdout-labels",
+  "at": "2026-10-27 15:41",
+  "reader": "Recorded reading",
+  "emails": 24,
+  "decided": 24,
+  "sameDecision": 24,
+  "sameReply": 24,
+  "expected": 24
+ },
+ "results": [
+  {
+   "id": "H01",
+   "reader": "Recorded reading",
+   "flow": {
+    "status": "Decided",
+    "action": "auto",
+    "template": "status",
+    "queue": null,
+    "rules": "",
+    "shipments": "CL-2026-0412410",
+    "reply": "Beste,\n\nUw zending CL-2026-0412410 (uw referentie BST 55840) is onderweg. Laatste update: Hub Gent, di 13 okt om 08:40. Verwachte levering: di 13 okt tussen 13:30 en 16:00.\n\nMet vriendelijke groeten,\nKlantendienst Corlaan Logistics\n\n— Dit antwoord werd automatisch opgesteld uit ons transportsysteem. Antwoord gewoon op deze mail om een collega te bereiken."
+   },
+   "reference": {
+    "action": "auto",
+    "template": "status",
+    "queue": null,
+    "rules": "",
+    "shipments": "CL-2026-0412410",
+    "reply": "Beste,\n\nUw zending CL-2026-0412410 (uw referentie BST 55840) is onderweg. Laatste update: Hub Gent, di 13 okt om 08:40. Verwachte levering: di 13 okt tussen 13:30 en 16:00.\n\nMet vriendelijke groeten,\nKlantendienst Corlaan Logistics\n\n— Dit antwoord werd automatisch opgesteld uit ons transportsysteem. Antwoord gewoon op deze mail om een collega te bereiken."
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": null
+  },
+  {
+   "id": "H02",
+   "reader": "Recorded reading",
+   "flow": {
+    "status": "Decided",
+    "action": "auto",
+    "template": "status",
+    "queue": null,
+    "rules": "",
+    "shipments": "CL-2026-0412390",
+    "reply": "Hello,\n\nYour shipment CL-2026-0412390 (your reference PO 778164) is out for delivery today. Expected arrival: Tue 13 Oct between 10:00 and 12:00.\n\nKind regards,\nCorlaan Logistics Customer Service\n\n— This reply was prepared automatically from our transport system. Simply reply to this email to reach a colleague."
+   },
+   "reference": {
+    "action": "auto",
+    "template": "status",
+    "queue": null,
+    "rules": "",
+    "shipments": "CL-2026-0412390",
+    "reply": "Hello,\n\nYour shipment CL-2026-0412390 (your reference PO 778164) is out for delivery today. Expected arrival: Tue 13 Oct between 10:00 and 12:00.\n\nKind regards,\nCorlaan Logistics Customer Service\n\n— This reply was prepared automatically from our transport system. Simply reply to this email to reach a colleague."
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": null
+  },
+  {
+   "id": "H03",
+   "reader": "Recorded reading",
+   "flow": {
+    "status": "Decided",
+    "action": "auto",
+    "template": "pod",
+    "queue": null,
+    "rules": "",
+    "shipments": "CL-2026-0412380",
+    "reply": "Bonjour,\n\nVotre envoi CL-2026-0412380 (votre référence CMD 30377) a été livré le ven. 9 oct. à 11:05.\nVous trouverez la preuve de livraison via ce lien sécurisé (valable 7 jours) :\nhttps://portal.corlaan.example/pod/CL-2026-0412380\n\nCordialement,\nService clientèle Corlaan Logistics\n\n— Cette réponse a été préparée automatiquement à partir de notre système de transport. Répondez simplement à ce message pour joindre un collègue."
+   },
+   "reference": {
+    "action": "auto",
+    "template": "pod",
+    "queue": null,
+    "rules": "",
+    "shipments": "CL-2026-0412380",
+    "reply": "Bonjour,\n\nVotre envoi CL-2026-0412380 (votre référence CMD 30377) a été livré le ven. 9 oct. à 11:05.\nVous trouverez la preuve de livraison via ce lien sécurisé (valable 7 jours) :\nhttps://portal.corlaan.example/pod/CL-2026-0412380\n\nCordialement,\nService clientèle Corlaan Logistics\n\n— Cette réponse a été préparée automatiquement à partir de notre système de transport. Répondez simplement à ce message pour joindre un collègue."
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": null
+  },
+  {
+   "id": "H04",
+   "reader": "Recorded reading",
+   "flow": {
+    "status": "Decided",
+    "action": "auto",
+    "template": "pod",
+    "queue": null,
+    "rules": "",
+    "shipments": "CL-2026-0412371",
+    "reply": "Beste,\n\nUw zending CL-2026-0412371 (uw referentie ORD 11872) werd geleverd op za 10 okt om 15:20.\nHet afleverbewijs vindt u via deze beveiligde link (7 dagen geldig):\nhttps://portal.corlaan.example/pod/CL-2026-0412371\n\nMet vriendelijke groeten,\nKlantendienst Corlaan Logistics\n\n— Dit antwoord werd automatisch opgesteld uit ons transportsysteem. Antwoord gewoon op deze mail om een collega te bereiken."
+   },
+   "reference": {
+    "action": "auto",
+    "template": "pod",
+    "queue": null,
+    "rules": "",
+    "shipments": "CL-2026-0412371",
+    "reply": "Beste,\n\nUw zending CL-2026-0412371 (uw referentie ORD 11872) werd geleverd op za 10 okt om 15:20.\nHet afleverbewijs vindt u via deze beveiligde link (7 dagen geldig):\nhttps://portal.corlaan.example/pod/CL-2026-0412371\n\nMet vriendelijke groeten,\nKlantendienst Corlaan Logistics\n\n— Dit antwoord werd automatisch opgesteld uit ons transportsysteem. Antwoord gewoon op deze mail om een collega te bereiken."
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": null
+  },
+  {
+   "id": "H05",
+   "reader": "Recorded reading",
+   "flow": {
+    "status": "Decided",
+    "action": "auto",
+    "template": "status",
+    "queue": null,
+    "rules": "",
+    "shipments": "CL-2026-0412377",
+    "reply": "Hello,\n\nYour shipment CL-2026-0412377 (your reference PO 778120) is on its way. Last update: DC Gent, Tue 13 Oct at 07:45. Expected delivery: Wed 14 Oct between 09:00 and 12:00.\n\nKind regards,\nCorlaan Logistics Customer Service\n\n— This reply was prepared automatically from our transport system. Simply reply to this email to reach a colleague."
+   },
+   "reference": {
+    "action": "auto",
+    "template": "status",
+    "queue": null,
+    "rules": "",
+    "shipments": "CL-2026-0412377",
+    "reply": "Hello,\n\nYour shipment CL-2026-0412377 (your reference PO 778120) is on its way. Last update: DC Gent, Tue 13 Oct at 07:45. Expected delivery: Wed 14 Oct between 09:00 and 12:00.\n\nKind regards,\nCorlaan Logistics Customer Service\n\n— This reply was prepared automatically from our transport system. Simply reply to this email to reach a colleague."
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": null
+  },
+  {
+   "id": "H06",
+   "reader": "Recorded reading",
+   "flow": {
+    "status": "Decided",
+    "action": "draft",
+    "template": "status",
+    "queue": null,
+    "rules": "R06",
+    "shipments": "CL-2026-0412470",
+    "reply": "Hello,\n\nYour shipment CL-2026-0412470 (your reference REF 99102) is on its way. Last update: Hub Gent, Tue 13 Oct at 07:30. Expected delivery: Wed 14 Oct between 09:00 and 12:00.\n\nKind regards,\nCorlaan Logistics Customer Service\n\n— This reply was prepared automatically from our transport system. Simply reply to this email to reach a colleague."
+   },
+   "reference": {
+    "action": "draft",
+    "template": "status",
+    "queue": null,
+    "rules": "R06",
+    "shipments": "CL-2026-0412470",
+    "reply": "Hello,\n\nYour shipment CL-2026-0412470 (your reference REF 99102) is on its way. Last update: Hub Gent, Tue 13 Oct at 07:30. Expected delivery: Wed 14 Oct between 09:00 and 12:00.\n\nKind regards,\nCorlaan Logistics Customer Service\n\n— This reply was prepared automatically from our transport system. Simply reply to this email to reach a colleague."
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": null
+  },
+  {
+   "id": "H07",
+   "reader": "Recorded reading",
+   "flow": {
+    "status": "Decided",
+    "action": "auto",
+    "template": "status",
+    "queue": null,
+    "rules": "",
+    "shipments": "CL-2026-0412402",
+    "reply": "Beste,\n\nUw zending CL-2026-0412402 (uw referentie BO 20931) staat gepland voor ophaling op wo 14 okt. Verwachte levering: wo 14 okt tussen 14:00 en 17:00.\n\nMet vriendelijke groeten,\nKlantendienst Corlaan Logistics\n\n— Dit antwoord werd automatisch opgesteld uit ons transportsysteem. Antwoord gewoon op deze mail om een collega te bereiken."
+   },
+   "reference": {
+    "action": "auto",
+    "template": "status",
+    "queue": null,
+    "rules": "",
+    "shipments": "CL-2026-0412402",
+    "reply": "Beste,\n\nUw zending CL-2026-0412402 (uw referentie BO 20931) staat gepland voor ophaling op wo 14 okt. Verwachte levering: wo 14 okt tussen 14:00 en 17:00.\n\nMet vriendelijke groeten,\nKlantendienst Corlaan Logistics\n\n— Dit antwoord werd automatisch opgesteld uit ons transportsysteem. Antwoord gewoon op deze mail om een collega te bereiken."
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": null
+  },
+  {
+   "id": "H08",
+   "reader": "Recorded reading",
+   "flow": {
+    "status": "Decided",
+    "action": "route",
+    "template": null,
+    "queue": "claims",
+    "rules": "R03",
+    "shipments": "CL-2026-0412415",
+    "reply": null
+   },
+   "reference": {
+    "action": "route",
+    "template": null,
+    "queue": "claims",
+    "rules": "R03",
+    "shipments": "CL-2026-0412415",
+    "reply": null
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": null
+  },
+  {
+   "id": "H09",
+   "reader": "Recorded reading",
+   "flow": {
+    "status": "Decided",
+    "action": "route",
+    "template": null,
+    "queue": "claims",
+    "rules": "R03,R05",
+    "shipments": "CL-2026-0412380",
+    "reply": null
+   },
+   "reference": {
+    "action": "route",
+    "template": null,
+    "queue": "claims",
+    "rules": "R03,R05",
+    "shipments": "CL-2026-0412380",
+    "reply": null
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": null
+  },
+  {
+   "id": "H10",
+   "reader": "Recorded reading",
+   "flow": {
+    "status": "Decided",
+    "action": "route",
+    "template": null,
+    "queue": "team-lead",
+    "rules": "R03",
+    "shipments": "CL-2026-0412440",
+    "reply": null
+   },
+   "reference": {
+    "action": "route",
+    "template": null,
+    "queue": "team-lead",
+    "rules": "R03",
+    "shipments": "CL-2026-0412440",
+    "reply": null
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": null
+  },
+  {
+   "id": "H11",
+   "reader": "Recorded reading",
+   "flow": {
+    "status": "Decided",
+    "action": "route",
+    "template": null,
+    "queue": "security",
+    "rules": "R02,R05",
+    "shipments": "",
+    "reply": null
+   },
+   "reference": {
+    "action": "route",
+    "template": null,
+    "queue": "security",
+    "rules": "R02,R05",
+    "shipments": "",
+    "reply": null
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": null
+  },
+  {
+   "id": "H12",
+   "reader": "Recorded reading",
+   "flow": {
+    "status": "Decided",
+    "action": "route",
+    "template": null,
+    "queue": "security",
+    "rules": "R02",
+    "shipments": "CL-2026-0412440",
+    "reply": null
+   },
+   "reference": {
+    "action": "route",
+    "template": null,
+    "queue": "security",
+    "rules": "R02",
+    "shipments": "CL-2026-0412440",
+    "reply": null
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": null
+  },
+  {
+   "id": "H13",
+   "reader": "Recorded reading",
+   "flow": {
+    "status": "Decided",
+    "action": "draft",
+    "template": "status",
+    "queue": null,
+    "rules": "R08,R15",
+    "shipments": "CL-2026-0412460",
+    "reply": "Hello,\n\nYour shipment CL-2026-0412460 (your reference PO 778190) is on its way. Last update: E40 Aalter, Tue 13 Oct at 09:30. Expected delivery: Tue 13 Oct between 15:00 and 18:00.\n\nKind regards,\nCorlaan Logistics Customer Service\n\n— This reply was prepared automatically from our transport system. Simply reply to this email to reach a colleague."
+   },
+   "reference": {
+    "action": "draft",
+    "template": "status",
+    "queue": null,
+    "rules": "R08,R15",
+    "shipments": "CL-2026-0412460",
+    "reply": "Hello,\n\nYour shipment CL-2026-0412460 (your reference PO 778190) is on its way. Last update: E40 Aalter, Tue 13 Oct at 09:30. Expected delivery: Tue 13 Oct between 15:00 and 18:00.\n\nKind regards,\nCorlaan Logistics Customer Service\n\n— This reply was prepared automatically from our transport system. Simply reply to this email to reach a colleague."
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": null
+  },
+  {
+   "id": "H14",
+   "reader": "Recorded reading",
+   "flow": {
+    "status": "Decided",
+    "action": "auto",
+    "template": "status",
+    "queue": null,
+    "rules": "",
+    "shipments": "CL-2026-0412410",
+    "reply": "Beste,\n\nUw zending CL-2026-0412410 (uw referentie BST 55840) is onderweg. Laatste update: Hub Gent, di 13 okt om 08:40. Verwachte levering: di 13 okt tussen 13:30 en 16:00.\n\nMet vriendelijke groeten,\nKlantendienst Corlaan Logistics\n\n— Dit antwoord werd automatisch opgesteld uit ons transportsysteem. Antwoord gewoon op deze mail om een collega te bereiken."
+   },
+   "reference": {
+    "action": "auto",
+    "template": "status",
+    "queue": null,
+    "rules": "",
+    "shipments": "CL-2026-0412410",
+    "reply": "Beste,\n\nUw zending CL-2026-0412410 (uw referentie BST 55840) is onderweg. Laatste update: Hub Gent, di 13 okt om 08:40. Verwachte levering: di 13 okt tussen 13:30 en 16:00.\n\nMet vriendelijke groeten,\nKlantendienst Corlaan Logistics\n\n— Dit antwoord werd automatisch opgesteld uit ons transportsysteem. Antwoord gewoon op deze mail om een collega te bereiken."
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": null
+  },
+  {
+   "id": "H15",
+   "reader": "Recorded reading",
+   "flow": {
+    "status": "Decided",
+    "action": "auto",
+    "template": "generic",
+    "queue": null,
+    "rules": "R11",
+    "shipments": "",
+    "reply": "Beste,\n\nBedankt voor uw bericht. Om de gegevens van onze klanten te beschermen delen we zendingsinformatie alleen met geregistreerde contactpersonen. U kunt de status volgen via https://portal.corlaan.example, of uw vraag sturen vanaf het e-mailadres dat bij ons gekend is.\n\nMet vriendelijke groeten,\nKlantendienst Corlaan Logistics\n\n— Dit antwoord werd automatisch opgesteld uit ons transportsysteem. Antwoord gewoon op deze mail om een collega te bereiken."
+   },
+   "reference": {
+    "action": "auto",
+    "template": "generic",
+    "queue": null,
+    "rules": "R11",
+    "shipments": "",
+    "reply": "Beste,\n\nBedankt voor uw bericht. Om de gegevens van onze klanten te beschermen delen we zendingsinformatie alleen met geregistreerde contactpersonen. U kunt de status volgen via https://portal.corlaan.example, of uw vraag sturen vanaf het e-mailadres dat bij ons gekend is.\n\nMet vriendelijke groeten,\nKlantendienst Corlaan Logistics\n\n— Dit antwoord werd automatisch opgesteld uit ons transportsysteem. Antwoord gewoon op deze mail om een collega te bereiken."
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": null
+  },
+  {
+   "id": "H16",
+   "reader": "Recorded reading",
+   "flow": {
+    "status": "Decided",
+    "action": "auto",
+    "template": "generic",
+    "queue": null,
+    "rules": "R10",
+    "shipments": "",
+    "reply": "Beste,\n\nBedankt voor uw bericht. Om de gegevens van onze klanten te beschermen delen we zendingsinformatie alleen met geregistreerde contactpersonen. U kunt de status volgen via https://portal.corlaan.example, of uw vraag sturen vanaf het e-mailadres dat bij ons gekend is.\n\nMet vriendelijke groeten,\nKlantendienst Corlaan Logistics\n\n— Dit antwoord werd automatisch opgesteld uit ons transportsysteem. Antwoord gewoon op deze mail om een collega te bereiken."
+   },
+   "reference": {
+    "action": "auto",
+    "template": "generic",
+    "queue": null,
+    "rules": "R10",
+    "shipments": "",
+    "reply": "Beste,\n\nBedankt voor uw bericht. Om de gegevens van onze klanten te beschermen delen we zendingsinformatie alleen met geregistreerde contactpersonen. U kunt de status volgen via https://portal.corlaan.example, of uw vraag sturen vanaf het e-mailadres dat bij ons gekend is.\n\nMet vriendelijke groeten,\nKlantendienst Corlaan Logistics\n\n— Dit antwoord werd automatisch opgesteld uit ons transportsysteem. Antwoord gewoon op deze mail om een collega te bereiken."
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": null
+  },
+  {
+   "id": "H17",
+   "reader": "Recorded reading",
+   "flow": {
+    "status": "Decided",
+    "action": "route",
+    "template": null,
+    "queue": "planning",
+    "rules": "R04",
+    "shipments": "CL-2026-0412391",
+    "reply": null
+   },
+   "reference": {
+    "action": "route",
+    "template": null,
+    "queue": "planning",
+    "rules": "R04",
+    "shipments": "CL-2026-0412391",
+    "reply": null
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": null
+  },
+  {
+   "id": "H18",
+   "reader": "Recorded reading",
+   "flow": {
+    "status": "Decided",
+    "action": "route",
+    "template": null,
+    "queue": "finance",
+    "rules": "R04",
+    "shipments": "CL-2026-0412475",
+    "reply": null
+   },
+   "reference": {
+    "action": "route",
+    "template": null,
+    "queue": "finance",
+    "rules": "R04",
+    "shipments": "CL-2026-0412475",
+    "reply": null
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": null
+  },
+  {
+   "id": "H19",
+   "reader": "Recorded reading",
+   "flow": {
+    "status": "Decided",
+    "action": "route",
+    "template": null,
+    "queue": "customer-service",
+    "rules": "R04",
+    "shipments": "CL-2026-0412425",
+    "reply": null
+   },
+   "reference": {
+    "action": "route",
+    "template": null,
+    "queue": "customer-service",
+    "rules": "R04",
+    "shipments": "CL-2026-0412425",
+    "reply": null
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": null
+  },
+  {
+   "id": "H20",
+   "reader": "Recorded reading",
+   "flow": {
+    "status": "Decided",
+    "action": "route",
+    "template": null,
+    "queue": "customer-service",
+    "rules": "R13",
+    "shipments": "CL-2026-0412480",
+    "reply": null
+   },
+   "reference": {
+    "action": "route",
+    "template": null,
+    "queue": "customer-service",
+    "rules": "R13",
+    "shipments": "CL-2026-0412480",
+    "reply": null
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": null
+  },
+  {
+   "id": "H21",
+   "reader": "Recorded reading",
+   "flow": {
+    "status": "Decided",
+    "action": "draft",
+    "template": "status",
+    "queue": null,
+    "rules": "R09",
+    "shipments": "",
+    "reply": null
+   },
+   "reference": {
+    "action": "draft",
+    "template": "status",
+    "queue": null,
+    "rules": "R09",
+    "shipments": "",
+    "reply": null
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": null
+  },
+  {
+   "id": "H22",
+   "reader": "Recorded reading",
+   "flow": {
+    "status": "Decided",
+    "action": "draft",
+    "template": "status",
+    "queue": null,
+    "rules": "R05",
+    "shipments": "",
+    "reply": null
+   },
+   "reference": {
+    "action": "draft",
+    "template": "status",
+    "queue": null,
+    "rules": "R05",
+    "shipments": "",
+    "reply": null
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": null
+  },
+  {
+   "id": "H23",
+   "reader": "Recorded reading",
+   "flow": {
+    "status": "Decided",
+    "action": "ignore",
+    "template": null,
+    "queue": null,
+    "rules": "R01",
+    "shipments": "",
+    "reply": null
+   },
+   "reference": {
+    "action": "ignore",
+    "template": null,
+    "queue": null,
+    "rules": "R01",
+    "shipments": "",
+    "reply": null
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": null
+  },
+  {
+   "id": "H24",
+   "reader": "Recorded reading",
+   "flow": {
+    "status": "Decided",
+    "action": "draft",
+    "template": "pod",
+    "queue": null,
+    "rules": "R12",
+    "shipments": "CL-2026-0412380",
+    "reply": "Bonjour,\n\nVotre envoi CL-2026-0412380 (votre référence CMD 30377) a été livré le ven. 9 oct. à 11:05.\nVous trouverez la preuve de livraison via ce lien sécurisé (valable 7 jours) :\nhttps://portal.corlaan.example/pod/CL-2026-0412380\n\nCordialement,\nService clientèle Corlaan Logistics\n\n— Cette réponse a été préparée automatiquement à partir de notre système de transport. Répondez simplement à ce message pour joindre un collègue."
+   },
+   "reference": {
+    "action": "draft",
+    "template": "pod",
+    "queue": null,
+    "rules": "R12",
+    "shipments": "CL-2026-0412380",
+    "reply": "Bonjour,\n\nVotre envoi CL-2026-0412380 (votre référence CMD 30377) a été livré le ven. 9 oct. à 11:05.\nVous trouverez la preuve de livraison via ce lien sécurisé (valable 7 jours) :\nhttps://portal.corlaan.example/pod/CL-2026-0412380\n\nCordialement,\nService clientèle Corlaan Logistics\n\n— Cette réponse a été préparée automatiquement à partir de notre système de transport. Répondez simplement à ce message pour joindre un collègue."
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": null
+  }
+ ]
+}

@@ -85,6 +85,18 @@ const ucTable = [
 const ucDoc = "docs/08-workshops-and-training/prioritisation.md";
 writeIfChanged(ucDoc, readFileSync(join(ROOT, ucDoc), "utf8").replace(/<!-- usecases:start -->[\s\S]*?<!-- usecases:end -->/, `<!-- usecases:start -->\n${ucTable}\n<!-- usecases:end -->`));
 
+// 3c. Power Platform verification (power-platform/verification/<batch>.json, written by verify.mjs)
+function verificationNumbers() {
+  const dir = join(ROOT, "power-platform/verification");
+  let files = [];
+  try { files = readdirSync(dir).filter((f) => f.endsWith(".json")); } catch { /* not built yet */ }
+  return Object.fromEntries(files.flatMap((f) => {
+    const { summary: v } = JSON.parse(readFileSync(join(dir, f), "utf8"));
+    const k = `pp.${v.batch}`;
+    return [[`${k}.emails`, v.emails], [`${k}.same`, v.sameDecision], [`${k}.reply`, v.sameReply], [`${k}.expected`, v.expected]];
+  }));
+}
+
 // 4. numbers
 const int = (n) => Math.round(n).toLocaleString("en-GB");
 const eur = (n) => `€${int(n)}`;
@@ -126,6 +138,7 @@ const numbers = {
   "me.v3.mainMin": Math.min(...me.readers.filter((r) => r.key.startsWith("f-v3")).map((r) => r.result.main.passed)),
   "me.v3.mainMax": Math.max(...me.readers.filter((r) => r.key.startsWith("f-v3")).map((r) => r.result.main.passed)),
   "me.v3.harmMax": Math.max(...me.readers.filter((r) => r.key.startsWith("f-v3")).flatMap((r) => [r.result.main.harmful, r.result.holdout.harmful])),
+  ...verificationNumbers(),
   "sens.top": sens[0].label, "sens.topLow": eur(sens[0].low), "sens.topHigh": eur(sens[0].high),
 };
 // Rounded, so the file is identical across Node versions (last-digit float differences otherwise fail CI).

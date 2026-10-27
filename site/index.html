@@ -16,6 +16,7 @@
       <a href="#problem">Problem</a>
       <a href="#design">Design</a>
       <a href="#proof">Proof</a>
+      <a href="#built">Built</a>
       <a href="#value">Value</a>
       <a href="demo/">Demo</a>
       <a href="https://github.com/phlppgdfry/logistics-ai-automation-case-study">Repository</a>
@@ -51,6 +52,7 @@
   <section class="section">
     <div class="wrap">
       <h2>The journey</h2>
+      <p class="note" style="font-style:normal">It starts before the mailbox: an <a href="https://github.com/phlppgdfry/logistics-ai-automation-case-study/blob/main/docs/08-workshops-and-training/inspiration-session.md">inspiration session</a> and a <a href="https://github.com/phlppgdfry/logistics-ai-automation-case-study/blob/main/docs/08-workshops-and-training/discovery-workshop.md">discovery workshop</a> that ranked eight use cases. It ends after go-live: <a href="https://github.com/phlppgdfry/logistics-ai-automation-case-study/blob/main/docs/08-workshops-and-training/reviewer-training.md">reviewer training</a>, champions and a weekly review.</p>
       <ol class="journey">
         <li><a href="https://github.com/phlppgdfry/logistics-ai-automation-case-study/blob/main/docs/01-discover/mailbox-analysis.md"><span class="step-no">1</span>Analyse the mailbox</a></li>
         <li><a href="https://github.com/phlppgdfry/logistics-ai-automation-case-study/blob/main/docs/02-design/to-be-and-architecture.md"><span class="step-no">2</span>Design the solution</a></li>
@@ -98,6 +100,18 @@
     </div>
   </section>
 
+  <section class="section" id="built">
+    <div class="wrap">
+      <h2>Built, and measured on a real model</h2>
+      <div class="grid cards-3">
+        <div class="card"><div class="kpi-value"><!--n:pp.main-standin.same-->48<!--/n-->/<!--n:pp.main-standin.emails-->48<!--/n--></div><p>emails where the <strong>real Power Automate flows</strong> take the same decision as the tested code, with the reply text identical to the character. Plus <!--n:pp.holdout-labels.same-->24<!--/n-->/<!--n:pp.holdout-labels.emails-->24<!--/n--> on the held-out set.</p></div>
+        <div class="card"><div class="kpi-value"><!--n:me.stand-in.ho-->14<!--/n--> → <!--n:me.f-v3.ho-->24<!--/n--></div><p>held-out emails read right: the keyword stand-in vs gpt-4.1-mini in <strong>Azure AI Foundry</strong> with the final agent instructions. No harmful outcome in 3 runs.</p></div>
+        <div class="card"><div class="kpi-value">3 + 1</div><p>cloud flows and a model-driven app around a <strong>Copilot Studio agent</strong> kept as code; plus a second, knowledge-based agent for the team's procedures.</p></div>
+      </div>
+      <p class="cta-row" style="margin-top:20px"><a class="btn" href="demo/#reading">Compare the readers</a> <a class="btn" href="https://github.com/phlppgdfry/logistics-ai-automation-case-study/blob/main/power-platform/README.md">How it was built, and what broke</a></p>
+    </div>
+  </section>
+
   <section class="section" id="value">
     <div class="wrap measure">
       <h2>The value, honestly</h2>
@@ -112,8 +126,10 @@
       <h2>What is real and what is simulated</h2>
       <ul class="checklist">
         <li><strong>Real, tested code:</strong> the policy rules, the reply templates in three languages, the business case model, the TMS API contract and its mock server. The demo runs the same modules as CI.</li>
-        <li><strong>Simulated:</strong> the language-understanding step. A deterministic stand-in returns the same JSON as the specified Copilot Studio agent.</li>
-        <li><strong>Design and build guide, not built in a tenant:</strong> the Copilot Studio agent and the Power Automate flow.</li>
+        <li><strong>Built in a Power Platform developer environment:</strong> the Copilot Studio agent, three cloud flows, Dataverse tables and a model-driven app. Verified against the tested code.</li>
+        <li><strong>Measured on a real model:</strong> gpt-4.1-mini in Azure AI Foundry and the live agent, on the test set and a held-out set. The answers are recorded and replayed.</li>
+        <li><strong>Stand-in in the demo:</strong> the browser demo reads emails with a deterministic stand-in, so it works without a model.</li>
+        <li><strong>Not connected:</strong> a live mailbox and a real TMS.</li>
         <li><strong>Fictional:</strong> the company, customers, emails, interviews and figures.</li>
       </ul>
     </div>

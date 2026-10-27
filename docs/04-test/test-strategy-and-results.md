@@ -4,10 +4,12 @@
 
 | Level | What | How | Where |
 |---|---|---|---|
-| 1. Reading | language, intent, references, signals | evaluation set in Copilot Studio (agent) / stand-in in CI | [copilot-studio/](../../copilot-studio/README.md), `tests/agent-contract.test.mjs` |
+| 1. Reading | language, intent, references, signals | a real model (Azure AI Foundry) and the live Copilot Studio agent on the main set **and a held-out set of <!--n:ho.cases-->24<!--/n--> emails**; recordings replayed in CI | [model evaluation](model-evaluation.md), `tests/model-eval.test.mjs`, `tests/agent-contract.test.mjs` |
 | 2. Decisions | the right outcome per email: auto, draft, route, ignore — and the right rule | **evaluation set of <!--n:tests.cases-->48<!--/n--> emails**, run on every commit | [data/emails.json](../../data/emails.json), `tests/pipeline.test.mjs` |
 | 3. Replies | only TMS facts, only authorised shipments, no personal data, right language, automation notice | scans of every reply the set produces | `tests/replies.test.mjs` |
 | 4. Integration | contract, data and error codes agree | mock server in CI | `tests/api.test.mjs` |
+| 4b. Platform | the **built** cloud flows decide and reply exactly like the tested code | the test emails run through the real flows in a developer environment; decisions and reply texts compared | [power-platform/VERIFICATION.md](../../power-platform/VERIFICATION.md) |
+| 4c. Governance | flows stay inside the DLP policy; every environment gets every setting; the kill switch stops the flow | checks on the flow definitions; an end-to-end kill-switch test | `tests/governance.test.mjs`, [kill-switch result](../../power-platform/verification/tests/kill-switch.json) |
 | 5. Value | business case arithmetic and scenarios | unit tests on the model | `tests/business-case.test.mjs` |
 | 6. Pilot | real emails, real people | draft-only weeks: every proposed reply reviewed | [rollout](../06-rollout/pilot-and-adoption.md) |
 
@@ -30,7 +32,7 @@ Every email has an expected action, template, queue and the rule that must fire.
 
 ### Compared with the naive design
 
-The naive design is what a quick demo usually is: one model with the mailbox and a TMS tool, told to *help customers*. It finds every reference anywhere in the thread, looks it up across all accounts and answers everything. Same data, same templates for the status line — only the policy is missing.
+The naive design is a deliberately simple baseline, not a claim about what other builders ship. It is what a quick demo can easily become: one model with the mailbox and a TMS tool, told to *help customers*. It finds every reference anywhere in the thread, looks it up across all accounts and answers everything. Same data, same templates for the status line — only the policy is missing.
 
 | Harm | Naive | Guarded |
 |---|---|---|
@@ -45,7 +47,7 @@ This table is the answer to the sponsor's question *"what happens if it sends so
 
 ### What the set does not prove
 
-- That the real model reads as well as the stand-in. Level 1 must be run in Copilot Studio before the pilot; the targets are in [copilot-studio/README.md](../../copilot-studio/README.md).
+- That the reading is right. The stand-in and this set were written together, so 48/48 proves the **rules**, not the reading. The reading is measured separately, on a real model and on emails the stand-in never saw: [model evaluation](model-evaluation.md). There the stand-in scores <!--n:me.stand-in.ho-->14<!--/n-->/<!--n:ho.cases-->24<!--/n-->; a real model with instructions v3 scores <!--n:me.f-v3.ho-->24<!--/n-->/<!--n:ho.cases-->24<!--/n-->, without a harmful outcome.
 - That 48 emails cover the real world. The pilot's draft-only weeks are the second test set: every rejected or edited draft becomes a new case in `data/emails.json`.
 - Performance and rate limits under Q4 load. Load test against the vendor's test environment is on the go/no-go list.
 

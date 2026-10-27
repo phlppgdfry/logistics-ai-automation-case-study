@@ -3,3 +3,4 @@ node_modules/
 
 # local tenant/endpoint configuration
 *.local.json
+power-platform/solution/out/

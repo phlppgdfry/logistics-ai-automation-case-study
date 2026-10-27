@@ -30,7 +30,7 @@ Three outcomes besides "ignore", and only one of them sends without a person. Th
 | Agent "Corlaan Mail Reader" | Copilot Studio agent without tools, called from the flow (Copilot Studio connector, *execute agent and wait*) | reads one email, returns JSON: language, intent, confidence, references, sensitive signals, instruction signals ([schema](../../copilot-studio/agent-output.schema.json)) | send email, call the TMS, see other emails |
 | Custom connector "Corlaan TMS" | Power Platform custom connector, OAuth 2.0 client credentials | read-only calls to the TMS API ([contract](../../api/tms-shipments.swagger.json)) | write anything |
 | Templates + rule settings | Dataverse tables, owned by the team lead | reply texts per language, thresholds (stale hours, reply limit) | — |
-| Audit log | Dataverse table `cor_emailcase` | one row per email: outcome, rules fired, shipment ids, reply id | store the email body (only a hash + subject) |
+| Audit log | Dataverse table `crl_inboundemail` | one row per email: outcome, rules fired, shipment ids, reply id | store the email body (only a hash + subject) |
 | Review | Outlook draft + Teams adaptive card | agent approves, edits or rejects; edit reasons feed the weekly review | — |
 
 ### Why the agent cannot send
@@ -70,7 +70,7 @@ sequenceDiagram
 | TMS returns 5xx or times out (10 s) | draft with note; after 10 failures in 15 min the flow switches to draft-only mode and alerts IT |
 | Agent returns invalid JSON or times out | route to customer service queue unchanged (as today) |
 | Credits exhausted | Copilot Studio stops; flow trigger keeps running and routes everything to the team queue (as today) |
-| Kill switch | environment variable `cor_Mode` = `off` → everything stays in the mailbox as today; `draft-only` → R18 |
+| Kill switch | environment variable `crl_Mode` = `off` → everything stays in the mailbox as today; `draft-only` → R18 |
 
 Every failure falls back to **today's process**, never to "send anyway".
 
