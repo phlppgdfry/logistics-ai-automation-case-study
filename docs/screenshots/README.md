@@ -14,5 +14,8 @@ Fallback if the live demo does not load. Captured from the local site with Chrom
 | 7 · Test set: 48/48 vs 23 harmful | ![Tour 7](tour-07.png) |
 | 8 · Business case: the hire decides | ![Tour 8](tour-08.png) |
 | 9 · Rollout ladder | ![Tour 9](tour-09.png) |
-| 10 · What is simulated | ![Tour 10](tour-10.png) |
+| 10 · What is real, what is a stand-in | ![Tour 10](tour-10.png) |
+| Reading tab: the stand-in, a real model and the live agent compared | ![Reading tab](reading-tab.png) |
+
+Screens of the built solution in Power Platform: [power-platform/](power-platform/README.md).
 | Mobile (375 px) | ![Mobile](mobile-demo.png) |
