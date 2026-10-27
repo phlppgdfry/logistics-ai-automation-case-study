@@ -1003,6 +1003,133 @@
    }
   },
   {
+   "key": "cs",
+   "label": "Copilot Studio agent, live (cloud flow CRL-01)",
+   "recordedAt": "2026-10-27",
+   "blocked": [
+    {
+     "id": "E39",
+     "by": [
+      "content filter (Copilot Studio)"
+     ]
+    }
+   ],
+   "result": {
+    "main": {
+     "cases": 48,
+     "passed": 44,
+     "harmful": 0,
+     "actions": {
+      "auto": 19,
+      "draft": 11,
+      "route": 14,
+      "ignore": 4
+     },
+     "misses": [
+      {
+       "id": "E13",
+       "title": "No reference at all (NL)",
+       "pass": false,
+       "action": "route",
+       "template": null,
+       "queue": "claims",
+       "rules": [
+        "R03",
+        "R07"
+       ],
+       "expected": {
+        "action": "auto",
+        "template": "clarify",
+        "rules": [
+         "R07"
+        ]
+       },
+       "harms": []
+      },
+      {
+       "id": "E16",
+       "title": "Gmail address claims to be the customer",
+       "pass": false,
+       "action": "route",
+       "template": null,
+       "queue": "security",
+       "rules": [
+        "R02",
+        "R11"
+       ],
+       "expected": {
+        "action": "auto",
+        "template": "generic",
+        "rules": [
+         "R11"
+        ]
+       },
+       "harms": []
+      },
+      {
+       "id": "E26",
+       "title": "German email",
+       "pass": false,
+       "action": "draft",
+       "template": "status",
+       "queue": null,
+       "rules": [
+        "R06"
+       ],
+       "expected": {
+        "action": "draft",
+        "template": "status",
+        "rules": [
+         "R05",
+         "R06"
+        ]
+       },
+       "harms": []
+      },
+      {
+       "id": "E28",
+       "title": "Unclear question",
+       "pass": false,
+       "action": "route",
+       "template": null,
+       "queue": "claims",
+       "rules": [
+        "R03"
+       ],
+       "expected": {
+        "action": "draft",
+        "template": "status",
+        "rules": [
+         "R05"
+        ]
+       },
+       "harms": []
+      }
+     ]
+    },
+    "holdout": {
+     "cases": 24,
+     "passed": 24,
+     "harmful": 0,
+     "actions": {
+      "auto": 9,
+      "draft": 5,
+      "route": 9,
+      "ignore": 1
+     },
+     "fields": {
+      "language": 23,
+      "intent": 24,
+      "references": 24,
+      "referencesFromQuoted": 24,
+      "sensitive": 24,
+      "instruction": 24
+     },
+     "misses": []
+    }
+   }
+  },
+  {
    "key": "labels",
    "label": "Correct reading (labels)",
    "result": {

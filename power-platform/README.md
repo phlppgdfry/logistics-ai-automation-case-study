@@ -25,11 +25,18 @@ The design in [docs/02-design](../docs/02-design/to-be-and-architecture.md) is *
 | Main set | recorded reading of the stand-in | **<!--n:pp.main-standin.same-->48<!--/n-->/<!--n:pp.main-standin.emails-->48<!--/n-->** | <!--n:pp.main-standin.reply-->48<!--/n-->/<!--n:pp.main-standin.emails-->48<!--/n--> | <!--n:pp.main-standin.expected-->48<!--/n-->/<!--n:pp.main-standin.emails-->48<!--/n--> |
 | Held-out set | the labelled correct reading | **<!--n:pp.holdout-labels.same-->24<!--/n-->/<!--n:pp.holdout-labels.emails-->24<!--/n-->** | <!--n:pp.holdout-labels.reply-->24<!--/n-->/<!--n:pp.holdout-labels.emails-->24<!--/n--> | <!--n:pp.holdout-labels.expected-->24<!--/n-->/<!--n:pp.holdout-labels.emails-->24<!--/n--> |
 
-Details per email: [VERIFICATION.md](VERIFICATION.md).
+Details per email: [VERIFICATION.md](VERIFICATION.md). Screens of the agent, a flow run and the app: [docs/screenshots/power-platform/](../docs/screenshots/power-platform/README.md).
 
 ## The live agent
 
-The same 72 emails, read live by the Copilot Studio agent through flow CRL-01: see [VERIFICATION.md](VERIFICATION.md) and the comparison with the Foundry model in [docs/04-test/model-evaluation.md](../docs/04-test/model-evaluation.md).
+The same 72 emails, read live by the Copilot Studio agent through flow CRL-01:
+
+| Batch | Same decision as the code (given the agent's reading) | Same reply text | As expected |
+|---|---|---|---|
+| Main set | **<!--n:pp.main-agent.same-->48<!--/n-->/<!--n:pp.main-agent.emails-->48<!--/n-->** | <!--n:pp.main-agent.reply-->48<!--/n-->/<!--n:pp.main-agent.emails-->48<!--/n--> | <!--n:pp.main-agent.expected-->44<!--/n-->/<!--n:pp.main-agent.emails-->48<!--/n--> |
+| Held-out set | **<!--n:pp.holdout-agent.same-->24<!--/n-->/<!--n:pp.holdout-agent.emails-->24<!--/n-->** | <!--n:pp.holdout-agent.reply-->24<!--/n-->/<!--n:pp.holdout-agent.emails-->24<!--/n--> | <!--n:pp.holdout-agent.expected-->24<!--/n-->/<!--n:pp.holdout-agent.emails-->24<!--/n--> |
+
+The four misses are safe (a draft or a routing instead of an automatic reply) and none is harmful: see [docs/04-test/model-evaluation.md](../docs/04-test/model-evaluation.md#copilot-studio-live).
 
 **What went wrong first, and what it taught.** The first run sent 72 emails at once. 47 agent calls failed with *GenAITool* errors, the generative-AI rate limit of a developer environment. The design did its job: every failed call became a safe reading, so every one of those emails became a draft for a colleague. Nothing wrong was sent ([archive](verification/archive/)). The fix is a production setting anyway: the trigger of CRL-01 now runs one email at a time (concurrency control), and the run was repeated.
 

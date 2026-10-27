@@ -8,6 +8,10 @@
           <entity name="crl_inboundemail">
             <attribute groupby="true" alias="groupby_column" name="crl_queue" />
             <attribute alias="aggregate_column" name="crl_inboundemailid" aggregate="count" />
+            <filter>
+              <condition attribute="crl_queue" operator="not-null" />
+              <condition attribute="crl_queue" operator="ne" value="" />
+            </filter>
           </entity>
         </fetch>
       </fetchcollection>

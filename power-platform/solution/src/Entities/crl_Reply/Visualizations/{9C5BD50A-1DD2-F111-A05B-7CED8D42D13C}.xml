@@ -8,6 +8,9 @@
           <entity name="crl_reply">
             <attribute groupby="true" alias="groupby_column" name="crl_status" />
             <attribute alias="aggregate_column" name="crl_replyid" aggregate="count" />
+            <filter>
+              <condition attribute="crl_status" operator="not-null" />
+            </filter>
           </entity>
         </fetch>
       </fetchcollection>

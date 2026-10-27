@@ -8,37 +8,15 @@ What the real cloud flows decided in the developer environment (Portfolio lab (s
 
 | Batch | Reader | Emails | Decided | Same decision | Same reply | As expected | Run at (UTC) |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| holdout-agent | Copilot Studio agent | 24 | 24 | **24/24** | 24/24 | 14/24 | 2026-10-27 15:43 |
+| holdout-agent | Copilot Studio agent | 24 | 24 | **24/24** | 24/24 | 24/24 | 2026-10-27 16:12 |
 | holdout-labels | Recorded reading | 24 | 24 | **24/24** | 24/24 | 24/24 | 2026-10-27 15:41 |
-| main-agent | Copilot Studio agent | 48 | 48 | **48/48** | 48/48 | 16/48 | 2026-10-27 15:43 |
+| main-agent | Copilot Studio agent | 48 | 48 | **48/48** | 48/48 | 44/48 | 2026-10-27 16:12 |
 | main-standin | Recorded reading | 48 | 48 | **48/48** | 48/48 | 48/48 | 2026-10-27 15:39 |
 
 ## holdout-agent
 
-Emails where the flow differs from the reference, or the outcome differs from the expectation:
+No differences.
 
-| Email | Flow | Reference | Same decision | Same reply | As expected | Note |
-| --- | --- | --- | --- | --- | --- | --- |
-| H01 | draft status  R05,R06 | draft status  R05,R06 | yes | yes | no | Agent answer was not JSON, safe reading used: An error has occurred.
-Error code: GenAIToolPlannerRat |
-| H11 | draft status  R05,R06 | draft status  R05,R06 | yes | yes | no | Agent answer was not JSON, safe reading used: An error has occurred.
-Error code: GenAIToolPlannerRat |
-| H13 | draft status  R05,R06 | draft status  R05,R06 | yes | yes | no | Agent answer was not JSON, safe reading used: An error has occurred.
-Error code: GenAIToolPlannerRat |
-| H16 | draft status  R05,R06 | draft status  R05,R06 | yes | yes | no | Agent answer was not JSON, safe reading used: An error has occurred.
-Error code: GenAIToolPlannerRat |
-| H17 | draft status  R05,R06 | draft status  R05,R06 | yes | yes | no | Agent answer was not JSON, safe reading used: An error has occurred.
-Error code: GenAIToolPlannerRat |
-| H18 | draft status  R05,R06 | draft status  R05,R06 | yes | yes | no | Agent answer was not JSON, safe reading used: An error has occurred.
-Error code: GenAIToolPlannerRat |
-| H19 | draft status  R05,R06 | draft status  R05,R06 | yes | yes | no | Agent answer was not JSON, safe reading used: An error has occurred.
-Error code: GenAIToolPlannerRat |
-| H20 | draft status  R05,R06 | draft status  R05,R06 | yes | yes | no | Agent answer was not JSON, safe reading used: An error has occurred.
-Error code: GenAIToolPlannerRat |
-| H21 | draft status  R05,R06 | draft status  R05,R06 | yes | yes | no | Agent answer was not JSON, safe reading used: An error has occurred.
-Error code: GenAIToolPlannerRat |
-| H24 | draft status  R05,R06 | draft status  R05,R06 | yes | yes | no | Agent answer was not JSON, safe reading used: An error has occurred.
-Error code: GenAIToolPlannerRat |
 
 ## holdout-labels
 
@@ -51,70 +29,10 @@ Emails where the flow differs from the reference, or the outcome differs from th
 
 | Email | Flow | Reference | Same decision | Same reply | As expected | Note |
 | --- | --- | --- | --- | --- | --- | --- |
-| E06 | draft status  R05,R06 | draft status  R05,R06 | yes | yes | no | Agent answer was not JSON, safe reading used: An error has occurred.
-Error code: GenAIToolPlannerRat |
-| E08 | draft status  R05,R06 | draft status  R05,R06 | yes | yes | no | Agent answer was not JSON, safe reading used: An error has occurred.
-Error code: GenAIToolPlannerRat |
-| E09 | draft status  R05,R06 | draft status  R05,R06 | yes | yes | no | Agent answer was not JSON, safe reading used: An error has occurred.
-Error code: GenAIToolPlannerRat |
-| E10 | draft status  R05,R06 | draft status  R05,R06 | yes | yes | no | Agent answer was not JSON, safe reading used: An error has occurred.
-Error code: GenAIToolPlannerRat |
-| E11 | draft status  R05,R06 | draft status  R05,R06 | yes | yes | no | Agent answer was not JSON, safe reading used: An error has occurred.
-Error code: GenAIToolPlannerRat |
-| E12 | draft status  R05,R06 | draft status  R05,R06 | yes | yes | no | Agent answer was not JSON, safe reading used: An error has occurred.
-Error code: GenAIToolPlannerRat |
-| E13 | draft status  R05,R06 | draft status  R05,R06 | yes | yes | no | Agent answer was not JSON, safe reading used: An error has occurred.
-Error code: GenAIToolPlannerRat |
-| E14 | draft status  R05,R06 | draft status  R05,R06 | yes | yes | no | Agent answer was not JSON, safe reading used: An error has occurred.
-Error code: GenAIToolPlannerRat |
-| E15 | draft status  R05,R06 | draft status  R05,R06 | yes | yes | no | Agent answer was not JSON, safe reading used: An error has occurred.
-Error code: GenAIToolPlannerRat |
-| E16 | draft status  R05,R06 | draft status  R05,R06 | yes | yes | no | Agent answer was not JSON, safe reading used: An error has occurred.
-Error code: GenAIToolPlannerRat |
-| E17 | draft status  R05,R06 | draft status  R05,R06 | yes | yes | no | Agent answer was not JSON, safe reading used: An error has occurred.
-Error code: GenAIToolPlannerRat |
-| E18 | draft status  R05,R06 | draft status  R05,R06 | yes | yes | no | Agent answer was not JSON, safe reading used: An error has occurred.
-Error code: GenAIToolPlannerRat |
-| E19 | draft status  R05,R06 | draft status  R05,R06 | yes | yes | no | Agent answer was not JSON, safe reading used: An error has occurred.
-Error code: GenAIToolPlannerRat |
-| E21 | draft status  R05,R06 | draft status  R05,R06 | yes | yes | no | Agent answer was not JSON, safe reading used: An error has occurred.
-Error code: GenAIToolPlannerRat |
-| E22 | draft status  R05,R06 | draft status  R05,R06 | yes | yes | no | Agent answer was not JSON, safe reading used: An error has occurred.
-Error code: GenAIToolPlannerRat |
-| E23 | draft status  R05,R06 | draft status  R05,R06 | yes | yes | no | Agent answer was not JSON, safe reading used: An error has occurred.
-Error code: GenAIToolPlannerRat |
-| E24 | draft status  R05,R06 | draft status  R05,R06 | yes | yes | no | Agent answer was not JSON, safe reading used: An error has occurred.
-Error code: GenAIToolPlannerRat |
-| E27 | draft status  R05,R06 | draft status  R05,R06 | yes | yes | no | Agent answer was not JSON, safe reading used: An error has occurred.
-Error code: GenAIToolPlannerRat |
-| E31 | draft status  R05,R06 | draft status  R05,R06 | yes | yes | no | Agent answer was not JSON, safe reading used: An error has occurred.
-Error code: GenAIToolPlannerRat |
-| E32 | draft status  R05,R06 | draft status  R05,R06 | yes | yes | no | Agent answer was not JSON, safe reading used: An error has occurred.
-Error code: GenAIToolPlannerRat |
-| E33 | draft status  R05,R06 | draft status  R05,R06 | yes | yes | no | Agent answer was not JSON, safe reading used: An error has occurred.
-Error code: GenAIToolPlannerRat |
-| E34 | draft status  R05,R06 | draft status  R05,R06 | yes | yes | no | Agent answer was not JSON, safe reading used: An error has occurred.
-Error code: GenAIToolPlannerRat |
-| E35 | draft status  R05,R06 | draft status  R05,R06 | yes | yes | no | Agent answer was not JSON, safe reading used: An error has occurred.
-Error code: GenAIToolPlannerRat |
-| E36 | draft status  R05,R06 | draft status  R05,R06 | yes | yes | no | Agent answer was not JSON, safe reading used: An error has occurred.
-Error code: GenAIToolPlannerRat |
-| E37 | draft status  R05,R06 | draft status  R05,R06 | yes | yes | no | Agent answer was not JSON, safe reading used: An error has occurred.
-Error code: GenAIToolPlannerRat |
-| E38 | draft status  R05,R06 | draft status  R05,R06 | yes | yes | no | Agent answer was not JSON, safe reading used: An error has occurred.
-Error code: GenAIToolPlannerRat |
-| E39 | draft status  R05,R06 | draft status  R05,R06 | yes | yes | no | Agent answer was not JSON, safe reading used: An error has occurred.
-Error code: GenAIToolPlannerRat |
-| E40 | draft status  R05,R06 | draft status  R05,R06 | yes | yes | no | Agent answer was not JSON, safe reading used: An error has occurred.
-Error code: GenAIToolPlannerRat |
-| E41 | draft status  R05,R06 | draft status  R05,R06 | yes | yes | no | Agent answer was not JSON, safe reading used: An error has occurred.
-Error code: GenAIToolPlannerRat |
-| E42 | draft status  R05,R06 | draft status  R05,R06 | yes | yes | no | Agent answer was not JSON, safe reading used: An error has occurred.
-Error code: GenAIToolPlannerRat |
-| E47 | draft status  R05,R06 | draft status  R05,R06 | yes | yes | no | Agent answer was not JSON, safe reading used: An error has occurred.
-Error code: GenAIToolPlannerRat |
-| E48 | draft status  R05,R06 | draft status  R05,R06 | yes | yes | no | Agent answer was not JSON, safe reading used: An error has occurred.
-Error code: GenAIToolPlannerRat |
+| E13 | route  claims R03,R07 | route  claims R03,R07 | yes | yes | no |  |
+| E16 | route  security R02,R11 | route  security R02,R11 | yes | yes | no |  |
+| E26 | draft status  R06 | draft status  R06 | yes | yes | no |  |
+| E28 | route  claims R03 | route  claims R03 | yes | yes | no |  |
 
 ## main-standin
 

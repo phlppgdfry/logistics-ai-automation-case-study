@@ -8,6 +8,9 @@
           <entity name="crl_inboundemail">
             <attribute groupby="true" alias="groupby_column" name="crl_action" />
             <attribute alias="aggregate_column" name="crl_inboundemailid" aggregate="count" />
+            <filter>
+              <condition attribute="crl_action" operator="not-null" />
+            </filter>
           </entity>
         </fetch>
       </fetchcollection>

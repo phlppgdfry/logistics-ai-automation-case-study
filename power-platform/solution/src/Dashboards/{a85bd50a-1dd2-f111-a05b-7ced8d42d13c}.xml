@@ -13,20 +13,20 @@
     <forms type="dashboard">
       <form>
         <tabs>
-          <tab name="overview" verticallayout="true" id="{e9026465-52e5-48c2-bca4-11a8a03442a4}">
+          <tab name="overview" verticallayout="true" id="{32f0e2c8-2ca8-478c-b4a5-431c2c983cb8}">
             <labels>
               <label description="Overview" languagecode="1033" />
             </labels>
             <columns>
               <column width="100%">
                 <sections>
-                  <section name="kpi" showlabel="false" showbar="false" columns="111" id="{c1c8cbd6-c1c1-443e-a85b-14270bf1c9f0}">
+                  <section name="kpi" showlabel="false" showbar="false" columns="111" id="{5d252211-b4fb-4be8-89f8-7cc92e895231}">
                     <labels>
                       <label description="KPIs" languagecode="1033" />
                     </labels>
                     <rows>
                       <row>
-                        <cell id="{cb0079a2-b415-4497-a43d-269c8633d77d}" showlabel="false" rowspan="12" colspan="1" auto="false">
+                        <cell id="{32338a5d-0b15-4c04-a6e7-86f04f626d3e}" showlabel="false" rowspan="12" colspan="1" auto="false">
                           <labels>
                             <label description="KPI 1 · Emails per decision" languagecode="1033" />
                           </labels>
@@ -48,7 +48,7 @@
                             </parameters>
                           </control>
                         </cell>
-                        <cell id="{f9151379-b4f0-4101-b774-1b3d32f8c30a}" showlabel="false" rowspan="12" colspan="1" auto="false">
+                        <cell id="{fb833b21-7c43-43c1-983c-b93910e94e2d}" showlabel="false" rowspan="12" colspan="1" auto="false">
                           <labels>
                             <label description="KPI 2 · Routed emails per queue" languagecode="1033" />
                           </labels>
@@ -70,7 +70,7 @@
                             </parameters>
                           </control>
                         </cell>
-                        <cell id="{07808075-c2d8-42a5-8d1a-939a193e8cb1}" showlabel="false" rowspan="12" colspan="1" auto="false">
+                        <cell id="{67e479ac-3691-4c11-928c-a932cfe47645}" showlabel="false" rowspan="12" colspan="1" auto="false">
                           <labels>
                             <label description="KPI 3 · Replies per status" languagecode="1033" />
                           </labels>
@@ -105,7 +105,7 @@
                       <row />
                       <row />
                       <row>
-                        <cell id="{03e899af-a623-4f67-b46b-8f566449d952}" showlabel="false" rowspan="12" colspan="1" auto="false">
+                        <cell id="{9e23a6a2-1868-44e8-89d6-7522f088c4cc}" showlabel="false" rowspan="12" colspan="1" auto="false">
                           <labels>
                             <label description="KPI 4 · Emails per intent" languagecode="1033" />
                           </labels>
@@ -127,7 +127,7 @@
                             </parameters>
                           </control>
                         </cell>
-                        <cell id="{ab9f1e2d-c5df-406c-bf66-24c7c5805181}" showlabel="false" rowspan="12" colspan="1" auto="false">
+                        <cell id="{f6f7824f-38fd-42e4-845a-c5023da86547}" showlabel="false" rowspan="12" colspan="1" auto="false">
                           <labels>
                             <label description="KPI 5 · Emails per language" languagecode="1033" />
                           </labels>
@@ -149,7 +149,7 @@
                             </parameters>
                           </control>
                         </cell>
-                        <cell id="{6d7e890e-8ee3-4a0d-b419-6341ee515fa3}" showlabel="false" rowspan="12" colspan="1" auto="false">
+                        <cell id="{ec8efe8d-6652-401a-8562-156723d20f27}" showlabel="false" rowspan="12" colspan="1" auto="false">
                           <labels>
                             <label description="KPI 6 · Emails per processing status" languagecode="1033" />
                           </labels>

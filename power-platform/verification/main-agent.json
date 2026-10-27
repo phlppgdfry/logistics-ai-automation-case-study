@@ -1,0 +1,1214 @@
+{
+ "summary": {
+  "batch": "main-agent",
+  "at": "2026-10-27 16:12",
+  "reader": "Copilot Studio agent",
+  "emails": 48,
+  "decided": 48,
+  "sameDecision": 48,
+  "sameReply": 48,
+  "expected": 44
+ },
+ "results": [
+  {
+   "id": "E01",
+   "reader": "Copilot Studio agent",
+   "flow": {
+    "status": "Decided",
+    "action": "auto",
+    "template": "status",
+    "queue": null,
+    "rules": "",
+    "shipments": "CL-2026-0412345",
+    "reply": "Beste,\n\nUw zending CL-2026-0412345 (uw referentie BST 55821) is onderweg. Laatste update: Hub Gent, di 13 okt om 09:10. Verwachte levering: di 13 okt tussen 12:00 en 15:00.\n\nMet vriendelijke groeten,\nKlantendienst Corlaan Logistics\n\n— Dit antwoord werd automatisch opgesteld uit ons transportsysteem. Antwoord gewoon op deze mail om een collega te bereiken."
+   },
+   "reference": {
+    "action": "auto",
+    "template": "status",
+    "queue": null,
+    "rules": "",
+    "shipments": "CL-2026-0412345",
+    "reply": "Beste,\n\nUw zending CL-2026-0412345 (uw referentie BST 55821) is onderweg. Laatste update: Hub Gent, di 13 okt om 09:10. Verwachte levering: di 13 okt tussen 12:00 en 15:00.\n\nMet vriendelijke groeten,\nKlantendienst Corlaan Logistics\n\n— Dit antwoord werd automatisch opgesteld uit ons transportsysteem. Antwoord gewoon op deze mail om een collega te bereiken."
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": null
+  },
+  {
+   "id": "E02",
+   "reader": "Copilot Studio agent",
+   "flow": {
+    "status": "Decided",
+    "action": "auto",
+    "template": "status",
+    "queue": null,
+    "rules": "",
+    "shipments": "CL-2026-0412360",
+    "reply": "Bonjour,\n\nVotre envoi CL-2026-0412360 (votre référence CMD 30418) est en tournée aujourd'hui. Arrivée prévue : mar. 13 oct. entre 10:30 et 12:30.\n\nCordialement,\nService clientèle Corlaan Logistics\n\n— Cette réponse a été préparée automatiquement à partir de notre système de transport. Répondez simplement à ce message pour joindre un collègue."
+   },
+   "reference": {
+    "action": "auto",
+    "template": "status",
+    "queue": null,
+    "rules": "",
+    "shipments": "CL-2026-0412360",
+    "reply": "Bonjour,\n\nVotre envoi CL-2026-0412360 (votre référence CMD 30418) est en tournée aujourd'hui. Arrivée prévue : mar. 13 oct. entre 10:30 et 12:30.\n\nCordialement,\nService clientèle Corlaan Logistics\n\n— Cette réponse a été préparée automatiquement à partir de notre système de transport. Répondez simplement à ce message pour joindre un collègue."
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": null
+  },
+  {
+   "id": "E03",
+   "reader": "Copilot Studio agent",
+   "flow": {
+    "status": "Decided",
+    "action": "auto",
+    "template": "status",
+    "queue": null,
+    "rules": "",
+    "shipments": "CL-2026-0412377",
+    "reply": "Hello,\n\nYour shipment CL-2026-0412377 (your reference PO 778120) is on its way. Last update: DC Gent, Tue 13 Oct at 07:45. Expected delivery: Wed 14 Oct between 09:00 and 12:00.\n\nKind regards,\nCorlaan Logistics Customer Service\n\n— This reply was prepared automatically from our transport system. Simply reply to this email to reach a colleague."
+   },
+   "reference": {
+    "action": "auto",
+    "template": "status",
+    "queue": null,
+    "rules": "",
+    "shipments": "CL-2026-0412377",
+    "reply": "Hello,\n\nYour shipment CL-2026-0412377 (your reference PO 778120) is on its way. Last update: DC Gent, Tue 13 Oct at 07:45. Expected delivery: Wed 14 Oct between 09:00 and 12:00.\n\nKind regards,\nCorlaan Logistics Customer Service\n\n— This reply was prepared automatically from our transport system. Simply reply to this email to reach a colleague."
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": null
+  },
+  {
+   "id": "E04",
+   "reader": "Copilot Studio agent",
+   "flow": {
+    "status": "Decided",
+    "action": "auto",
+    "template": "pod",
+    "queue": null,
+    "rules": "",
+    "shipments": "CL-2026-0412371",
+    "reply": "Beste,\n\nUw zending CL-2026-0412371 (uw referentie ORD 11872) werd geleverd op za 10 okt om 15:20.\nHet afleverbewijs vindt u via deze beveiligde link (7 dagen geldig):\nhttps://portal.corlaan.example/pod/CL-2026-0412371\n\nMet vriendelijke groeten,\nKlantendienst Corlaan Logistics\n\n— Dit antwoord werd automatisch opgesteld uit ons transportsysteem. Antwoord gewoon op deze mail om een collega te bereiken."
+   },
+   "reference": {
+    "action": "auto",
+    "template": "pod",
+    "queue": null,
+    "rules": "",
+    "shipments": "CL-2026-0412371",
+    "reply": "Beste,\n\nUw zending CL-2026-0412371 (uw referentie ORD 11872) werd geleverd op za 10 okt om 15:20.\nHet afleverbewijs vindt u via deze beveiligde link (7 dagen geldig):\nhttps://portal.corlaan.example/pod/CL-2026-0412371\n\nMet vriendelijke groeten,\nKlantendienst Corlaan Logistics\n\n— Dit antwoord werd automatisch opgesteld uit ons transportsysteem. Antwoord gewoon op deze mail om een collega te bereiken."
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": null
+  },
+  {
+   "id": "E05",
+   "reader": "Copilot Studio agent",
+   "flow": {
+    "status": "Decided",
+    "action": "auto",
+    "template": "pod",
+    "queue": null,
+    "rules": "",
+    "shipments": "CL-2026-0412380",
+    "reply": "Bonjour,\n\nVotre envoi CL-2026-0412380 (votre référence CMD 30377) a été livré le ven. 9 oct. à 11:05.\nVous trouverez la preuve de livraison via ce lien sécurisé (valable 7 jours) :\nhttps://portal.corlaan.example/pod/CL-2026-0412380\n\nCordialement,\nService clientèle Corlaan Logistics\n\n— Cette réponse a été préparée automatiquement à partir de notre système de transport. Répondez simplement à ce message pour joindre un collègue."
+   },
+   "reference": {
+    "action": "auto",
+    "template": "pod",
+    "queue": null,
+    "rules": "",
+    "shipments": "CL-2026-0412380",
+    "reply": "Bonjour,\n\nVotre envoi CL-2026-0412380 (votre référence CMD 30377) a été livré le ven. 9 oct. à 11:05.\nVous trouverez la preuve de livraison via ce lien sécurisé (valable 7 jours) :\nhttps://portal.corlaan.example/pod/CL-2026-0412380\n\nCordialement,\nService clientèle Corlaan Logistics\n\n— Cette réponse a été préparée automatiquement à partir de notre système de transport. Répondez simplement à ce message pour joindre un collègue."
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": null
+  },
+  {
+   "id": "E06",
+   "reader": "Copilot Studio agent",
+   "flow": {
+    "status": "Decided",
+    "action": "auto",
+    "template": "status",
+    "queue": null,
+    "rules": "",
+    "shipments": "CL-2026-0412390,CL-2026-0412391",
+    "reply": "Hello,\n\nYour shipment CL-2026-0412390 (your reference PO 778164) is out for delivery today. Expected arrival: Tue 13 Oct between 10:00 and 12:00.\n\nYour shipment CL-2026-0412391 (your reference PO 778170) is planned for collection on Wed 14 Oct. Expected delivery: Thu 15 Oct between 08:00 and 12:00.\n\nKind regards,\nCorlaan Logistics Customer Service\n\n— This reply was prepared automatically from our transport system. Simply reply to this email to reach a colleague."
+   },
+   "reference": {
+    "action": "auto",
+    "template": "status",
+    "queue": null,
+    "rules": "",
+    "shipments": "CL-2026-0412390,CL-2026-0412391",
+    "reply": "Hello,\n\nYour shipment CL-2026-0412390 (your reference PO 778164) is out for delivery today. Expected arrival: Tue 13 Oct between 10:00 and 12:00.\n\nYour shipment CL-2026-0412391 (your reference PO 778170) is planned for collection on Wed 14 Oct. Expected delivery: Thu 15 Oct between 08:00 and 12:00.\n\nKind regards,\nCorlaan Logistics Customer Service\n\n— This reply was prepared automatically from our transport system. Simply reply to this email to reach a colleague."
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": null
+  },
+  {
+   "id": "E07",
+   "reader": "Copilot Studio agent",
+   "flow": {
+    "status": "Decided",
+    "action": "auto",
+    "template": "status",
+    "queue": null,
+    "rules": "",
+    "shipments": "CL-2026-0412402",
+    "reply": "Beste,\n\nUw zending CL-2026-0412402 (uw referentie BO 20931) staat gepland voor ophaling op wo 14 okt. Verwachte levering: wo 14 okt tussen 14:00 en 17:00.\n\nMet vriendelijke groeten,\nKlantendienst Corlaan Logistics\n\n— Dit antwoord werd automatisch opgesteld uit ons transportsysteem. Antwoord gewoon op deze mail om een collega te bereiken."
+   },
+   "reference": {
+    "action": "auto",
+    "template": "status",
+    "queue": null,
+    "rules": "",
+    "shipments": "CL-2026-0412402",
+    "reply": "Beste,\n\nUw zending CL-2026-0412402 (uw referentie BO 20931) staat gepland voor ophaling op wo 14 okt. Verwachte levering: wo 14 okt tussen 14:00 en 17:00.\n\nMet vriendelijke groeten,\nKlantendienst Corlaan Logistics\n\n— Dit antwoord werd automatisch opgesteld uit ons transportsysteem. Antwoord gewoon op deze mail om een collega te bereiken."
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": null
+  },
+  {
+   "id": "E08",
+   "reader": "Copilot Studio agent",
+   "flow": {
+    "status": "Decided",
+    "action": "auto",
+    "template": "status",
+    "queue": null,
+    "rules": "",
+    "shipments": "CL-2026-0412410",
+    "reply": "Beste,\n\nUw zending CL-2026-0412410 (uw referentie BST 55840) is onderweg. Laatste update: Hub Gent, di 13 okt om 08:40. Verwachte levering: di 13 okt tussen 13:30 en 16:00.\n\nMet vriendelijke groeten,\nKlantendienst Corlaan Logistics\n\n— Dit antwoord werd automatisch opgesteld uit ons transportsysteem. Antwoord gewoon op deze mail om een collega te bereiken."
+   },
+   "reference": {
+    "action": "auto",
+    "template": "status",
+    "queue": null,
+    "rules": "",
+    "shipments": "CL-2026-0412410",
+    "reply": "Beste,\n\nUw zending CL-2026-0412410 (uw referentie BST 55840) is onderweg. Laatste update: Hub Gent, di 13 okt om 08:40. Verwachte levering: di 13 okt tussen 13:30 en 16:00.\n\nMet vriendelijke groeten,\nKlantendienst Corlaan Logistics\n\n— Dit antwoord werd automatisch opgesteld uit ons transportsysteem. Antwoord gewoon op deze mail om een collega te bereiken."
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": null
+  },
+  {
+   "id": "E09",
+   "reader": "Copilot Studio agent",
+   "flow": {
+    "status": "Decided",
+    "action": "auto",
+    "template": "status",
+    "queue": null,
+    "rules": "",
+    "shipments": "CL-2026-0412415",
+    "reply": "Hello,\n\nYour shipment CL-2026-0412415 (your reference PO 778101) was delivered on Mon 12 Oct at 12:40.\n\nKind regards,\nCorlaan Logistics Customer Service\n\n— This reply was prepared automatically from our transport system. Simply reply to this email to reach a colleague."
+   },
+   "reference": {
+    "action": "auto",
+    "template": "status",
+    "queue": null,
+    "rules": "",
+    "shipments": "CL-2026-0412415",
+    "reply": "Hello,\n\nYour shipment CL-2026-0412415 (your reference PO 778101) was delivered on Mon 12 Oct at 12:40.\n\nKind regards,\nCorlaan Logistics Customer Service\n\n— This reply was prepared automatically from our transport system. Simply reply to this email to reach a colleague."
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": null
+  },
+  {
+   "id": "E10",
+   "reader": "Copilot Studio agent",
+   "flow": {
+    "status": "Decided",
+    "action": "auto",
+    "template": "status",
+    "queue": null,
+    "rules": "",
+    "shipments": "CL-2026-0412420",
+    "reply": "Beste,\n\nUw zending CL-2026-0412420 (uw referentie ORD 11890) is onderweg. Laatste update: Hub Gent, di 13 okt om 09:25. Verwachte levering: di 13 okt tussen 14:30 en 16:30.\n\nMet vriendelijke groeten,\nKlantendienst Corlaan Logistics\n\n— Dit antwoord werd automatisch opgesteld uit ons transportsysteem. Antwoord gewoon op deze mail om een collega te bereiken."
+   },
+   "reference": {
+    "action": "auto",
+    "template": "status",
+    "queue": null,
+    "rules": "",
+    "shipments": "CL-2026-0412420",
+    "reply": "Beste,\n\nUw zending CL-2026-0412420 (uw referentie ORD 11890) is onderweg. Laatste update: Hub Gent, di 13 okt om 09:25. Verwachte levering: di 13 okt tussen 14:30 en 16:30.\n\nMet vriendelijke groeten,\nKlantendienst Corlaan Logistics\n\n— Dit antwoord werd automatisch opgesteld uit ons transportsysteem. Antwoord gewoon op deze mail om een collega te bereiken."
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": null
+  },
+  {
+   "id": "E11",
+   "reader": "Copilot Studio agent",
+   "flow": {
+    "status": "Decided",
+    "action": "auto",
+    "template": "status",
+    "queue": null,
+    "rules": "",
+    "shipments": "CL-2026-0412425",
+    "reply": "Bonjour,\n\nVotre envoi CL-2026-0412425 (votre référence CMD 30455) est planifié pour enlèvement le mer. 14 oct.. Livraison prévue : jeu. 15 oct. entre 09:00 et 13:00.\n\nCordialement,\nService clientèle Corlaan Logistics\n\n— Cette réponse a été préparée automatiquement à partir de notre système de transport. Répondez simplement à ce message pour joindre un collègue."
+   },
+   "reference": {
+    "action": "auto",
+    "template": "status",
+    "queue": null,
+    "rules": "",
+    "shipments": "CL-2026-0412425",
+    "reply": "Bonjour,\n\nVotre envoi CL-2026-0412425 (votre référence CMD 30455) est planifié pour enlèvement le mer. 14 oct.. Livraison prévue : jeu. 15 oct. entre 09:00 et 13:00.\n\nCordialement,\nService clientèle Corlaan Logistics\n\n— Cette réponse a été préparée automatiquement à partir de notre système de transport. Répondez simplement à ce message pour joindre un collègue."
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": null
+  },
+  {
+   "id": "E12",
+   "reader": "Copilot Studio agent",
+   "flow": {
+    "status": "Decided",
+    "action": "auto",
+    "template": "status",
+    "queue": null,
+    "rules": "R17",
+    "shipments": "CL-2026-0412430,CL-2026-0412430",
+    "reply": "Beste,\n\nUw zending CL-2026-0412430 (uw referentie BO 20940) is onderweg. Laatste update: Hub Gent, di 13 okt om 08:55. Verwachte levering: di 13 okt tussen 13:00 en 15:00.\n\nUw zending CL-2026-0412430 (uw referentie BO 20940) is onderweg. Laatste update: Hub Gent, di 13 okt om 08:55. Verwachte levering: di 13 okt tussen 13:00 en 15:00.\n\nMet vriendelijke groeten,\nKlantendienst Corlaan Logistics\n\n— Dit antwoord werd automatisch opgesteld uit ons transportsysteem. Antwoord gewoon op deze mail om een collega te bereiken."
+   },
+   "reference": {
+    "action": "auto",
+    "template": "status",
+    "queue": null,
+    "rules": "R17",
+    "shipments": "CL-2026-0412430,CL-2026-0412430",
+    "reply": "Beste,\n\nUw zending CL-2026-0412430 (uw referentie BO 20940) is onderweg. Laatste update: Hub Gent, di 13 okt om 08:55. Verwachte levering: di 13 okt tussen 13:00 en 15:00.\n\nUw zending CL-2026-0412430 (uw referentie BO 20940) is onderweg. Laatste update: Hub Gent, di 13 okt om 08:55. Verwachte levering: di 13 okt tussen 13:00 en 15:00.\n\nMet vriendelijke groeten,\nKlantendienst Corlaan Logistics\n\n— Dit antwoord werd automatisch opgesteld uit ons transportsysteem. Antwoord gewoon op deze mail om een collega te bereiken."
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": null
+  },
+  {
+   "id": "E13",
+   "reader": "Copilot Studio agent",
+   "flow": {
+    "status": "Decided",
+    "action": "route",
+    "template": null,
+    "queue": "claims",
+    "rules": "R03,R07",
+    "shipments": "",
+    "reply": null
+   },
+   "reference": {
+    "action": "route",
+    "template": null,
+    "queue": "claims",
+    "rules": "R03,R07",
+    "shipments": "",
+    "reply": null
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": false,
+   "error": null
+  },
+  {
+   "id": "E14",
+   "reader": "Copilot Studio agent",
+   "flow": {
+    "status": "Decided",
+    "action": "auto",
+    "template": "clarify",
+    "queue": null,
+    "rules": "R07",
+    "shipments": "",
+    "reply": "Hello,\n\nThank you for your message. To find your shipment quickly we need the shipment number (e.g. CL-2026-0412345), the CMR number or your own order reference. Could you send one of these?\n\nKind regards,\nCorlaan Logistics Customer Service\n\n— This reply was prepared automatically from our transport system. Simply reply to this email to reach a colleague."
+   },
+   "reference": {
+    "action": "auto",
+    "template": "clarify",
+    "queue": null,
+    "rules": "R07",
+    "shipments": "",
+    "reply": "Hello,\n\nThank you for your message. To find your shipment quickly we need the shipment number (e.g. CL-2026-0412345), the CMR number or your own order reference. Could you send one of these?\n\nKind regards,\nCorlaan Logistics Customer Service\n\n— This reply was prepared automatically from our transport system. Simply reply to this email to reach a colleague."
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": null
+  },
+  {
+   "id": "E15",
+   "reader": "Copilot Studio agent",
+   "flow": {
+    "status": "Decided",
+    "action": "auto",
+    "template": "clarify",
+    "queue": null,
+    "rules": "R07",
+    "shipments": "",
+    "reply": "Beste,\n\nBedankt voor uw bericht. Om uw zending snel terug te vinden hebben we het zendingsnummer (bv. CL-2026-0412345), het CMR-nummer of uw eigen orderreferentie nodig. Kunt u een van die nummers bezorgen?\n\nMet vriendelijke groeten,\nKlantendienst Corlaan Logistics\n\n— Dit antwoord werd automatisch opgesteld uit ons transportsysteem. Antwoord gewoon op deze mail om een collega te bereiken."
+   },
+   "reference": {
+    "action": "auto",
+    "template": "clarify",
+    "queue": null,
+    "rules": "R07",
+    "shipments": "",
+    "reply": "Beste,\n\nBedankt voor uw bericht. Om uw zending snel terug te vinden hebben we het zendingsnummer (bv. CL-2026-0412345), het CMR-nummer of uw eigen orderreferentie nodig. Kunt u een van die nummers bezorgen?\n\nMet vriendelijke groeten,\nKlantendienst Corlaan Logistics\n\n— Dit antwoord werd automatisch opgesteld uit ons transportsysteem. Antwoord gewoon op deze mail om een collega te bereiken."
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": null
+  },
+  {
+   "id": "E16",
+   "reader": "Copilot Studio agent",
+   "flow": {
+    "status": "Decided",
+    "action": "route",
+    "template": null,
+    "queue": "security",
+    "rules": "R02,R11",
+    "shipments": "",
+    "reply": null
+   },
+   "reference": {
+    "action": "route",
+    "template": null,
+    "queue": "security",
+    "rules": "R02,R11",
+    "shipments": "",
+    "reply": null
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": false,
+   "error": null
+  },
+  {
+   "id": "E17",
+   "reader": "Copilot Studio agent",
+   "flow": {
+    "status": "Decided",
+    "action": "auto",
+    "template": "generic",
+    "queue": null,
+    "rules": "R11",
+    "shipments": "",
+    "reply": "Beste,\n\nBedankt voor uw bericht. Om de gegevens van onze klanten te beschermen delen we zendingsinformatie alleen met geregistreerde contactpersonen. U kunt de status volgen via https://portal.corlaan.example, of uw vraag sturen vanaf het e-mailadres dat bij ons gekend is.\n\nMet vriendelijke groeten,\nKlantendienst Corlaan Logistics\n\n— Dit antwoord werd automatisch opgesteld uit ons transportsysteem. Antwoord gewoon op deze mail om een collega te bereiken."
+   },
+   "reference": {
+    "action": "auto",
+    "template": "generic",
+    "queue": null,
+    "rules": "R11",
+    "shipments": "",
+    "reply": "Beste,\n\nBedankt voor uw bericht. Om de gegevens van onze klanten te beschermen delen we zendingsinformatie alleen met geregistreerde contactpersonen. U kunt de status volgen via https://portal.corlaan.example, of uw vraag sturen vanaf het e-mailadres dat bij ons gekend is.\n\nMet vriendelijke groeten,\nKlantendienst Corlaan Logistics\n\n— Dit antwoord werd automatisch opgesteld uit ons transportsysteem. Antwoord gewoon op deze mail om een collega te bereiken."
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": null
+  },
+  {
+   "id": "E18",
+   "reader": "Copilot Studio agent",
+   "flow": {
+    "status": "Decided",
+    "action": "auto",
+    "template": "generic",
+    "queue": null,
+    "rules": "R11",
+    "shipments": "",
+    "reply": "Bonjour,\n\nMerci pour votre message. Pour protéger les données de nos clients, nous ne partageons les informations d'envoi qu'avec les contacts enregistrés. Vous pouvez suivre le statut via https://portal.corlaan.example, ou nous écrire depuis l'adresse e-mail connue chez nous.\n\nCordialement,\nService clientèle Corlaan Logistics\n\n— Cette réponse a été préparée automatiquement à partir de notre système de transport. Répondez simplement à ce message pour joindre un collègue."
+   },
+   "reference": {
+    "action": "auto",
+    "template": "generic",
+    "queue": null,
+    "rules": "R11",
+    "shipments": "",
+    "reply": "Bonjour,\n\nMerci pour votre message. Pour protéger les données de nos clients, nous ne partageons les informations d'envoi qu'avec les contacts enregistrés. Vous pouvez suivre le statut via https://portal.corlaan.example, ou nous écrire depuis l'adresse e-mail connue chez nous.\n\nCordialement,\nService clientèle Corlaan Logistics\n\n— Cette réponse a été préparée automatiquement à partir de notre système de transport. Répondez simplement à ce message pour joindre un collègue."
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": null
+  },
+  {
+   "id": "E19",
+   "reader": "Copilot Studio agent",
+   "flow": {
+    "status": "Decided",
+    "action": "auto",
+    "template": "generic",
+    "queue": null,
+    "rules": "R10",
+    "shipments": "",
+    "reply": "Hello,\n\nThank you for your message. To protect our customers' data we only share shipment information with registered contacts. You can follow the status at https://portal.corlaan.example, or write to us from the email address we have on file.\n\nKind regards,\nCorlaan Logistics Customer Service\n\n— This reply was prepared automatically from our transport system. Simply reply to this email to reach a colleague."
+   },
+   "reference": {
+    "action": "auto",
+    "template": "generic",
+    "queue": null,
+    "rules": "R10",
+    "shipments": "",
+    "reply": "Hello,\n\nThank you for your message. To protect our customers' data we only share shipment information with registered contacts. You can follow the status at https://portal.corlaan.example, or write to us from the email address we have on file.\n\nKind regards,\nCorlaan Logistics Customer Service\n\n— This reply was prepared automatically from our transport system. Simply reply to this email to reach a colleague."
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": null
+  },
+  {
+   "id": "E20",
+   "reader": "Copilot Studio agent",
+   "flow": {
+    "status": "Decided",
+    "action": "draft",
+    "template": "pod",
+    "queue": null,
+    "rules": "R12",
+    "shipments": "CL-2026-0412371",
+    "reply": "Beste,\n\nUw zending CL-2026-0412371 (uw referentie ORD 11872) werd geleverd op za 10 okt om 15:20.\nHet afleverbewijs vindt u via deze beveiligde link (7 dagen geldig):\nhttps://portal.corlaan.example/pod/CL-2026-0412371\n\nMet vriendelijke groeten,\nKlantendienst Corlaan Logistics\n\n— Dit antwoord werd automatisch opgesteld uit ons transportsysteem. Antwoord gewoon op deze mail om een collega te bereiken."
+   },
+   "reference": {
+    "action": "draft",
+    "template": "pod",
+    "queue": null,
+    "rules": "R12",
+    "shipments": "CL-2026-0412371",
+    "reply": "Beste,\n\nUw zending CL-2026-0412371 (uw referentie ORD 11872) werd geleverd op za 10 okt om 15:20.\nHet afleverbewijs vindt u via deze beveiligde link (7 dagen geldig):\nhttps://portal.corlaan.example/pod/CL-2026-0412371\n\nMet vriendelijke groeten,\nKlantendienst Corlaan Logistics\n\n— Dit antwoord werd automatisch opgesteld uit ons transportsysteem. Antwoord gewoon op deze mail om een collega te bereiken."
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": null
+  },
+  {
+   "id": "E21",
+   "reader": "Copilot Studio agent",
+   "flow": {
+    "status": "Decided",
+    "action": "draft",
+    "template": "status",
+    "queue": null,
+    "rules": "R14",
+    "shipments": "CL-2026-0412450",
+    "reply": "Beste,\n\nUw zending CL-2026-0412450 (uw referentie BO 20951) is onderweg. Laatste update: Lille (FR), di 13 okt om 02:40. Verwachte levering: di 13 okt tussen 11:00 en 14:00.\n\nMet vriendelijke groeten,\nKlantendienst Corlaan Logistics\n\n— Dit antwoord werd automatisch opgesteld uit ons transportsysteem. Antwoord gewoon op deze mail om een collega te bereiken."
+   },
+   "reference": {
+    "action": "draft",
+    "template": "status",
+    "queue": null,
+    "rules": "R14",
+    "shipments": "CL-2026-0412450",
+    "reply": "Beste,\n\nUw zending CL-2026-0412450 (uw referentie BO 20951) is onderweg. Laatste update: Lille (FR), di 13 okt om 02:40. Verwachte levering: di 13 okt tussen 11:00 en 14:00.\n\nMet vriendelijke groeten,\nKlantendienst Corlaan Logistics\n\n— Dit antwoord werd automatisch opgesteld uit ons transportsysteem. Antwoord gewoon op deze mail om een collega te bereiken."
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": null
+  },
+  {
+   "id": "E22",
+   "reader": "Copilot Studio agent",
+   "flow": {
+    "status": "Decided",
+    "action": "draft",
+    "template": "status",
+    "queue": null,
+    "rules": "R14",
+    "shipments": "CL-2026-0412455",
+    "reply": "Bonjour,\n\nVotre envoi CL-2026-0412455 (votre référence CMD 30461) est en route. Dernière mise à jour : Hub Liège, mar. 13 oct. à 00:15. Livraison prévue : mar. 13 oct. entre 10:00 et 13:00.\n\nCordialement,\nService clientèle Corlaan Logistics\n\n— Cette réponse a été préparée automatiquement à partir de notre système de transport. Répondez simplement à ce message pour joindre un collègue."
+   },
+   "reference": {
+    "action": "draft",
+    "template": "status",
+    "queue": null,
+    "rules": "R14",
+    "shipments": "CL-2026-0412455",
+    "reply": "Bonjour,\n\nVotre envoi CL-2026-0412455 (votre référence CMD 30461) est en route. Dernière mise à jour : Hub Liège, mar. 13 oct. à 00:15. Livraison prévue : mar. 13 oct. entre 10:00 et 13:00.\n\nCordialement,\nService clientèle Corlaan Logistics\n\n— Cette réponse a été préparée automatiquement à partir de notre système de transport. Répondez simplement à ce message pour joindre un collègue."
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": null
+  },
+  {
+   "id": "E23",
+   "reader": "Copilot Studio agent",
+   "flow": {
+    "status": "Decided",
+    "action": "draft",
+    "template": "status",
+    "queue": null,
+    "rules": "R15",
+    "shipments": "CL-2026-0412460",
+    "reply": "Hello,\n\nYour shipment CL-2026-0412460 (your reference PO 778190) is on its way. Last update: E40 Aalter, Tue 13 Oct at 09:30. Expected delivery: Tue 13 Oct between 15:00 and 18:00.\n\nKind regards,\nCorlaan Logistics Customer Service\n\n— This reply was prepared automatically from our transport system. Simply reply to this email to reach a colleague."
+   },
+   "reference": {
+    "action": "draft",
+    "template": "status",
+    "queue": null,
+    "rules": "R15",
+    "shipments": "CL-2026-0412460",
+    "reply": "Hello,\n\nYour shipment CL-2026-0412460 (your reference PO 778190) is on its way. Last update: E40 Aalter, Tue 13 Oct at 09:30. Expected delivery: Tue 13 Oct between 15:00 and 18:00.\n\nKind regards,\nCorlaan Logistics Customer Service\n\n— This reply was prepared automatically from our transport system. Simply reply to this email to reach a colleague."
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": null
+  },
+  {
+   "id": "E24",
+   "reader": "Copilot Studio agent",
+   "flow": {
+    "status": "Decided",
+    "action": "draft",
+    "template": "status",
+    "queue": null,
+    "rules": "R10",
+    "shipments": "",
+    "reply": null
+   },
+   "reference": {
+    "action": "draft",
+    "template": "status",
+    "queue": null,
+    "rules": "R10",
+    "shipments": "",
+    "reply": null
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": null
+  },
+  {
+   "id": "E25",
+   "reader": "Copilot Studio agent",
+   "flow": {
+    "status": "Decided",
+    "action": "draft",
+    "template": "status",
+    "queue": null,
+    "rules": "R08",
+    "shipments": "CL-2026-0412465",
+    "reply": "Beste,\n\nUw zending CL-2026-0412465 (uw referentie BST 55870) is onderweg. Laatste update: Hub Gent, di 13 okt om 08:45. Verwachte levering: di 13 okt tussen 14:00 en 16:00.\n\nMet vriendelijke groeten,\nKlantendienst Corlaan Logistics\n\n— Dit antwoord werd automatisch opgesteld uit ons transportsysteem. Antwoord gewoon op deze mail om een collega te bereiken."
+   },
+   "reference": {
+    "action": "draft",
+    "template": "status",
+    "queue": null,
+    "rules": "R08",
+    "shipments": "CL-2026-0412465",
+    "reply": "Beste,\n\nUw zending CL-2026-0412465 (uw referentie BST 55870) is onderweg. Laatste update: Hub Gent, di 13 okt om 08:45. Verwachte levering: di 13 okt tussen 14:00 en 16:00.\n\nMet vriendelijke groeten,\nKlantendienst Corlaan Logistics\n\n— Dit antwoord werd automatisch opgesteld uit ons transportsysteem. Antwoord gewoon op deze mail om een collega te bereiken."
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": null
+  },
+  {
+   "id": "E26",
+   "reader": "Copilot Studio agent",
+   "flow": {
+    "status": "Decided",
+    "action": "draft",
+    "template": "status",
+    "queue": null,
+    "rules": "R06",
+    "shipments": "CL-2026-0412470",
+    "reply": "Hello,\n\nYour shipment CL-2026-0412470 (your reference REF 99102) is on its way. Last update: Hub Gent, Tue 13 Oct at 07:30. Expected delivery: Wed 14 Oct between 09:00 and 12:00.\n\nKind regards,\nCorlaan Logistics Customer Service\n\n— This reply was prepared automatically from our transport system. Simply reply to this email to reach a colleague."
+   },
+   "reference": {
+    "action": "draft",
+    "template": "status",
+    "queue": null,
+    "rules": "R06",
+    "shipments": "CL-2026-0412470",
+    "reply": "Hello,\n\nYour shipment CL-2026-0412470 (your reference REF 99102) is on its way. Last update: Hub Gent, Tue 13 Oct at 07:30. Expected delivery: Wed 14 Oct between 09:00 and 12:00.\n\nKind regards,\nCorlaan Logistics Customer Service\n\n— This reply was prepared automatically from our transport system. Simply reply to this email to reach a colleague."
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": false,
+   "error": null
+  },
+  {
+   "id": "E27",
+   "reader": "Copilot Studio agent",
+   "flow": {
+    "status": "Decided",
+    "action": "draft",
+    "template": "status",
+    "queue": null,
+    "rules": "R09",
+    "shipments": "",
+    "reply": null
+   },
+   "reference": {
+    "action": "draft",
+    "template": "status",
+    "queue": null,
+    "rules": "R09",
+    "shipments": "",
+    "reply": null
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": null
+  },
+  {
+   "id": "E28",
+   "reader": "Copilot Studio agent",
+   "flow": {
+    "status": "Decided",
+    "action": "route",
+    "template": null,
+    "queue": "claims",
+    "rules": "R03",
+    "shipments": "CL-2026-0412420",
+    "reply": null
+   },
+   "reference": {
+    "action": "route",
+    "template": null,
+    "queue": "claims",
+    "rules": "R03",
+    "shipments": "CL-2026-0412420",
+    "reply": null
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": false,
+   "error": null
+  },
+  {
+   "id": "E29",
+   "reader": "Copilot Studio agent",
+   "flow": {
+    "status": "Decided",
+    "action": "draft",
+    "template": "status",
+    "queue": null,
+    "rules": "R05",
+    "shipments": "CL-2026-0412345",
+    "reply": "Beste,\n\nUw zending CL-2026-0412345 (uw referentie BST 55821) is onderweg. Laatste update: Hub Gent, di 13 okt om 09:10. Verwachte levering: di 13 okt tussen 12:00 en 15:00.\n\nMet vriendelijke groeten,\nKlantendienst Corlaan Logistics\n\n— Dit antwoord werd automatisch opgesteld uit ons transportsysteem. Antwoord gewoon op deze mail om een collega te bereiken."
+   },
+   "reference": {
+    "action": "draft",
+    "template": "status",
+    "queue": null,
+    "rules": "R05",
+    "shipments": "CL-2026-0412345",
+    "reply": "Beste,\n\nUw zending CL-2026-0412345 (uw referentie BST 55821) is onderweg. Laatste update: Hub Gent, di 13 okt om 09:10. Verwachte levering: di 13 okt tussen 12:00 en 15:00.\n\nMet vriendelijke groeten,\nKlantendienst Corlaan Logistics\n\n— Dit antwoord werd automatisch opgesteld uit ons transportsysteem. Antwoord gewoon op deze mail om een collega te bereiken."
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": null
+  },
+  {
+   "id": "E30",
+   "reader": "Copilot Studio agent",
+   "flow": {
+    "status": "Decided",
+    "action": "draft",
+    "template": "status",
+    "queue": null,
+    "rules": "R16",
+    "shipments": "CL-2026-0412390",
+    "reply": "Hello,\n\nYour shipment CL-2026-0412390 (your reference PO 778164) is out for delivery today. Expected arrival: Tue 13 Oct between 10:00 and 12:00.\n\nKind regards,\nCorlaan Logistics Customer Service\n\n— This reply was prepared automatically from our transport system. Simply reply to this email to reach a colleague."
+   },
+   "reference": {
+    "action": "draft",
+    "template": "status",
+    "queue": null,
+    "rules": "R16",
+    "shipments": "CL-2026-0412390",
+    "reply": "Hello,\n\nYour shipment CL-2026-0412390 (your reference PO 778164) is out for delivery today. Expected arrival: Tue 13 Oct between 10:00 and 12:00.\n\nKind regards,\nCorlaan Logistics Customer Service\n\n— This reply was prepared automatically from our transport system. Simply reply to this email to reach a colleague."
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": null
+  },
+  {
+   "id": "E31",
+   "reader": "Copilot Studio agent",
+   "flow": {
+    "status": "Decided",
+    "action": "draft",
+    "template": "status",
+    "queue": null,
+    "rules": "R11",
+    "shipments": "CL-2026-0412377",
+    "reply": "Hello,\n\nYour shipment CL-2026-0412377 (your reference PO 778120) is on its way. Last update: DC Gent, Tue 13 Oct at 07:45. Expected delivery: Wed 14 Oct between 09:00 and 12:00.\n\nKind regards,\nCorlaan Logistics Customer Service\n\n— This reply was prepared automatically from our transport system. Simply reply to this email to reach a colleague."
+   },
+   "reference": {
+    "action": "draft",
+    "template": "status",
+    "queue": null,
+    "rules": "R11",
+    "shipments": "CL-2026-0412377",
+    "reply": "Hello,\n\nYour shipment CL-2026-0412377 (your reference PO 778120) is on its way. Last update: DC Gent, Tue 13 Oct at 07:45. Expected delivery: Wed 14 Oct between 09:00 and 12:00.\n\nKind regards,\nCorlaan Logistics Customer Service\n\n— This reply was prepared automatically from our transport system. Simply reply to this email to reach a colleague."
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": null
+  },
+  {
+   "id": "E32",
+   "reader": "Copilot Studio agent",
+   "flow": {
+    "status": "Decided",
+    "action": "route",
+    "template": null,
+    "queue": "claims",
+    "rules": "R03",
+    "shipments": "CL-2026-0412475",
+    "reply": null
+   },
+   "reference": {
+    "action": "route",
+    "template": null,
+    "queue": "claims",
+    "rules": "R03",
+    "shipments": "CL-2026-0412475",
+    "reply": null
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": null
+  },
+  {
+   "id": "E33",
+   "reader": "Copilot Studio agent",
+   "flow": {
+    "status": "Decided",
+    "action": "route",
+    "template": null,
+    "queue": "team-lead",
+    "rules": "R03,R14",
+    "shipments": "CL-2026-0412455",
+    "reply": null
+   },
+   "reference": {
+    "action": "route",
+    "template": null,
+    "queue": "team-lead",
+    "rules": "R03,R14",
+    "shipments": "CL-2026-0412455",
+    "reply": null
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": null
+  },
+  {
+   "id": "E34",
+   "reader": "Copilot Studio agent",
+   "flow": {
+    "status": "Decided",
+    "action": "route",
+    "template": null,
+    "queue": "team-lead",
+    "rules": "R03",
+    "shipments": "CL-2026-0412345",
+    "reply": null
+   },
+   "reference": {
+    "action": "route",
+    "template": null,
+    "queue": "team-lead",
+    "rules": "R03",
+    "shipments": "CL-2026-0412345",
+    "reply": null
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": null
+  },
+  {
+   "id": "E35",
+   "reader": "Copilot Studio agent",
+   "flow": {
+    "status": "Decided",
+    "action": "route",
+    "template": null,
+    "queue": "planning",
+    "rules": "R04",
+    "shipments": "CL-2026-0412391",
+    "reply": null
+   },
+   "reference": {
+    "action": "route",
+    "template": null,
+    "queue": "planning",
+    "rules": "R04",
+    "shipments": "CL-2026-0412391",
+    "reply": null
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": null
+  },
+  {
+   "id": "E36",
+   "reader": "Copilot Studio agent",
+   "flow": {
+    "status": "Decided",
+    "action": "route",
+    "template": null,
+    "queue": "finance",
+    "rules": "R04",
+    "shipments": "CL-2026-0412371",
+    "reply": null
+   },
+   "reference": {
+    "action": "route",
+    "template": null,
+    "queue": "finance",
+    "rules": "R04",
+    "shipments": "CL-2026-0412371",
+    "reply": null
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": null
+  },
+  {
+   "id": "E37",
+   "reader": "Copilot Studio agent",
+   "flow": {
+    "status": "Decided",
+    "action": "route",
+    "template": null,
+    "queue": "customer-service",
+    "rules": "R04",
+    "shipments": "CL-2026-0412391",
+    "reply": null
+   },
+   "reference": {
+    "action": "route",
+    "template": null,
+    "queue": "customer-service",
+    "rules": "R04",
+    "shipments": "CL-2026-0412391",
+    "reply": null
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": null
+  },
+  {
+   "id": "E38",
+   "reader": "Copilot Studio agent",
+   "flow": {
+    "status": "Decided",
+    "action": "route",
+    "template": null,
+    "queue": "customer-service",
+    "rules": "R13",
+    "shipments": "CL-2026-0412480",
+    "reply": null
+   },
+   "reference": {
+    "action": "route",
+    "template": null,
+    "queue": "customer-service",
+    "rules": "R13",
+    "shipments": "CL-2026-0412480",
+    "reply": null
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": null
+  },
+  {
+   "id": "E39",
+   "reader": "Copilot Studio agent",
+   "flow": {
+    "status": "Decided",
+    "action": "route",
+    "template": null,
+    "queue": "security",
+    "rules": "R02,R05,R06",
+    "shipments": "",
+    "reply": null
+   },
+   "reference": {
+    "action": "route",
+    "template": null,
+    "queue": "security",
+    "rules": "R02,R05,R06",
+    "shipments": "",
+    "reply": null
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": "Refused by the content filter, routed to security: An error has occurred.\nError code: ContentFiltered\nConversation Id: 564bcdbc-1355-447d-ba7d-3a16e0bc77f2\nTime (UTC): 2026-10-27T16:05:46.881Z."
+  },
+  {
+   "id": "E40",
+   "reader": "Copilot Studio agent",
+   "flow": {
+    "status": "Decided",
+    "action": "route",
+    "template": null,
+    "queue": "security",
+    "rules": "R02",
+    "shipments": "CL-2026-0412345",
+    "reply": null
+   },
+   "reference": {
+    "action": "route",
+    "template": null,
+    "queue": "security",
+    "rules": "R02",
+    "shipments": "CL-2026-0412345",
+    "reply": null
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": null
+  },
+  {
+   "id": "E41",
+   "reader": "Copilot Studio agent",
+   "flow": {
+    "status": "Decided",
+    "action": "route",
+    "template": null,
+    "queue": "customer-service",
+    "rules": "R13",
+    "shipments": "CL-2026-0412485",
+    "reply": null
+   },
+   "reference": {
+    "action": "route",
+    "template": null,
+    "queue": "customer-service",
+    "rules": "R13",
+    "shipments": "CL-2026-0412485",
+    "reply": null
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": null
+  },
+  {
+   "id": "E42",
+   "reader": "Copilot Studio agent",
+   "flow": {
+    "status": "Decided",
+    "action": "route",
+    "template": null,
+    "queue": "claims",
+    "rules": "R03",
+    "shipments": "CL-2026-0412415",
+    "reply": null
+   },
+   "reference": {
+    "action": "route",
+    "template": null,
+    "queue": "claims",
+    "rules": "R03",
+    "shipments": "CL-2026-0412415",
+    "reply": null
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": null
+  },
+  {
+   "id": "E43",
+   "reader": "Copilot Studio agent",
+   "flow": {
+    "status": "Decided",
+    "action": "ignore",
+    "template": null,
+    "queue": null,
+    "rules": "R01",
+    "shipments": "",
+    "reply": null
+   },
+   "reference": {
+    "action": "ignore",
+    "template": null,
+    "queue": null,
+    "rules": "R01",
+    "shipments": "",
+    "reply": null
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": null
+  },
+  {
+   "id": "E44",
+   "reader": "Copilot Studio agent",
+   "flow": {
+    "status": "Decided",
+    "action": "ignore",
+    "template": null,
+    "queue": null,
+    "rules": "R01",
+    "shipments": "",
+    "reply": null
+   },
+   "reference": {
+    "action": "ignore",
+    "template": null,
+    "queue": null,
+    "rules": "R01",
+    "shipments": "",
+    "reply": null
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": null
+  },
+  {
+   "id": "E45",
+   "reader": "Copilot Studio agent",
+   "flow": {
+    "status": "Decided",
+    "action": "ignore",
+    "template": null,
+    "queue": null,
+    "rules": "R01",
+    "shipments": "",
+    "reply": null
+   },
+   "reference": {
+    "action": "ignore",
+    "template": null,
+    "queue": null,
+    "rules": "R01",
+    "shipments": "",
+    "reply": null
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": null
+  },
+  {
+   "id": "E46",
+   "reader": "Copilot Studio agent",
+   "flow": {
+    "status": "Decided",
+    "action": "ignore",
+    "template": null,
+    "queue": null,
+    "rules": "R01",
+    "shipments": "",
+    "reply": null
+   },
+   "reference": {
+    "action": "ignore",
+    "template": null,
+    "queue": null,
+    "rules": "R01",
+    "shipments": "",
+    "reply": null
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": null
+  },
+  {
+   "id": "E47",
+   "reader": "Copilot Studio agent",
+   "flow": {
+    "status": "Decided",
+    "action": "auto",
+    "template": "status",
+    "queue": null,
+    "rules": "",
+    "shipments": "CL-2026-0412390",
+    "reply": "Hello,\n\nYour shipment CL-2026-0412390 (your reference PO 778164) is out for delivery today. Expected arrival: Tue 13 Oct between 10:00 and 12:00.\n\nKind regards,\nCorlaan Logistics Customer Service\n\n— This reply was prepared automatically from our transport system. Simply reply to this email to reach a colleague."
+   },
+   "reference": {
+    "action": "auto",
+    "template": "status",
+    "queue": null,
+    "rules": "",
+    "shipments": "CL-2026-0412390",
+    "reply": "Hello,\n\nYour shipment CL-2026-0412390 (your reference PO 778164) is out for delivery today. Expected arrival: Tue 13 Oct between 10:00 and 12:00.\n\nKind regards,\nCorlaan Logistics Customer Service\n\n— This reply was prepared automatically from our transport system. Simply reply to this email to reach a colleague."
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": null
+  },
+  {
+   "id": "E48",
+   "reader": "Copilot Studio agent",
+   "flow": {
+    "status": "Decided",
+    "action": "auto",
+    "template": "status",
+    "queue": null,
+    "rules": "",
+    "shipments": "CL-2026-0412490",
+    "reply": "Bonjour,\n\nVotre envoi CL-2026-0412490 (votre référence CMD 30482) est en route. Dernière mise à jour : Hub Liège, mar. 13 oct. à 08:20. Livraison prévue : mar. 13 oct. entre 14:30 et 16:30.\n\nCordialement,\nService clientèle Corlaan Logistics\n\n— Cette réponse a été préparée automatiquement à partir de notre système de transport. Répondez simplement à ce message pour joindre un collègue."
+   },
+   "reference": {
+    "action": "auto",
+    "template": "status",
+    "queue": null,
+    "rules": "",
+    "shipments": "CL-2026-0412490",
+    "reply": "Bonjour,\n\nVotre envoi CL-2026-0412490 (votre référence CMD 30482) est en route. Dernière mise à jour : Hub Liège, mar. 13 oct. à 08:20. Livraison prévue : mar. 13 oct. entre 14:30 et 16:30.\n\nCordialement,\nService clientèle Corlaan Logistics\n\n— Cette réponse a été préparée automatiquement à partir de notre système de transport. Répondez simplement à ce message pour joindre un collègue."
+   },
+   "sameDecision": true,
+   "sameReply": true,
+   "expected": true,
+   "error": null
+  }
+ ]
+}

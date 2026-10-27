@@ -62,7 +62,12 @@ if (record) {
   try { run = JSON.parse(readFileSync(file, "utf8")); } catch { /* first batch */ }
   Object.assign(run, { reader: "Copilot Studio agent (Execute Agent and wait, cloud flow CRL-01)", agent: "crl_corlaanMailReader", batches: [...new Set([...(run.batches ?? []), batch])], recordedAt: summary.at.slice(0, 10) });
   // only real readings: a failed agent call stored a safe placeholder, which says nothing about the model
-  for (const r of results) if (!r.error && r.reading && Object.keys(r.reading).length) run.outputs[r.id] = r.reading;
+  // real readings only: a failed agent call stored a safe placeholder that says nothing about the model.
+  // A content-filter refusal is a real outcome (recorded as blocked); automated mail never reaches the agent ({}).
+  for (const r of results) {
+    if (r.error && !r.error.startsWith("Refused by the content filter")) continue;
+    run.outputs[r.id] = r.reading ?? {};
+  }
   run.outputs = Object.fromEntries(Object.entries(run.outputs).sort(([a], [b]) => a.localeCompare(b)));
   writeFileSync(file, `${JSON.stringify(run, null, 2)}\n`);
   console.log(`recorded ${Object.keys(run.outputs).length} readings → evaluation/runs/${record}.json`);
