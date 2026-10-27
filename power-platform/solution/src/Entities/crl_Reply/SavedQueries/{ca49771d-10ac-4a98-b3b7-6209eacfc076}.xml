@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>1</isdefault>
+    <savedqueryid>{ca49771d-10ac-4a98-b3b7-6209eacfc076}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="crl_name" select="1" icon="1" preview="1">
+        <row name="result" id="crl_replyid">
+          <cell name="crl_name" width="140" />
+          <cell name="crl_to" width="130" />
+          <cell name="crl_subject" width="130" />
+          <cell name="crl_status" width="130" />
+          <cell name="crl_heldby" width="130" />
+          <cell name="crl_reviewedby" width="130" />
+          <cell name="crl_reviewedon" width="130" />
+          <cell name="crl_inboundemail" width="130" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="crl_reply">
+          <attribute name="crl_name" />
+          <attribute name="crl_to" />
+          <attribute name="crl_subject" />
+          <attribute name="crl_status" />
+          <attribute name="crl_heldby" />
+          <attribute name="crl_reviewedby" />
+          <attribute name="crl_reviewedon" />
+          <attribute name="crl_inboundemail" />
+          <attribute name="crl_replyid" />
+          <order attribute="createdon" descending="true" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="0" />
+          </filter>
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0.0.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Active Replies" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

@@ -1,0 +1,768 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "crl_dataverse"
+        },
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        }
+      },
+      "shared_approvals": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "crl_approvals"
+        },
+        "api": {
+          "name": "shared_approvals"
+        }
+      },
+      "shared_microsoftcopilotstudio": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "crl_copilotstudio"
+        },
+        "api": {
+          "name": "shared_microsoftcopilotstudio"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        },
+        "Minimum intent confidence (R05) (crl_ConfidenceMin)": {
+          "defaultValue": 0.75,
+          "type": "Float",
+          "metadata": {
+            "schemaName": "crl_ConfidenceMin"
+          }
+        },
+        "Stale status after hours (R14) (crl_StaleHours)": {
+          "defaultValue": 4,
+          "type": "Float",
+          "metadata": {
+            "schemaName": "crl_StaleHours"
+          }
+        },
+        "Maximum references per email (R09) (crl_MaxReferences)": {
+          "defaultValue": 3,
+          "type": "Float",
+          "metadata": {
+            "schemaName": "crl_MaxReferences"
+          }
+        },
+        "Automatic replies per sender per day (R16) (crl_MaxAutoRepliesPerDay)": {
+          "defaultValue": 3,
+          "type": "Float",
+          "metadata": {
+            "schemaName": "crl_MaxAutoRepliesPerDay"
+          }
+        },
+        "Test clock (empty = real time) (crl_ClockOverride)": {
+          "defaultValue": "",
+          "type": "String",
+          "metadata": {
+            "schemaName": "crl_ClockOverride"
+          }
+        },
+        "Free-mail domains (crl_FreemailDomains)": {
+          "defaultValue": "",
+          "type": "String",
+          "metadata": {
+            "schemaName": "crl_FreemailDomains"
+          }
+        }
+      },
+      "triggers": {
+        "Email_read": {
+          "type": "OpenApiConnectionWebhook",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "SubscribeWebhookTrigger",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "subscriptionRequest/message": 3,
+              "subscriptionRequest/entityname": "crl_inboundemail",
+              "subscriptionRequest/scope": 4,
+              "subscriptionRequest/filteringattributes": "crl_status",
+              "subscriptionRequest/filterexpression": "crl_status eq 103450001"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        }
+      },
+      "actions": {
+        "Read_mode": {
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "ListRecords",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "entityName": "environmentvariabledefinitions",
+              "$select": "schemaname,defaultvalue",
+              "$filter": "schemaname eq 'crl_Mode'",
+              "$expand": "environmentvariabledefinition_environmentvariablevalue($select=value)"
+            },
+            "authentication": "@parameters('$authentication')"
+          },
+          "runAfter": {}
+        },
+        "Agent_reading": {
+          "type": "Compose",
+          "inputs": "@json(coalesce(triggerOutputs()?['body/crl_agentoutput'], '{}'))",
+          "runAfter": {
+            "Read_mode": [
+              "Succeeded"
+            ]
+          }
+        },
+        "References": {
+          "type": "Select",
+          "inputs": {
+            "from": "@coalesce(outputs('Agent_reading')?['references'], json('[]'))",
+            "select": {
+              "type": "@item()?['type']",
+              "value": "@if(equals(item()?['type'], 'shipment'), if(equals(length(replace(replace(replace(replace(replace(toUpper(string(item()?['value'])), 'CL', ''), ' ', ''), '-', ''), ':', ''), '#', '')), 11), concat('CL-', substring(replace(replace(replace(replace(replace(toUpper(string(item()?['value'])), 'CL', ''), ' ', ''), '-', ''), ':', ''), '#', ''), 0, 4), '-', substring(replace(replace(replace(replace(replace(toUpper(string(item()?['value'])), 'CL', ''), ' ', ''), '-', ''), ':', ''), '#', ''), 4, 7)), toUpper(string(item()?['value']))), if(equals(item()?['type'], 'cmr'), replace(replace(replace(replace(replace(toUpper(string(item()?['value'])), 'CMR', ''), ' ', ''), '-', ''), ':', ''), '#', ''), concat(substring(replace(replace(replace(replace(toUpper(string(item()?['value'])), ' ', ''), '-', ''), ':', ''), '#', ''), 0, if(or(startsWith(replace(replace(replace(replace(toUpper(string(item()?['value'])), ' ', ''), '-', ''), ':', ''), '#', ''), 'ORD'), startsWith(replace(replace(replace(replace(toUpper(string(item()?['value'])), ' ', ''), '-', ''), ':', ''), '#', ''), 'REF'), startsWith(replace(replace(replace(replace(toUpper(string(item()?['value'])), ' ', ''), '-', ''), ':', ''), '#', ''), 'BST'), startsWith(replace(replace(replace(replace(toUpper(string(item()?['value'])), ' ', ''), '-', ''), ':', ''), '#', ''), 'CMD')), 3, 2)), ' ', substring(replace(replace(replace(replace(toUpper(string(item()?['value'])), ' ', ''), '-', ''), ':', ''), '#', ''), if(or(startsWith(replace(replace(replace(replace(toUpper(string(item()?['value'])), ' ', ''), '-', ''), ':', ''), '#', ''), 'ORD'), startsWith(replace(replace(replace(replace(toUpper(string(item()?['value'])), ' ', ''), '-', ''), ':', ''), '#', ''), 'REF'), startsWith(replace(replace(replace(replace(toUpper(string(item()?['value'])), ' ', ''), '-', ''), ':', ''), '#', ''), 'BST'), startsWith(replace(replace(replace(replace(toUpper(string(item()?['value'])), ' ', ''), '-', ''), ':', ''), '#', ''), 'CMD')), 3, 2)))))"
+            }
+          },
+          "runAfter": {
+            "Agent_reading": [
+              "Succeeded"
+            ]
+          }
+        },
+        "Lookups_init": {
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "Lookups",
+                "type": "array",
+                "value": []
+              }
+            ]
+          },
+          "runAfter": {
+            "References": [
+              "Succeeded"
+            ]
+          }
+        },
+        "Shipment_findings_init": {
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "ShipmentFindings",
+                "type": "array",
+                "value": []
+              }
+            ]
+          },
+          "runAfter": {
+            "Lookups_init": [
+              "Succeeded"
+            ]
+          }
+        },
+        "Accounts": {
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "ListRecords",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "entityName": "crl_customeraccounts",
+              "$select": "crl_customeraccountid,crl_code,crl_domains"
+            },
+            "authentication": "@parameters('$authentication')"
+          },
+          "runAfter": {
+            "Shipment_findings_init": [
+              "Succeeded"
+            ]
+          }
+        },
+        "Contacts": {
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "ListRecords",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "entityName": "crl_customercontacts",
+              "$select": "crl_email,_crl_account_value"
+            },
+            "authentication": "@parameters('$authentication')"
+          },
+          "runAfter": {
+            "Accounts": [
+              "Succeeded"
+            ]
+          }
+        },
+        "Sender_as_contact": {
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "ListRecords",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "entityName": "crl_customercontacts",
+              "$filter": "crl_email eq '@{replace(toLower(coalesce(triggerOutputs()?['body/crl_from'], '')), '''', '''''')}'",
+              "$top": 1
+            },
+            "authentication": "@parameters('$authentication')"
+          },
+          "runAfter": {
+            "Contacts": [
+              "Succeeded"
+            ]
+          }
+        },
+        "Accounts_in_scope": {
+          "type": "Query",
+          "inputs": {
+            "from": "@outputs('Accounts')?['body/value']",
+            "where": "@and(not(contains(split(toLower(parameters('Free-mail domains (crl_FreemailDomains)')), ','), last(split(toLower(coalesce(triggerOutputs()?['body/crl_from'], '')), '@')))), contains(split(toLower(coalesce(item()?['crl_domains'], '')), ','), last(split(toLower(coalesce(triggerOutputs()?['body/crl_from'], '')), '@'))))"
+          },
+          "runAfter": {
+            "Sender_as_contact": [
+              "Succeeded"
+            ]
+          }
+        },
+        "Scope_terms": {
+          "type": "Select",
+          "inputs": {
+            "from": "@body('Accounts_in_scope')",
+            "select": "@concat('_crl_account_value eq ', item()?['crl_customeraccountid'])"
+          },
+          "runAfter": {
+            "Accounts_in_scope": [
+              "Succeeded"
+            ]
+          }
+        },
+        "Scope_filter": {
+          "type": "Compose",
+          "inputs": "@if(empty(body('Scope_terms')), '_crl_account_value eq 00000000-0000-0000-0000-000000000000', join(body('Scope_terms'), ' or '))",
+          "runAfter": {
+            "Scope_terms": [
+              "Succeeded"
+            ]
+          }
+        },
+        "Look_up_references": {
+          "type": "If",
+          "expression": {
+            "and": [
+              {
+                "greater": [
+                  "@length(body('References'))",
+                  0
+                ]
+              },
+              {
+                "lessOrEquals": [
+                  "@length(body('References'))",
+                  "@parameters('Maximum references per email (R09) (crl_MaxReferences)')"
+                ]
+              }
+            ]
+          },
+          "actions": {
+            "For_each_reference": {
+              "type": "Foreach",
+              "foreach": "@body('References')",
+              "runtimeConfiguration": {
+                "concurrency": {
+                  "repetitions": 1
+                }
+              },
+              "actions": {
+                "Find_shipment": {
+                  "type": "OpenApiConnection",
+                  "inputs": {
+                    "host": {
+                      "connectionName": "shared_commondataserviceforapps",
+                      "operationId": "ListRecords",
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                    },
+                    "parameters": {
+                      "entityName": "crl_shipments",
+                      "$top": 1,
+                      "$filter": "@{if(equals(item()?['type'], 'shipment'), concat('crl_shipmentno eq ''', item()?['value'], ''''), if(equals(item()?['type'], 'cmr'), concat('crl_cmr eq ''', item()?['value'], ''''), concat('crl_customerref eq ''', item()?['value'], ''' and (', outputs('Scope_filter'), ')')))}"
+                    },
+                    "authentication": "@parameters('$authentication')"
+                  },
+                  "runAfter": {}
+                },
+                "Account_of_this_shipment": {
+                  "type": "Query",
+                  "inputs": {
+                    "from": "@outputs('Accounts')?['body/value']",
+                    "where": "@equals(item()?['crl_customeraccountid'], first(outputs('Find_shipment')?['body/value'])?['_crl_account_value'])"
+                  },
+                  "runAfter": {
+                    "Find_shipment": [
+                      "Succeeded"
+                    ]
+                  }
+                },
+                "Contact_of_this_account": {
+                  "type": "Query",
+                  "inputs": {
+                    "from": "@outputs('Contacts')?['body/value']",
+                    "where": "@and(equals(item()?['_crl_account_value'], first(outputs('Find_shipment')?['body/value'])?['_crl_account_value']), equals(toLower(item()?['crl_email']), toLower(coalesce(triggerOutputs()?['body/crl_from'], ''))))"
+                  },
+                  "runAfter": {
+                    "Account_of_this_shipment": [
+                      "Succeeded"
+                    ]
+                  }
+                },
+                "Level": {
+                  "type": "Compose",
+                  "inputs": "@if(not(equals(first(outputs('Find_shipment')?['body/value']), null)), if(not(equals(toLower(coalesce(triggerOutputs()?['body/crl_dmarc'], '')), 'pass')), 'none', if(greater(length(body('Contact_of_this_account')), 0), 'contact', if(and(not(contains(split(toLower(parameters('Free-mail domains (crl_FreemailDomains)')), ','), last(split(toLower(coalesce(triggerOutputs()?['body/crl_from'], '')), '@')))), contains(split(toLower(coalesce(first(body('Account_of_this_shipment'))?['crl_domains'], '')), ','), last(split(toLower(coalesce(triggerOutputs()?['body/crl_from'], '')), '@')))), 'domain', if(equals(toLower(coalesce(first(outputs('Find_shipment')?['body/value'])?['crl_consigneeemail'], '')), toLower(coalesce(triggerOutputs()?['body/crl_from'], ''))), 'consignee', 'none')))), 'none')",
+                  "runAfter": {
+                    "Contact_of_this_account": [
+                      "Succeeded"
+                    ]
+                  }
+                },
+                "Record_lookup": {
+                  "type": "AppendToArrayVariable",
+                  "inputs": {
+                    "name": "Lookups",
+                    "value": "@addProperty(addProperty(addProperty(json('{}'), 'ref', items('For_each_reference')?['value']), 'found', not(equals(first(outputs('Find_shipment')?['body/value']), null))), 'level', outputs('Level'))"
+                  },
+                  "runAfter": {
+                    "Level": [
+                      "Succeeded"
+                    ]
+                  }
+                },
+                "When_allowed": {
+                  "type": "If",
+                  "expression": {
+                    "and": [
+                      {
+                        "equals": [
+                          "@not(equals(first(outputs('Find_shipment')?['body/value']), null))",
+                          true
+                        ]
+                      },
+                      {
+                        "not": {
+                          "equals": [
+                            "@outputs('Level')",
+                            "none"
+                          ]
+                        }
+                      }
+                    ]
+                  },
+                  "actions": {
+                    "Shipment_record": {
+                      "type": "AppendToArrayVariable",
+                      "inputs": {
+                        "name": "Lookups",
+                        "value": "@addProperty(addProperty(json('{}'), 'shipment', addProperty(addProperty(addProperty(addProperty(addProperty(addProperty(addProperty(addProperty(addProperty(addProperty(json('{}'), 'id', first(outputs('Find_shipment')?['body/value'])?['crl_shipmentno']), 'status', json('{\"103450000\":\"BOOKED\",\"103450001\":\"PICKED_UP\",\"103450002\":\"IN_TRANSIT\",\"103450003\":\"OUT_FOR_DELIVERY\",\"103450004\":\"DELIVERED\",\"103450005\":\"EXCEPTION\"}')?[string(first(outputs('Find_shipment')?['body/value'])?['crl_status'])]), 'customerReference', first(outputs('Find_shipment')?['body/value'])?['crl_customerref']), 'pickupDate', first(outputs('Find_shipment')?['body/value'])?['crl_pickupdate']), 'lastEventAt', first(outputs('Find_shipment')?['body/value'])?['crl_lasteventat']), 'lastEventLocation', first(outputs('Find_shipment')?['body/value'])?['crl_lasteventlocation']), 'etaFrom', first(outputs('Find_shipment')?['body/value'])?['crl_etafrom']), 'etaTo', first(outputs('Find_shipment')?['body/value'])?['crl_etato']), 'deliveredAt', first(outputs('Find_shipment')?['body/value'])?['crl_deliveredat']), 'accountId', first(outputs('Find_shipment')?['body/value'])?['_crl_account_value'])), 'allowed', true)"
+                      },
+                      "runAfter": {}
+                    },
+                    "Shipment_rules": {
+                      "type": "Compose",
+                      "inputs": "@union(if(and(equals(coalesce(outputs('Agent_reading')?['intent'], 'unknown'), 'pod'), equals(json('{\"103450000\":\"BOOKED\",\"103450001\":\"PICKED_UP\",\"103450002\":\"IN_TRANSIT\",\"103450003\":\"OUT_FOR_DELIVERY\",\"103450004\":\"DELIVERED\",\"103450005\":\"EXCEPTION\"}')?[string(first(outputs('Find_shipment')?['body/value'])?['crl_status'])], 'DELIVERED'), not(equals(outputs('Level'), 'contact'))), createArray(addProperty(addProperty(addProperty(addProperty(json('{}'), 'id', 'R12'), 'effect', 'draft'), 'queue', null), 'detail', concat('POD asked by ', outputs('Level'), ' for ', first(outputs('Find_shipment')?['body/value'])?['crl_shipmentno']))), json('[]')), if(and(equals(coalesce(outputs('Agent_reading')?['intent'], 'unknown'), 'pod'), not(equals(json('{\"103450000\":\"BOOKED\",\"103450001\":\"PICKED_UP\",\"103450002\":\"IN_TRANSIT\",\"103450003\":\"OUT_FOR_DELIVERY\",\"103450004\":\"DELIVERED\",\"103450005\":\"EXCEPTION\"}')?[string(first(outputs('Find_shipment')?['body/value'])?['crl_status'])], 'DELIVERED')), not(equals(json('{\"103450000\":\"BOOKED\",\"103450001\":\"PICKED_UP\",\"103450002\":\"IN_TRANSIT\",\"103450003\":\"OUT_FOR_DELIVERY\",\"103450004\":\"DELIVERED\",\"103450005\":\"EXCEPTION\"}')?[string(first(outputs('Find_shipment')?['body/value'])?['crl_status'])], 'EXCEPTION'))), createArray(addProperty(addProperty(addProperty(addProperty(json('{}'), 'id', 'R17'), 'effect', 'auto'), 'queue', null), 'detail', concat(first(outputs('Find_shipment')?['body/value'])?['crl_shipmentno'], ' not delivered yet: status instead of POD'))), json('[]')), if(equals(json('{\"103450000\":\"BOOKED\",\"103450001\":\"PICKED_UP\",\"103450002\":\"IN_TRANSIT\",\"103450003\":\"OUT_FOR_DELIVERY\",\"103450004\":\"DELIVERED\",\"103450005\":\"EXCEPTION\"}')?[string(first(outputs('Find_shipment')?['body/value'])?['crl_status'])], 'EXCEPTION'), createArray(addProperty(addProperty(addProperty(addProperty(json('{}'), 'id', 'R13'), 'effect', 'route'), 'queue', 'customer-service'), 'detail', concat(first(outputs('Find_shipment')?['body/value'])?['crl_shipmentno'], ': ', coalesce(first(outputs('Find_shipment')?['body/value'])?['crl_exceptioncode'], '')))), json('[]')), if(if(or(not(contains(createArray('PICKED_UP', 'IN_TRANSIT', 'OUT_FOR_DELIVERY'), json('{\"103450000\":\"BOOKED\",\"103450001\":\"PICKED_UP\",\"103450002\":\"IN_TRANSIT\",\"103450003\":\"OUT_FOR_DELIVERY\",\"103450004\":\"DELIVERED\",\"103450005\":\"EXCEPTION\"}')?[string(first(outputs('Find_shipment')?['body/value'])?['crl_status'])])), equals(first(outputs('Find_shipment')?['body/value'])?['crl_lasteventat'], null)), false, greater(div(float(sub(ticks(if(empty(parameters('Test clock (empty = real time) (crl_ClockOverride)')), utcNow(), parameters('Test clock (empty = real time) (crl_ClockOverride)'))), ticks(first(outputs('Find_shipment')?['body/value'])?['crl_lasteventat']))), 36000000000.0), parameters('Stale status after hours (R14) (crl_StaleHours)'))), createArray(addProperty(addProperty(addProperty(addProperty(json('{}'), 'id', 'R14'), 'effect', 'draft'), 'queue', null), 'detail', concat(first(outputs('Find_shipment')?['body/value'])?['crl_shipmentno'], ': last event ', if(equals(first(outputs('Find_shipment')?['body/value'])?['crl_lasteventat'], null), '?', string(div(float(sub(ticks(if(empty(parameters('Test clock (empty = real time) (crl_ClockOverride)')), utcNow(), parameters('Test clock (empty = real time) (crl_ClockOverride)'))), ticks(first(outputs('Find_shipment')?['body/value'])?['crl_lasteventat']))), 36000000000.0))), ' h ago'))), json('[]')), if(if(or(equals(first(outputs('Find_shipment')?['body/value'])?['crl_etato'], null), equals(first(outputs('Find_shipment')?['body/value'])?['crl_promisedto'], null), equals(json('{\"103450000\":\"BOOKED\",\"103450001\":\"PICKED_UP\",\"103450002\":\"IN_TRANSIT\",\"103450003\":\"OUT_FOR_DELIVERY\",\"103450004\":\"DELIVERED\",\"103450005\":\"EXCEPTION\"}')?[string(first(outputs('Find_shipment')?['body/value'])?['crl_status'])], 'DELIVERED')), false, greater(ticks(first(outputs('Find_shipment')?['body/value'])?['crl_etato']), ticks(first(outputs('Find_shipment')?['body/value'])?['crl_promisedto']))), createArray(addProperty(addProperty(addProperty(addProperty(json('{}'), 'id', 'R15'), 'effect', 'draft'), 'queue', null), 'detail', concat(first(outputs('Find_shipment')?['body/value'])?['crl_shipmentno'], ': ETA ends after the promised slot'))), json('[]')))",
+                      "runAfter": {
+                        "Shipment_record": [
+                          "Succeeded"
+                        ]
+                      }
+                    },
+                    "For_each_shipment_finding": {
+                      "type": "Foreach",
+                      "foreach": "@outputs('Shipment_rules')",
+                      "actions": {
+                        "Add_shipment_finding": {
+                          "type": "AppendToArrayVariable",
+                          "inputs": {
+                            "name": "ShipmentFindings",
+                            "value": "@item()"
+                          },
+                          "runAfter": {}
+                        }
+                      },
+                      "runAfter": {
+                        "Shipment_rules": [
+                          "Succeeded"
+                        ]
+                      }
+                    }
+                  },
+                  "else": {
+                    "actions": {}
+                  },
+                  "runAfter": {
+                    "Record_lookup": [
+                      "Succeeded"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "else": {
+            "actions": {}
+          },
+          "runAfter": {
+            "Scope_filter": [
+              "Succeeded"
+            ]
+          }
+        },
+        "Found": {
+          "type": "Query",
+          "inputs": {
+            "from": "@variables('Lookups')",
+            "where": "@equals(item()?['found'], true)"
+          },
+          "runAfter": {
+            "Look_up_references": [
+              "Succeeded"
+            ]
+          }
+        },
+        "Allowed_lookups": {
+          "type": "Query",
+          "inputs": {
+            "from": "@variables('Lookups')",
+            "where": "@equals(item()?['allowed'], true)"
+          },
+          "runAfter": {
+            "Found": [
+              "Succeeded"
+            ]
+          }
+        },
+        "Allowed": {
+          "type": "Select",
+          "inputs": {
+            "from": "@body('Allowed_lookups')",
+            "select": "@item()?['shipment']"
+          },
+          "runAfter": {
+            "Allowed_lookups": [
+              "Succeeded"
+            ]
+          }
+        },
+        "Allowed_ids": {
+          "type": "Select",
+          "inputs": {
+            "from": "@body('Allowed')",
+            "select": "@item()?['id']"
+          },
+          "runAfter": {
+            "Allowed": [
+              "Succeeded"
+            ]
+          }
+        },
+        "Not_allowed": {
+          "type": "Query",
+          "inputs": {
+            "from": "@body('Found')",
+            "where": "@equals(item()?['level'], 'none')"
+          },
+          "runAfter": {
+            "Allowed_ids": [
+              "Succeeded"
+            ]
+          }
+        },
+        "Missing": {
+          "type": "Query",
+          "inputs": {
+            "from": "@variables('Lookups')",
+            "where": "@and(equals(item()?['found'], false), not(equals(item()?['ref'], null)))"
+          },
+          "runAfter": {
+            "Not_allowed": [
+              "Succeeded"
+            ]
+          }
+        },
+        "Sensitive_findings": {
+          "type": "Select",
+          "inputs": {
+            "from": "@coalesce(outputs('Agent_reading')?['sensitive'], json('[]'))",
+            "select": "@addProperty(addProperty(addProperty(addProperty(json('{}'), 'id', 'R03'), 'effect', 'route'), 'queue', if(or(equals(item(), 'damage'), equals(item(), 'dispute')), 'claims', 'team-lead')), 'detail', concat('sensitive: ', item()))"
+          },
+          "runAfter": {
+            "Missing": [
+              "Succeeded"
+            ]
+          }
+        },
+        "Findings": {
+          "type": "Compose",
+          "inputs": "@union(if(or(equals(outputs('Agent_reading')?['blocked'], true), greater(length(coalesce(outputs('Agent_reading')?['instructionSignals'], json('[]'))), 0)), createArray(addProperty(addProperty(addProperty(addProperty(json('{}'), 'id', 'R02'), 'effect', 'route'), 'queue', 'security'), 'detail', 'the email tries to instruct the system or redirect data')), json('[]')), if(and(not(equals(json('{\"slot_change\":\"planning\",\"invoice\":\"finance\",\"cancel\":\"customer-service\"}')?[coalesce(outputs('Agent_reading')?['intent'], 'unknown')], null)), greaterOrEquals(float(coalesce(outputs('Agent_reading')?['confidence'], 0)), parameters('Minimum intent confidence (R05) (crl_ConfidenceMin)'))), createArray(addProperty(addProperty(addProperty(addProperty(json('{}'), 'id', 'R04'), 'effect', 'route'), 'queue', json('{\"slot_change\":\"planning\",\"invoice\":\"finance\",\"cancel\":\"customer-service\"}')?[coalesce(outputs('Agent_reading')?['intent'], 'unknown')]), 'detail', concat('intent ', coalesce(outputs('Agent_reading')?['intent'], 'unknown')))), json('[]')), if(less(float(coalesce(outputs('Agent_reading')?['confidence'], 0)), parameters('Minimum intent confidence (R05) (crl_ConfidenceMin)')), createArray(addProperty(addProperty(addProperty(addProperty(json('{}'), 'id', 'R05'), 'effect', 'draft'), 'queue', null), 'detail', concat('intent ', coalesce(outputs('Agent_reading')?['intent'], 'unknown'), ', confidence ', string(float(coalesce(outputs('Agent_reading')?['confidence'], 0)))))), json('[]')), if(not(contains(createArray('nl', 'fr', 'en'), coalesce(outputs('Agent_reading')?['language'], 'unknown'))), createArray(addProperty(addProperty(addProperty(addProperty(json('{}'), 'id', 'R06'), 'effect', 'draft'), 'queue', null), 'detail', concat('language ', coalesce(outputs('Agent_reading')?['language'], 'unknown')))), json('[]')), if(and(equals(length(body('References')), 0), contains(createArray('wismo', 'pod'), coalesce(outputs('Agent_reading')?['intent'], 'unknown')), greaterOrEquals(float(coalesce(outputs('Agent_reading')?['confidence'], 0)), parameters('Minimum intent confidence (R05) (crl_ConfidenceMin)'))), createArray(addProperty(addProperty(addProperty(addProperty(json('{}'), 'id', 'R07'), 'effect', 'auto'), 'queue', null), 'detail', 'no usable reference')), json('[]')), if(greater(length(body('References')), parameters('Maximum references per email (R09) (crl_MaxReferences)')), createArray(addProperty(addProperty(addProperty(addProperty(json('{}'), 'id', 'R09'), 'effect', 'draft'), 'queue', null), 'detail', concat(string(length(body('References'))), ' references'))), json('[]')), if(and(and(greater(length(body('References')), 0), lessOrEquals(length(body('References')), parameters('Maximum references per email (R09) (crl_MaxReferences)'))), equals(outputs('Agent_reading')?['referencesFromQuoted'], true)), createArray(addProperty(addProperty(addProperty(addProperty(json('{}'), 'id', 'R08'), 'effect', 'draft'), 'queue', null), 'detail', 'reference only in the quoted thread')), json('[]')), if(and(and(greater(length(body('References')), 0), lessOrEquals(length(body('References')), parameters('Maximum references per email (R09) (crl_MaxReferences)'))), equals(length(body('Allowed')), 0), equals(length(body('Found')), 0), and(equals(toLower(coalesce(triggerOutputs()?['body/crl_dmarc'], '')), 'pass'), greater(length(outputs('Sender_as_contact')?['body/value']), 0))), createArray(addProperty(addProperty(addProperty(addProperty(json('{}'), 'id', 'R10'), 'effect', 'draft'), 'queue', null), 'detail', 'not found; sender is a registered contact')), json('[]')), if(and(and(greater(length(body('References')), 0), lessOrEquals(length(body('References')), parameters('Maximum references per email (R09) (crl_MaxReferences)'))), equals(length(body('Allowed')), 0), equals(length(body('Found')), 0), not(and(equals(toLower(coalesce(triggerOutputs()?['body/crl_dmarc'], '')), 'pass'), greater(length(outputs('Sender_as_contact')?['body/value']), 0)))), createArray(addProperty(addProperty(addProperty(addProperty(json('{}'), 'id', 'R10'), 'effect', 'auto'), 'queue', null), 'detail', 'not found; generic reply')), json('[]')), if(and(and(greater(length(body('References')), 0), lessOrEquals(length(body('References')), parameters('Maximum references per email (R09) (crl_MaxReferences)'))), equals(length(body('Allowed')), 0), greater(length(body('Found')), 0)), createArray(addProperty(addProperty(addProperty(addProperty(json('{}'), 'id', 'R11'), 'effect', 'auto'), 'queue', null), 'detail', 'sender not authorised')), json('[]')), if(and(and(greater(length(body('References')), 0), lessOrEquals(length(body('References')), parameters('Maximum references per email (R09) (crl_MaxReferences)'))), greater(length(body('Allowed')), 0), greater(length(body('Missing')), 0)), createArray(addProperty(addProperty(addProperty(addProperty(json('{}'), 'id', 'R10'), 'effect', 'draft'), 'queue', null), 'detail', concat(string(length(body('Missing'))), ' of ', string(length(body('References'))), ' references not found'))), json('[]')), if(and(and(greater(length(body('References')), 0), lessOrEquals(length(body('References')), parameters('Maximum references per email (R09) (crl_MaxReferences)'))), greater(length(body('Allowed')), 0), greater(length(body('Not_allowed')), 0)), createArray(addProperty(addProperty(addProperty(addProperty(json('{}'), 'id', 'R11'), 'effect', 'draft'), 'queue', null), 'detail', 'not authorised for one of the shipments')), json('[]')), if(greater(coalesce(triggerOutputs()?['body/crl_autorepliestoday'], 0), parameters('Automatic replies per sender per day (R16) (crl_MaxAutoRepliesPerDay)')), createArray(addProperty(addProperty(addProperty(addProperty(json('{}'), 'id', 'R16'), 'effect', 'draft'), 'queue', null), 'detail', concat(string(triggerOutputs()?['body/crl_autorepliestoday']), ' automatic replies already today'))), json('[]')), body('Sensitive_findings'), variables('ShipmentFindings'))",
+          "runAfter": {
+            "Sensitive_findings": [
+              "Succeeded"
+            ]
+          }
+        },
+        "Strongest": {
+          "type": "Compose",
+          "inputs": "@if(contains(string(outputs('Findings')), '\"effect\":\"ignore\"'), 'ignore', if(contains(string(outputs('Findings')), '\"effect\":\"route\"'), 'route', if(contains(string(outputs('Findings')), '\"effect\":\"draft\"'), 'draft', if(and(equals(length(outputs('Findings')), 0), equals(length(body('Allowed')), 0)), 'draft', 'auto'))))",
+          "runAfter": {
+            "Findings": [
+              "Succeeded"
+            ]
+          }
+        },
+        "Action": {
+          "type": "Compose",
+          "inputs": "@if(and(equals(outputs('Strongest'), 'auto'), equals(toLower(coalesce(first(first(outputs('Read_mode')?['body/value'])?['environmentvariabledefinition_environmentvariablevalue'])?['value'], first(outputs('Read_mode')?['body/value'])?['defaultvalue'], 'graduated')), 'draft-only')), 'draft', outputs('Strongest'))",
+          "runAfter": {
+            "Strongest": [
+              "Succeeded"
+            ]
+          }
+        },
+        "All_findings": {
+          "type": "Compose",
+          "inputs": "@if(and(equals(outputs('Strongest'), 'auto'), equals(toLower(coalesce(first(first(outputs('Read_mode')?['body/value'])?['environmentvariabledefinition_environmentvariablevalue'])?['value'], first(outputs('Read_mode')?['body/value'])?['defaultvalue'], 'graduated')), 'draft-only')), union(outputs('Findings'), createArray(addProperty(addProperty(addProperty(addProperty(json('{}'), 'id', 'R18'), 'effect', 'draft'), 'queue', null), 'detail', 'pilot runs in draft-only mode'))), outputs('Findings'))",
+          "runAfter": {
+            "Action": [
+              "Succeeded"
+            ]
+          }
+        },
+        "Rule_ids": {
+          "type": "Select",
+          "inputs": {
+            "from": "@outputs('All_findings')",
+            "select": "@item()?['id']"
+          },
+          "runAfter": {
+            "All_findings": [
+              "Succeeded"
+            ]
+          }
+        },
+        "Queue": {
+          "type": "Compose",
+          "inputs": "@if(equals(outputs('Action'), 'route'), if(contains(string(outputs('Findings')), '\"effect\":\"route\",\"queue\":\"security\"'), 'security', if(contains(string(outputs('Findings')), '\"effect\":\"route\",\"queue\":\"team-lead\"'), 'team-lead', if(contains(string(outputs('Findings')), '\"effect\":\"route\",\"queue\":\"claims\"'), 'claims', if(contains(string(outputs('Findings')), '\"effect\":\"route\",\"queue\":\"customer-service\"'), 'customer-service', if(contains(string(outputs('Findings')), '\"effect\":\"route\",\"queue\":\"planning\"'), 'planning', if(contains(string(outputs('Findings')), '\"effect\":\"route\",\"queue\":\"finance\"'), 'finance', null)))))), null)",
+          "runAfter": {
+            "Rule_ids": [
+              "Succeeded"
+            ]
+          }
+        },
+        "Template": {
+          "type": "Compose",
+          "inputs": "@if(contains(string(outputs('Findings')), '\"id\":\"R07\",\"effect\":\"auto\"'), 'clarify', if(or(contains(string(outputs('Findings')), '\"id\":\"R10\",\"effect\":\"auto\"'), contains(string(outputs('Findings')), '\"id\":\"R11\",\"effect\":\"auto\"')), 'generic', if(and(equals(coalesce(outputs('Agent_reading')?['intent'], 'unknown'), 'pod'), contains(string(body('Allowed')), '\"status\":\"DELIVERED\"')), 'pod', 'status')))",
+          "runAfter": {
+            "Queue": [
+              "Succeeded"
+            ]
+          }
+        },
+        "Templates_row": {
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "ListRecords",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "entityName": "crl_replytemplates",
+              "$filter": "crl_language eq '@{if(contains(createArray('nl', 'fr', 'en'), coalesce(outputs('Agent_reading')?['language'], 'unknown')), coalesce(outputs('Agent_reading')?['language'], 'unknown'), 'en')}'",
+              "$top": 1
+            },
+            "authentication": "@parameters('$authentication')"
+          },
+          "runAfter": {
+            "Template": [
+              "Succeeded"
+            ]
+          }
+        },
+        "Templates": {
+          "type": "Compose",
+          "inputs": "@json(first(outputs('Templates_row')?['body/value'])?['crl_templates'])",
+          "runAfter": {
+            "Templates_row": [
+              "Succeeded"
+            ]
+          }
+        },
+        "Status_lines": {
+          "type": "Select",
+          "inputs": {
+            "from": "@body('Allowed_lookups')",
+            "select": "@concat(concat(replace(replace(replace(replace(replace(replace(replace(if(empty(coalesce(item()?['shipment']?['customerReference'], '')), outputs('Templates')?['ref'], outputs('Templates')?['refCustomer']), '{id}', item()?['shipment']?['id']), '{customerReference}', coalesce(item()?['shipment']?['customerReference'], '')), '{pickupDay}', if(equals(item()?['shipment']?['pickupDate'], null), '', if(equals(outputs('Templates')?['locale'], 'nl-BE'), replace(formatDateTime(convertFromUtc(item()?['shipment']?['pickupDate'], 'Romance Standard Time'), 'ddd d MMM', 'nl-BE'), '.', ''), formatDateTime(convertFromUtc(item()?['shipment']?['pickupDate'], 'Romance Standard Time'), 'ddd d MMM', outputs('Templates')?['locale'])))), '{lastEventAt}', if(equals(item()?['shipment']?['lastEventAt'], null), '', concat(if(equals(outputs('Templates')?['locale'], 'nl-BE'), replace(formatDateTime(convertFromUtc(item()?['shipment']?['lastEventAt'], 'Romance Standard Time'), 'ddd d MMM', 'nl-BE'), '.', ''), formatDateTime(convertFromUtc(item()?['shipment']?['lastEventAt'], 'Romance Standard Time'), 'ddd d MMM', outputs('Templates')?['locale'])), ' ', outputs('Templates')?['at'], ' ', formatDateTime(convertFromUtc(item()?['shipment']?['lastEventAt'], 'Romance Standard Time'), 'HH:mm')))), '{lastEventLocation}', coalesce(item()?['shipment']?['lastEventLocation'], '')), '{eta}', if(equals(item()?['shipment']?['etaTo'], null), '', concat(if(equals(outputs('Templates')?['locale'], 'nl-BE'), replace(formatDateTime(convertFromUtc(item()?['shipment']?['etaFrom'], 'Romance Standard Time'), 'ddd d MMM', 'nl-BE'), '.', ''), formatDateTime(convertFromUtc(item()?['shipment']?['etaFrom'], 'Romance Standard Time'), 'ddd d MMM', outputs('Templates')?['locale'])), ' ', outputs('Templates')?['between'], ' ', formatDateTime(convertFromUtc(item()?['shipment']?['etaFrom'], 'Romance Standard Time'), 'HH:mm'), ' ', outputs('Templates')?['and'], ' ', if(equals(if(equals(outputs('Templates')?['locale'], 'nl-BE'), replace(formatDateTime(convertFromUtc(item()?['shipment']?['etaFrom'], 'Romance Standard Time'), 'ddd d MMM', 'nl-BE'), '.', ''), formatDateTime(convertFromUtc(item()?['shipment']?['etaFrom'], 'Romance Standard Time'), 'ddd d MMM', outputs('Templates')?['locale'])), if(equals(outputs('Templates')?['locale'], 'nl-BE'), replace(formatDateTime(convertFromUtc(item()?['shipment']?['etaTo'], 'Romance Standard Time'), 'ddd d MMM', 'nl-BE'), '.', ''), formatDateTime(convertFromUtc(item()?['shipment']?['etaTo'], 'Romance Standard Time'), 'ddd d MMM', outputs('Templates')?['locale']))), formatDateTime(convertFromUtc(item()?['shipment']?['etaTo'], 'Romance Standard Time'), 'HH:mm'), concat(if(equals(outputs('Templates')?['locale'], 'nl-BE'), replace(formatDateTime(convertFromUtc(item()?['shipment']?['etaTo'], 'Romance Standard Time'), 'ddd d MMM', 'nl-BE'), '.', ''), formatDateTime(convertFromUtc(item()?['shipment']?['etaTo'], 'Romance Standard Time'), 'ddd d MMM', outputs('Templates')?['locale'])), ' ', formatDateTime(convertFromUtc(item()?['shipment']?['etaTo'], 'Romance Standard Time'), 'HH:mm')))))), '{deliveredAt}', if(equals(item()?['shipment']?['deliveredAt'], null), '', concat(if(equals(outputs('Templates')?['locale'], 'nl-BE'), replace(formatDateTime(convertFromUtc(item()?['shipment']?['deliveredAt'], 'Romance Standard Time'), 'ddd d MMM', 'nl-BE'), '.', ''), formatDateTime(convertFromUtc(item()?['shipment']?['deliveredAt'], 'Romance Standard Time'), 'ddd d MMM', outputs('Templates')?['locale'])), ' ', outputs('Templates')?['at'], ' ', formatDateTime(convertFromUtc(item()?['shipment']?['deliveredAt'], 'Romance Standard Time'), 'HH:mm')))), ' ', replace(replace(replace(replace(replace(replace(replace(coalesce(outputs('Templates')?[item()?['shipment']?['status']], ''), '{id}', item()?['shipment']?['id']), '{customerReference}', coalesce(item()?['shipment']?['customerReference'], '')), '{pickupDay}', if(equals(item()?['shipment']?['pickupDate'], null), '', if(equals(outputs('Templates')?['locale'], 'nl-BE'), replace(formatDateTime(convertFromUtc(item()?['shipment']?['pickupDate'], 'Romance Standard Time'), 'ddd d MMM', 'nl-BE'), '.', ''), formatDateTime(convertFromUtc(item()?['shipment']?['pickupDate'], 'Romance Standard Time'), 'ddd d MMM', outputs('Templates')?['locale'])))), '{lastEventAt}', if(equals(item()?['shipment']?['lastEventAt'], null), '', concat(if(equals(outputs('Templates')?['locale'], 'nl-BE'), replace(formatDateTime(convertFromUtc(item()?['shipment']?['lastEventAt'], 'Romance Standard Time'), 'ddd d MMM', 'nl-BE'), '.', ''), formatDateTime(convertFromUtc(item()?['shipment']?['lastEventAt'], 'Romance Standard Time'), 'ddd d MMM', outputs('Templates')?['locale'])), ' ', outputs('Templates')?['at'], ' ', formatDateTime(convertFromUtc(item()?['shipment']?['lastEventAt'], 'Romance Standard Time'), 'HH:mm')))), '{lastEventLocation}', coalesce(item()?['shipment']?['lastEventLocation'], '')), '{eta}', if(equals(item()?['shipment']?['etaTo'], null), '', concat(if(equals(outputs('Templates')?['locale'], 'nl-BE'), replace(formatDateTime(convertFromUtc(item()?['shipment']?['etaFrom'], 'Romance Standard Time'), 'ddd d MMM', 'nl-BE'), '.', ''), formatDateTime(convertFromUtc(item()?['shipment']?['etaFrom'], 'Romance Standard Time'), 'ddd d MMM', outputs('Templates')?['locale'])), ' ', outputs('Templates')?['between'], ' ', formatDateTime(convertFromUtc(item()?['shipment']?['etaFrom'], 'Romance Standard Time'), 'HH:mm'), ' ', outputs('Templates')?['and'], ' ', if(equals(if(equals(outputs('Templates')?['locale'], 'nl-BE'), replace(formatDateTime(convertFromUtc(item()?['shipment']?['etaFrom'], 'Romance Standard Time'), 'ddd d MMM', 'nl-BE'), '.', ''), formatDateTime(convertFromUtc(item()?['shipment']?['etaFrom'], 'Romance Standard Time'), 'ddd d MMM', outputs('Templates')?['locale'])), if(equals(outputs('Templates')?['locale'], 'nl-BE'), replace(formatDateTime(convertFromUtc(item()?['shipment']?['etaTo'], 'Romance Standard Time'), 'ddd d MMM', 'nl-BE'), '.', ''), formatDateTime(convertFromUtc(item()?['shipment']?['etaTo'], 'Romance Standard Time'), 'ddd d MMM', outputs('Templates')?['locale']))), formatDateTime(convertFromUtc(item()?['shipment']?['etaTo'], 'Romance Standard Time'), 'HH:mm'), concat(if(equals(outputs('Templates')?['locale'], 'nl-BE'), replace(formatDateTime(convertFromUtc(item()?['shipment']?['etaTo'], 'Romance Standard Time'), 'ddd d MMM', 'nl-BE'), '.', ''), formatDateTime(convertFromUtc(item()?['shipment']?['etaTo'], 'Romance Standard Time'), 'ddd d MMM', outputs('Templates')?['locale'])), ' ', formatDateTime(convertFromUtc(item()?['shipment']?['etaTo'], 'Romance Standard Time'), 'HH:mm')))))), '{deliveredAt}', if(equals(item()?['shipment']?['deliveredAt'], null), '', concat(if(equals(outputs('Templates')?['locale'], 'nl-BE'), replace(formatDateTime(convertFromUtc(item()?['shipment']?['deliveredAt'], 'Romance Standard Time'), 'ddd d MMM', 'nl-BE'), '.', ''), formatDateTime(convertFromUtc(item()?['shipment']?['deliveredAt'], 'Romance Standard Time'), 'ddd d MMM', outputs('Templates')?['locale'])), ' ', outputs('Templates')?['at'], ' ', formatDateTime(convertFromUtc(item()?['shipment']?['deliveredAt'], 'Romance Standard Time'), 'HH:mm'))))), if(equals(outputs('Template'), 'pod'), concat(decodeUriComponent('%0A'), if(equals(item()?['shipment']?['status'], 'DELIVERED'), concat(outputs('Templates')?['podIntro'], decodeUriComponent('%0A'), 'https://portal.corlaan.example/pod/', item()?['shipment']?['id']), outputs('Templates')?['podNotYet'])), ''))"
+          },
+          "runAfter": {
+            "Templates": [
+              "Succeeded"
+            ]
+          }
+        },
+        "Reply_text": {
+          "type": "Compose",
+          "inputs": "@concat(outputs('Templates')?['hello'], decodeUriComponent('%0A'), decodeUriComponent('%0A'), if(equals(outputs('Template'), 'clarify'), outputs('Templates')?['clarify'], if(equals(outputs('Template'), 'generic'), outputs('Templates')?['generic'], join(body('Status_lines'), concat(decodeUriComponent('%0A'), decodeUriComponent('%0A'))))), decodeUriComponent('%0A'), decodeUriComponent('%0A'), outputs('Templates')?['bye'], decodeUriComponent('%0A'), decodeUriComponent('%0A'), '— ', outputs('Templates')?['footer'])",
+          "runAfter": {
+            "Status_lines": [
+              "Succeeded"
+            ]
+          }
+        },
+        "Save_decision": {
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "UpdateOnlyRecord",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "entityName": "crl_inboundemails",
+              "recordId": "@triggerOutputs()?['body/crl_inboundemailid']",
+              "item/crl_status": 103450002,
+              "item/crl_action": "@json('{\"auto\":103450000,\"draft\":103450001,\"route\":103450002,\"ignore\":103450003}')?[outputs('Action')]",
+              "item/crl_template": "@{if(contains(createArray('route', 'ignore'), outputs('Action')), null, outputs('Template'))}",
+              "item/crl_queue": "@{outputs('Queue')}",
+              "item/crl_rules": "@{join(sort(union(body('Rule_ids'), body('Rule_ids'))), ',')}",
+              "item/crl_findings": "@{string(outputs('All_findings'))}",
+              "item/crl_shipments": "@{join(body('Allowed_ids'), ',')}",
+              "item/crl_language": "@{coalesce(outputs('Agent_reading')?['language'], 'unknown')}",
+              "item/crl_intent": "@{coalesce(outputs('Agent_reading')?['intent'], 'unknown')}",
+              "item/crl_confidence": "@float(coalesce(outputs('Agent_reading')?['confidence'], 0))"
+            },
+            "authentication": "@parameters('$authentication')"
+          },
+          "runAfter": {
+            "Reply_text": [
+              "Succeeded"
+            ]
+          }
+        },
+        "Reply_needed": {
+          "type": "If",
+          "expression": {
+            "and": [
+              {
+                "or": [
+                  {
+                    "equals": [
+                      "@outputs('Action')",
+                      "auto"
+                    ]
+                  },
+                  {
+                    "equals": [
+                      "@outputs('Action')",
+                      "draft"
+                    ]
+                  }
+                ]
+              },
+              {
+                "equals": [
+                  "@or(contains(createArray('clarify', 'generic'), outputs('Template')), greater(length(body('Allowed')), 0))",
+                  true
+                ]
+              }
+            ]
+          },
+          "actions": {
+            "Create_reply": {
+              "type": "OpenApiConnection",
+              "inputs": {
+                "host": {
+                  "connectionName": "shared_commondataserviceforapps",
+                  "operationId": "CreateRecord",
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                },
+                "parameters": {
+                  "entityName": "crl_replies",
+                  "item/crl_Inboundemail@odata.bind": "@{concat('/crl_inboundemails(', triggerOutputs()?['body/crl_inboundemailid'], ')')}",
+                  "item/crl_to": "@{toLower(coalesce(triggerOutputs()?['body/crl_from'], ''))}",
+                  "item/crl_subject": "@{concat('RE: ', coalesce(triggerOutputs()?['body/crl_subject'], ''))}",
+                  "item/crl_text": "@{outputs('Reply_text')}",
+                  "item/crl_language": "@{if(contains(createArray('nl', 'fr', 'en'), coalesce(outputs('Agent_reading')?['language'], 'unknown')), coalesce(outputs('Agent_reading')?['language'], 'unknown'), 'en')}",
+                  "item/crl_status": "@if(equals(outputs('Action'), 'auto'), 103450000, 103450001)",
+                  "item/crl_heldby": "@{if(equals(outputs('Action'), 'draft'), join(sort(union(body('Rule_ids'), body('Rule_ids'))), ','), '')}"
+                },
+                "authentication": "@parameters('$authentication')"
+              },
+              "runAfter": {}
+            }
+          },
+          "else": {
+            "actions": {}
+          },
+          "runAfter": {
+            "Save_decision": [
+              "Succeeded"
+            ]
+          }
+        },
+        "Decision_failed": {
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "UpdateOnlyRecord",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "entityName": "crl_inboundemails",
+              "recordId": "@triggerOutputs()?['body/crl_inboundemailid']",
+              "item/crl_status": 103450009,
+              "item/crl_error": "The decision flow failed; see the run history. Nothing was sent."
+            },
+            "authentication": "@parameters('$authentication')"
+          },
+          "runAfter": {
+            "Save_decision": [
+              "Failed",
+              "Skipped",
+              "TimedOut"
+            ]
+          }
+        }
+      }
+    },
+    "templateName": null
+  },
+  "schemaVersion": "1.0.0.0"
+}

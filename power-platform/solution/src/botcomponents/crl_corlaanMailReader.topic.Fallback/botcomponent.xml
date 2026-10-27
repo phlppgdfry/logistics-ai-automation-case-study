@@ -1,0 +1,11 @@
+<botcomponent schemaname="crl_corlaanMailReader.topic.Fallback">
+  <componenttype>9</componenttype>
+  <description>This system topic triggers when the agent cannot read the message. It returns a safe reading (unknown, confidence 0), which the flow turns into a draft for a colleague (rule R05).</description>
+  <iscustomizable>0</iscustomizable>
+  <name>Fallback</name>
+  <parentbotid>
+    <schemaname>crl_corlaanMailReader</schemaname>
+  </parentbotid>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</botcomponent>

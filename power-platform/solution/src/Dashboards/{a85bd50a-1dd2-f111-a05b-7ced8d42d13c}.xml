@@ -1,0 +1,198 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dashboard xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <LocalizedNames>
+    <LocalizedName description="Corlaan — Customer email" languagecode="1033" />
+  </LocalizedNames>
+  <Descriptions>
+    <Description description="Customer email KPIs (fictional data): decisions, routed queues, draft reviews, intents, languages and processing status." languagecode="1033" />
+  </Descriptions>
+  <FormId>{a85bd50a-1dd2-f111-a05b-7ced8d42d13c}</FormId>
+  <IsCustomizable>1</IsCustomizable>
+  <IsDefault>0</IsDefault>
+  <FormXml>
+    <forms type="dashboard">
+      <form>
+        <tabs>
+          <tab name="overview" verticallayout="true" id="{e9026465-52e5-48c2-bca4-11a8a03442a4}">
+            <labels>
+              <label description="Overview" languagecode="1033" />
+            </labels>
+            <columns>
+              <column width="100%">
+                <sections>
+                  <section name="kpi" showlabel="false" showbar="false" columns="111" id="{c1c8cbd6-c1c1-443e-a85b-14270bf1c9f0}">
+                    <labels>
+                      <label description="KPIs" languagecode="1033" />
+                    </labels>
+                    <rows>
+                      <row>
+                        <cell id="{cb0079a2-b415-4497-a43d-269c8633d77d}" showlabel="false" rowspan="12" colspan="1" auto="false">
+                          <labels>
+                            <label description="KPI 1 · Emails per decision" languagecode="1033" />
+                          </labels>
+                          <control id="chart_965bd50a" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}">
+                            <parameters>
+                              <ViewId>{9ec20b33-c789-4f5c-a569-b49ad2553def}</ViewId>
+                              <IsUserView>false</IsUserView>
+                              <RelationshipName />
+                              <TargetEntityType>crl_inboundemail</TargetEntityType>
+                              <AutoExpand>Fixed</AutoExpand>
+                              <EnableQuickFind>false</EnableQuickFind>
+                              <EnableViewPicker>false</EnableViewPicker>
+                              <EnableJumpBar>false</EnableJumpBar>
+                              <ChartGridMode>Chart</ChartGridMode>
+                              <VisualizationId>{965bd50a-1dd2-f111-a05b-7ced8d42d13c}</VisualizationId>
+                              <IsUserChart>false</IsUserChart>
+                              <EnableChartPicker>false</EnableChartPicker>
+                              <RecordsPerPage>10</RecordsPerPage>
+                            </parameters>
+                          </control>
+                        </cell>
+                        <cell id="{f9151379-b4f0-4101-b774-1b3d32f8c30a}" showlabel="false" rowspan="12" colspan="1" auto="false">
+                          <labels>
+                            <label description="KPI 2 · Routed emails per queue" languagecode="1033" />
+                          </labels>
+                          <control id="chart_995bd50a" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}">
+                            <parameters>
+                              <ViewId>{9ec20b33-c789-4f5c-a569-b49ad2553def}</ViewId>
+                              <IsUserView>false</IsUserView>
+                              <RelationshipName />
+                              <TargetEntityType>crl_inboundemail</TargetEntityType>
+                              <AutoExpand>Fixed</AutoExpand>
+                              <EnableQuickFind>false</EnableQuickFind>
+                              <EnableViewPicker>false</EnableViewPicker>
+                              <EnableJumpBar>false</EnableJumpBar>
+                              <ChartGridMode>Chart</ChartGridMode>
+                              <VisualizationId>{995bd50a-1dd2-f111-a05b-7ced8d42d13c}</VisualizationId>
+                              <IsUserChart>false</IsUserChart>
+                              <EnableChartPicker>false</EnableChartPicker>
+                              <RecordsPerPage>10</RecordsPerPage>
+                            </parameters>
+                          </control>
+                        </cell>
+                        <cell id="{07808075-c2d8-42a5-8d1a-939a193e8cb1}" showlabel="false" rowspan="12" colspan="1" auto="false">
+                          <labels>
+                            <label description="KPI 3 · Replies per status" languagecode="1033" />
+                          </labels>
+                          <control id="chart_9c5bd50a" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}">
+                            <parameters>
+                              <ViewId>{ca49771d-10ac-4a98-b3b7-6209eacfc076}</ViewId>
+                              <IsUserView>false</IsUserView>
+                              <RelationshipName />
+                              <TargetEntityType>crl_reply</TargetEntityType>
+                              <AutoExpand>Fixed</AutoExpand>
+                              <EnableQuickFind>false</EnableQuickFind>
+                              <EnableViewPicker>false</EnableViewPicker>
+                              <EnableJumpBar>false</EnableJumpBar>
+                              <ChartGridMode>Chart</ChartGridMode>
+                              <VisualizationId>{9c5bd50a-1dd2-f111-a05b-7ced8d42d13c}</VisualizationId>
+                              <IsUserChart>false</IsUserChart>
+                              <EnableChartPicker>false</EnableChartPicker>
+                              <RecordsPerPage>10</RecordsPerPage>
+                            </parameters>
+                          </control>
+                        </cell>
+                      </row>
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row>
+                        <cell id="{03e899af-a623-4f67-b46b-8f566449d952}" showlabel="false" rowspan="12" colspan="1" auto="false">
+                          <labels>
+                            <label description="KPI 4 · Emails per intent" languagecode="1033" />
+                          </labels>
+                          <control id="chart_9f5bd50a" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}">
+                            <parameters>
+                              <ViewId>{9ec20b33-c789-4f5c-a569-b49ad2553def}</ViewId>
+                              <IsUserView>false</IsUserView>
+                              <RelationshipName />
+                              <TargetEntityType>crl_inboundemail</TargetEntityType>
+                              <AutoExpand>Fixed</AutoExpand>
+                              <EnableQuickFind>false</EnableQuickFind>
+                              <EnableViewPicker>false</EnableViewPicker>
+                              <EnableJumpBar>false</EnableJumpBar>
+                              <ChartGridMode>Chart</ChartGridMode>
+                              <VisualizationId>{9f5bd50a-1dd2-f111-a05b-7ced8d42d13c}</VisualizationId>
+                              <IsUserChart>false</IsUserChart>
+                              <EnableChartPicker>false</EnableChartPicker>
+                              <RecordsPerPage>10</RecordsPerPage>
+                            </parameters>
+                          </control>
+                        </cell>
+                        <cell id="{ab9f1e2d-c5df-406c-bf66-24c7c5805181}" showlabel="false" rowspan="12" colspan="1" auto="false">
+                          <labels>
+                            <label description="KPI 5 · Emails per language" languagecode="1033" />
+                          </labels>
+                          <control id="chart_a25bd50a" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}">
+                            <parameters>
+                              <ViewId>{9ec20b33-c789-4f5c-a569-b49ad2553def}</ViewId>
+                              <IsUserView>false</IsUserView>
+                              <RelationshipName />
+                              <TargetEntityType>crl_inboundemail</TargetEntityType>
+                              <AutoExpand>Fixed</AutoExpand>
+                              <EnableQuickFind>false</EnableQuickFind>
+                              <EnableViewPicker>false</EnableViewPicker>
+                              <EnableJumpBar>false</EnableJumpBar>
+                              <ChartGridMode>Chart</ChartGridMode>
+                              <VisualizationId>{a25bd50a-1dd2-f111-a05b-7ced8d42d13c}</VisualizationId>
+                              <IsUserChart>false</IsUserChart>
+                              <EnableChartPicker>false</EnableChartPicker>
+                              <RecordsPerPage>10</RecordsPerPage>
+                            </parameters>
+                          </control>
+                        </cell>
+                        <cell id="{6d7e890e-8ee3-4a0d-b419-6341ee515fa3}" showlabel="false" rowspan="12" colspan="1" auto="false">
+                          <labels>
+                            <label description="KPI 6 · Emails per processing status" languagecode="1033" />
+                          </labels>
+                          <control id="chart_a55bd50a" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}">
+                            <parameters>
+                              <ViewId>{9ec20b33-c789-4f5c-a569-b49ad2553def}</ViewId>
+                              <IsUserView>false</IsUserView>
+                              <RelationshipName />
+                              <TargetEntityType>crl_inboundemail</TargetEntityType>
+                              <AutoExpand>Fixed</AutoExpand>
+                              <EnableQuickFind>false</EnableQuickFind>
+                              <EnableViewPicker>false</EnableViewPicker>
+                              <EnableJumpBar>false</EnableJumpBar>
+                              <ChartGridMode>Chart</ChartGridMode>
+                              <VisualizationId>{a55bd50a-1dd2-f111-a05b-7ced8d42d13c}</VisualizationId>
+                              <IsUserChart>false</IsUserChart>
+                              <EnableChartPicker>false</EnableChartPicker>
+                              <RecordsPerPage>10</RecordsPerPage>
+                            </parameters>
+                          </control>
+                        </cell>
+                      </row>
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                    </rows>
+                  </section>
+                </sections>
+              </column>
+            </columns>
+          </tab>
+        </tabs>
+      </form>
+    </forms>
+  </FormXml>
+  <IntroducedVersion>1.0.0.0</IntroducedVersion>
+  <IsTabletEnabled>0</IsTabletEnabled>
+</Dashboard>

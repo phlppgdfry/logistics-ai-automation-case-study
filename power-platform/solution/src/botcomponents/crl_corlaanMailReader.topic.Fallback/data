@@ -1,0 +1,8 @@
+kind: AdaptiveDialog
+beginDialog:
+  kind: OnUnknownIntent
+  id: main
+  actions:
+    - kind: SendActivity
+      id: sendMessage_QZreqo
+      activity: '{Char(123)}"language": "unknown", "intent": "unknown", "confidence": 0, "references": [], "referencesFromQuoted": false, "sensitive": [], "instructionSignals": []{Char(125)}'

@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <systemform>
+    <formid>{de6739ae-a109-4493-87ea-8dee04444cef}</formid>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <FormPresentation>1</FormPresentation>
+    <FormActivationState>1</FormActivationState>
+    <form>
+      <tabs>
+        <tab verticallayout="true" id="{317d3d1f-6461-4dc5-8cea-da3894b1a570}" IsUserDefined="1">
+          <labels>
+            <label description="Customer account" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="50%">
+              <sections>
+                <section showlabel="true" showbar="false" IsUserDefined="0" id="{5334457f-725f-4293-b73b-497c75450736}">
+                  <labels>
+                    <label description="General" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{60181a3f-45b1-4c0e-9569-794e4251b67a}">
+                        <labels>
+                          <label description="Name" languagecode="1033" />
+                        </labels>
+                        <control id="crl_name" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="crl_name" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{15e635af-8edb-4a77-afcb-71ec0f358e3f}">
+                        <labels>
+                          <label description="Account code" languagecode="1033" />
+                        </labels>
+                        <control id="crl_code" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="crl_code" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+            <column width="50%">
+              <sections>
+                <section showlabel="true" showbar="false" IsUserDefined="0" id="{94411b78-8b0e-4e28-b411-eaae8c8659b1}">
+                  <labels>
+                    <label description="Details" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{124d0fb1-dafc-45cd-b4c2-fb402caeb58a}">
+                        <labels>
+                          <label description="Email domains" languagecode="1033" />
+                        </labels>
+                        <control id="crl_domains" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="crl_domains" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+      </tabs>
+    </form>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <LocalizedNames>
+      <LocalizedName description="Customer account" languagecode="1033" />
+    </LocalizedNames>
+    <Descriptions>
+      <Description description="A form for this entity." languagecode="1033" />
+    </Descriptions>
+  </systemform>
+</forms>

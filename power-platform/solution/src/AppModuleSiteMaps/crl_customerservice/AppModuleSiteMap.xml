@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AppModuleSiteMap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <SiteMapUniqueName>crl_customerservice</SiteMapUniqueName>
+  <EnableCollapsibleGroups>False</EnableCollapsibleGroups>
+  <ShowHome>True</ShowHome>
+  <ShowPinned>True</ShowPinned>
+  <ShowRecents>True</ShowRecents>
+  <SiteMap IntroducedVersion="7.0.0.0">
+    <Area Id="crl_area_overview" ShowGroups="true">
+      <Titles>
+        <Title LCID="1033" Title="Overview" />
+      </Titles>
+      <Group Id="crl_area_overview_g0" IsProfile="false">
+        <Titles>
+          <Title LCID="1033" Title="KPIs" />
+        </Titles>
+        <SubArea Id="crl_dashboard" Url="/main.aspx?pagetype=dashboard&amp;id=a85bd50a-1dd2-f111-a05b-7ced8d42d13c&amp;type=system" DefaultDashboard="a85bd50a-1dd2-f111-a05b-7ced8d42d13c">
+          <Titles>
+            <Title LCID="1033" Title="KPI dashboard" />
+          </Titles>
+        </SubArea>
+      </Group>
+    </Area>
+    <Area Id="crl_area_mail" ShowGroups="true">
+      <Titles>
+        <Title LCID="1033" Title="Customer email" />
+      </Titles>
+      <Group Id="crl_area_mail_g0" IsProfile="false">
+        <Titles>
+          <Title LCID="1033" Title="Mailbox" />
+        </Titles>
+        <SubArea Id="crl_area_mail_crl_inboundemail" Entity="crl_inboundemail">
+          <Titles>
+            <Title LCID="1033" Title="Inbound emails" />
+          </Titles>
+        </SubArea>
+        <SubArea Id="crl_area_mail_crl_reply" Entity="crl_reply">
+          <Titles>
+            <Title LCID="1033" Title="Replies" />
+          </Titles>
+        </SubArea>
+      </Group>
+    </Area>
+    <Area Id="crl_area_tms" ShowGroups="true">
+      <Titles>
+        <Title LCID="1033" Title="TMS sandbox" />
+      </Titles>
+      <Group Id="crl_area_tms_g0" IsProfile="false">
+        <Titles>
+          <Title LCID="1033" Title="Master data" />
+        </Titles>
+        <SubArea Id="crl_area_tms_crl_shipment" Entity="crl_shipment">
+          <Titles>
+            <Title LCID="1033" Title="Shipments (TMS sandbox)" />
+          </Titles>
+        </SubArea>
+        <SubArea Id="crl_area_tms_crl_customeraccount" Entity="crl_customeraccount">
+          <Titles>
+            <Title LCID="1033" Title="Customer accounts" />
+          </Titles>
+        </SubArea>
+        <SubArea Id="crl_area_tms_crl_customercontact" Entity="crl_customercontact">
+          <Titles>
+            <Title LCID="1033" Title="Customer contacts" />
+          </Titles>
+        </SubArea>
+      </Group>
+    </Area>
+    <Area Id="crl_area_settings" ShowGroups="true">
+      <Titles>
+        <Title LCID="1033" Title="Settings" />
+      </Titles>
+      <Group Id="crl_area_settings_g0" IsProfile="false">
+        <Titles>
+          <Title LCID="1033" Title="Replies" />
+        </Titles>
+        <SubArea Id="crl_area_settings_crl_replytemplate" Entity="crl_replytemplate">
+          <Titles>
+            <Title LCID="1033" Title="Reply template sets" />
+          </Titles>
+        </SubArea>
+      </Group>
+    </Area>
+  </SiteMap>
+  <LocalizedNames>
+    <LocalizedName description="Corlaan Customer Service" languagecode="1033" />
+  </LocalizedNames>
+</AppModuleSiteMap>

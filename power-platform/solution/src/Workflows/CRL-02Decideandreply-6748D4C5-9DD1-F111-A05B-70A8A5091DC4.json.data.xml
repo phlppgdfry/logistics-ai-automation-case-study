@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Workflow WorkflowId="{6748d4c5-9dd1-f111-a05b-70a8a5091dc4}" Name="CRL-02 Decide and reply" Description="TMS look-ups in the sandbox tables, authorisation per shipment, policy rules R02–R18 and a reply from approved templates. Mirrors runGuarded() in src/pipeline.mjs." xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <JsonFileName>/Workflows/CRL-02Decideandreply-6748D4C5-9DD1-F111-A05B-70A8A5091DC4.json</JsonFileName>
+  <Type>1</Type>
+  <Subprocess>0</Subprocess>
+  <Category>5</Category>
+  <Mode>0</Mode>
+  <Scope>4</Scope>
+  <OnDemand>0</OnDemand>
+  <TriggerOnCreate>0</TriggerOnCreate>
+  <TriggerOnDelete>0</TriggerOnDelete>
+  <AsyncAutodelete>0</AsyncAutodelete>
+  <SyncWorkflowLogOnFailure>0</SyncWorkflowLogOnFailure>
+  <StateCode>1</StateCode>
+  <StatusCode>2</StatusCode>
+  <RunAs>1</RunAs>
+  <IsTransacted>1</IsTransacted>
+  <IntroducedVersion>1.0.0.0</IntroducedVersion>
+  <IsCustomizable>1</IsCustomizable>
+  <BusinessProcessType>0</BusinessProcessType>
+  <IsCustomProcessingStepAllowedForOtherPublishers>1</IsCustomProcessingStepAllowedForOtherPublishers>
+  <ModernFlowType>0</ModernFlowType>
+  <PrimaryEntity>none</PrimaryEntity>
+  <LocalizedNames>
+    <LocalizedName languagecode="1033" description="CRL-02 Decide and reply" />
+  </LocalizedNames>
+  <Descriptions>
+    <Description languagecode="1033" description="TMS look-ups in the sandbox tables, authorisation per shipment, policy rules R02–R18 and a reply from approved templates. Mirrors runGuarded() in src/pipeline.mjs." />
+  </Descriptions>
+</Workflow>

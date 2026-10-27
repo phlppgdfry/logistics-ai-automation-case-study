@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>1</isdefault>
+    <savedqueryid>{ae3d19f5-c7ac-4edf-9210-c2a6a0b9f80b}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="crl_shipmentno" select="1" icon="1" preview="1">
+        <row name="result" id="crl_shipmentid">
+          <cell name="crl_shipmentno" width="140" />
+          <cell name="crl_accountcode" width="130" />
+          <cell name="crl_customerref" width="130" />
+          <cell name="crl_cmr" width="130" />
+          <cell name="crl_status" width="130" />
+          <cell name="crl_carrier" width="130" />
+          <cell name="crl_lasteventat" width="130" />
+          <cell name="crl_etato" width="130" />
+          <cell name="crl_promisedto" width="130" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="crl_shipment">
+          <attribute name="crl_shipmentno" />
+          <attribute name="crl_accountcode" />
+          <attribute name="crl_customerref" />
+          <attribute name="crl_cmr" />
+          <attribute name="crl_status" />
+          <attribute name="crl_carrier" />
+          <attribute name="crl_lasteventat" />
+          <attribute name="crl_etato" />
+          <attribute name="crl_promisedto" />
+          <attribute name="crl_shipmentid" />
+          <order attribute="createdon" descending="true" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="0" />
+          </filter>
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Active Shipments (TMS sandbox)" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

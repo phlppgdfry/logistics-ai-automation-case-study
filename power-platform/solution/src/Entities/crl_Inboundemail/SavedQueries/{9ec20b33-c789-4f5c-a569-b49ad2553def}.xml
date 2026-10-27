@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>1</isdefault>
+    <savedqueryid>{9ec20b33-c789-4f5c-a569-b49ad2553def}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="crl_name" select="1" icon="1" preview="1">
+        <row name="result" id="crl_inboundemailid">
+          <cell name="crl_name" width="140" />
+          <cell name="crl_testcase" width="130" />
+          <cell name="crl_from" width="130" />
+          <cell name="crl_subject" width="130" />
+          <cell name="crl_status" width="130" />
+          <cell name="crl_action" width="130" />
+          <cell name="crl_template" width="130" />
+          <cell name="crl_queue" width="130" />
+          <cell name="crl_rules" width="130" />
+          <cell name="crl_shipments" width="130" />
+          <cell name="crl_batch" width="130" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="crl_inboundemail">
+          <attribute name="crl_name" />
+          <attribute name="crl_testcase" />
+          <attribute name="crl_from" />
+          <attribute name="crl_subject" />
+          <attribute name="crl_status" />
+          <attribute name="crl_action" />
+          <attribute name="crl_template" />
+          <attribute name="crl_queue" />
+          <attribute name="crl_rules" />
+          <attribute name="crl_shipments" />
+          <attribute name="crl_batch" />
+          <attribute name="crl_inboundemailid" />
+          <order attribute="createdon" descending="true" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="0" />
+          </filter>
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0.0.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Active Inbound emails" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

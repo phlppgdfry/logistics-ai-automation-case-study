@@ -1,0 +1,14 @@
+<environmentvariabledefinition schemaname="crl_Mode">
+  <defaultvalue>graduated</defaultvalue>
+  <description default="Corlaan portfolio case: threshold or setting, changeable without a release. See docs/02-design/policy-rules.md.">
+    <label description="Corlaan portfolio case: threshold or setting, changeable without a release. See docs/02-design/policy-rules.md." languagecode="1033" />
+  </description>
+  <displayname default="Automation mode: graduated, draft-only or off (kill switch)">
+    <label description="Automation mode: graduated, draft-only or off (kill switch)" languagecode="1033" />
+  </displayname>
+  <introducedversion>1.0.0.0</introducedversion>
+  <iscustomizable>1</iscustomizable>
+  <isrequired>0</isrequired>
+  <secretstore>0</secretstore>
+  <type>100000000</type>
+</environmentvariabledefinition>

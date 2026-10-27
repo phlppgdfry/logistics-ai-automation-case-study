@@ -1,0 +1,307 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <systemform>
+    <formid>{ebeada37-8817-4663-a179-874cb341aecf}</formid>
+    <IntroducedVersion>1.0.0.0</IntroducedVersion>
+    <FormPresentation>1</FormPresentation>
+    <FormActivationState>1</FormActivationState>
+    <form>
+      <tabs>
+        <tab verticallayout="true" id="{b3a00d0e-82eb-4156-92a9-d67f3202f1c2}" IsUserDefined="1">
+          <labels>
+            <label description="Inbound email" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="33%">
+              <sections>
+                <section showlabel="true" showbar="false" IsUserDefined="0" id="{db3b388b-7882-441c-b1ba-1902117a22ba}">
+                  <labels>
+                    <label description="Decision" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{19b520ed-ac47-424a-9ad0-243e7792d244}">
+                        <labels>
+                          <label description="Status" languagecode="1033" />
+                        </labels>
+                        <control id="crl_status" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="crl_status" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{1c385f9c-ee8d-4245-a872-0794708f63f6}">
+                        <labels>
+                          <label description="Decision" languagecode="1033" />
+                        </labels>
+                        <control id="crl_action" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="crl_action" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{97e6dc58-dffd-48da-aabf-a338fa444876}">
+                        <labels>
+                          <label description="Template" languagecode="1033" />
+                        </labels>
+                        <control id="crl_template" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="crl_template" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{8819f952-52ac-443a-ad08-f634770a3b78}">
+                        <labels>
+                          <label description="Queue" languagecode="1033" />
+                        </labels>
+                        <control id="crl_queue" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="crl_queue" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{f437da9d-3e12-4273-8392-8959d77730ea}">
+                        <labels>
+                          <label description="Rules fired" languagecode="1033" />
+                        </labels>
+                        <control id="crl_rules" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="crl_rules" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{87682f84-9795-4a91-bb00-9dc9132640d0}">
+                        <labels>
+                          <label description="Shipments answered" languagecode="1033" />
+                        </labels>
+                        <control id="crl_shipments" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="crl_shipments" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{75e849ab-354a-4f2a-bf5b-95329a1c6962}">
+                        <labels>
+                          <label description="Error" languagecode="1033" />
+                        </labels>
+                        <control id="crl_error" classid="{E0DECE4B-6FC8-4a8f-A065-082708572369}" datafieldname="crl_error" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+            <column width="33%">
+              <sections>
+                <section showlabel="true" showbar="false" IsUserDefined="0" id="{40f767f5-2e82-4b1e-8d7a-72c286b598ce}">
+                  <labels>
+                    <label description="Email" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{6a4c27d0-0ad4-4ef2-9ea8-5f56f229782d}">
+                        <labels>
+                          <label description="Mail ID" languagecode="1033" />
+                        </labels>
+                        <control id="crl_name" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="crl_name" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{9d357256-32d7-4d84-bb8c-d84d3a328427}">
+                        <labels>
+                          <label description="Test case" languagecode="1033" />
+                        </labels>
+                        <control id="crl_testcase" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="crl_testcase" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{44521da1-02dc-4403-81aa-b8d2d2d1bf5b}">
+                        <labels>
+                          <label description="Test batch" languagecode="1033" />
+                        </labels>
+                        <control id="crl_batch" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="crl_batch" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{3d7928e1-46ab-4d85-8d57-5ff827643000}">
+                        <labels>
+                          <label description="From" languagecode="1033" />
+                        </labels>
+                        <control id="crl_from" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="crl_from" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{b453484b-9b71-429b-a099-d6c9d141bc92}">
+                        <labels>
+                          <label description="Subject" languagecode="1033" />
+                        </labels>
+                        <control id="crl_subject" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="crl_subject" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{5d495ce0-f12c-4698-8743-bc42ed69ef0f}">
+                        <labels>
+                          <label description="DMARC result" languagecode="1033" />
+                        </labels>
+                        <control id="crl_dmarc" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="crl_dmarc" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{dfce6b21-23db-4f95-adda-fc2b3508130c}">
+                        <labels>
+                          <label description="Received on" languagecode="1033" />
+                        </labels>
+                        <control id="crl_receivedon" classid="{5B773807-9FB2-42db-97C3-7A91EFF8ADFF}" datafieldname="crl_receivedon" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{975a53d1-6ae9-4bcb-b9c9-3cb9fc79dbf0}">
+                        <labels>
+                          <label description="Automatic replies to sender today" languagecode="1033" />
+                        </labels>
+                        <control id="crl_autorepliestoday" classid="{C6D124CA-7EDA-4a60-AEA9-7FB8D318B68F}" datafieldname="crl_autorepliestoday" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{09fc39e0-0277-427e-9d71-39a9072e6253}">
+                        <labels>
+                          <label description="Fresh text" languagecode="1033" />
+                        </labels>
+                        <control id="crl_freshtext" classid="{E0DECE4B-6FC8-4a8f-A065-082708572369}" datafieldname="crl_freshtext" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{a9d3f04b-e7c5-408b-b8ff-6b4ef9a7dcd2}">
+                        <labels>
+                          <label description="Quoted text" languagecode="1033" />
+                        </labels>
+                        <control id="crl_quotedtext" classid="{E0DECE4B-6FC8-4a8f-A065-082708572369}" datafieldname="crl_quotedtext" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+            <column width="34%">
+              <sections>
+                <section showlabel="true" showbar="false" IsUserDefined="0" id="{bb9b0428-be90-4257-925a-a666b52b6ae7}">
+                  <labels>
+                    <label description="Reading (agent)" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{38924b72-cb85-490e-ac73-a9b50193180e}">
+                        <labels>
+                          <label description="Reader" languagecode="1033" />
+                        </labels>
+                        <control id="crl_reader" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="crl_reader" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{b97ba6a1-ed9f-4516-b18b-191a70c4b0c9}">
+                        <labels>
+                          <label description="Language" languagecode="1033" />
+                        </labels>
+                        <control id="crl_language" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="crl_language" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{9c4dcb51-11bc-4af8-8fbd-3d103bbe6445}">
+                        <labels>
+                          <label description="Intent" languagecode="1033" />
+                        </labels>
+                        <control id="crl_intent" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="crl_intent" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{efdafd70-d8b7-4cf6-b352-1e8d489bcd95}">
+                        <labels>
+                          <label description="Confidence" languagecode="1033" />
+                        </labels>
+                        <control id="crl_confidence" classid="{C3EFE0C3-0EC6-42be-8349-CBD9079DFD8E}" datafieldname="crl_confidence" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{342050f2-7a21-4167-a9c8-997f09c9cd44}">
+                        <labels>
+                          <label description="Agent output (JSON)" languagecode="1033" />
+                        </labels>
+                        <control id="crl_agentoutput" classid="{E0DECE4B-6FC8-4a8f-A065-082708572369}" datafieldname="crl_agentoutput" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{82f1e850-31f0-4d2c-8923-a751a70d8d19}">
+                        <labels>
+                          <label description="Findings (JSON)" languagecode="1033" />
+                        </labels>
+                        <control id="crl_findings" classid="{E0DECE4B-6FC8-4a8f-A065-082708572369}" datafieldname="crl_findings" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{ee9b69be-4653-4707-9154-63ebbebeac19}">
+                        <labels>
+                          <label description="Headers (JSON)" languagecode="1033" />
+                        </labels>
+                        <control id="crl_headers" classid="{E0DECE4B-6FC8-4a8f-A065-082708572369}" datafieldname="crl_headers" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{13fc4a15-0f90-47e9-8155-4c436425b0fb}">
+                        <labels>
+                          <label description="Body" languagecode="1033" />
+                        </labels>
+                        <control id="crl_body" classid="{E0DECE4B-6FC8-4a8f-A065-082708572369}" datafieldname="crl_body" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+        <tab verticallayout="true" id="{64cf8397-2558-4f3d-ba7b-937e19d96cad}" IsUserDefined="1">
+          <labels>
+            <label description="Related" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section showlabel="true" showbar="false" IsUserDefined="0" id="{9f8e25ad-cfd2-47ad-85f9-b974192ba952}">
+                  <labels>
+                    <label description="Replies" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{0ca9f9c3-dba6-4181-8bbe-ea8d180722f6}" rowspan="6" colspan="1">
+                        <labels>
+                          <label description="Replies" languagecode="1033" />
+                        </labels>
+                        <control id="sg_crl_reply" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" indicationOfSubgrid="true" uniqueid="{e4264eb3-c5e3-4c78-a8ba-1710200a09e7}">
+                          <parameters>
+                            <RecordsPerPage>10</RecordsPerPage>
+                            <AutoExpand>Fixed</AutoExpand>
+                            <EnableQuickFind>false</EnableQuickFind>
+                            <EnableViewPicker>false</EnableViewPicker>
+                            <EnableJumpBar>false</EnableJumpBar>
+                            <ChartGridMode>Grid</ChartGridMode>
+                            <VisualizationId />
+                            <IsUserView>false</IsUserView>
+                            <ViewId>{f8ed9d30-42f3-4809-8dd3-c0756816bc36}</ViewId>
+                            <TargetEntityType>crl_reply</TargetEntityType>
+                            <ViewIds>{f8ed9d30-42f3-4809-8dd3-c0756816bc36}</ViewIds>
+                            <RelationshipName>crl_inboundemail_reply_inboundemail</RelationshipName>
+                          </parameters>
+                        </control>
+                      </cell>
+                    </row>
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+      </tabs>
+    </form>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <LocalizedNames>
+      <LocalizedName description="Inbound email" languagecode="1033" />
+    </LocalizedNames>
+    <Descriptions>
+      <Description description="A form for this entity." languagecode="1033" />
+    </Descriptions>
+  </systemform>
+</forms>

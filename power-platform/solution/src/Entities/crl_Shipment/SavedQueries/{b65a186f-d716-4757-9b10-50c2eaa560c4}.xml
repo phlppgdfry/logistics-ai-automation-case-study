@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>1</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>1</isdefault>
+    <savedqueryid>{b65a186f-d716-4757-9b10-50c2eaa560c4}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="crl_shipmentno" select="1" icon="1" preview="1">
+        <row name="result" id="crl_shipmentid">
+          <cell name="crl_shipmentno" width="300" />
+          <cell name="createdon" width="125" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>4</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="crl_shipment">
+          <attribute name="crl_shipmentid" />
+          <attribute name="crl_shipmentno" />
+          <attribute name="createdon" />
+          <order attribute="crl_shipmentno" descending="false" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="0" />
+          </filter>
+          <filter type="or" isquickfindfields="1">
+            <condition attribute="crl_shipmentno" operator="like" value="{0}" />
+          </filter>
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Quick Find Active Shipments (TMS sandbox)" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

@@ -1,0 +1,218 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <systemform>
+    <formid>{7c80c452-3295-4c74-b57a-5823abeeb6d6}</formid>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <FormPresentation>1</FormPresentation>
+    <FormActivationState>1</FormActivationState>
+    <form>
+      <tabs>
+        <tab verticallayout="true" id="{5a266dfa-4ba6-450a-918e-0687bd8331d4}" IsUserDefined="1">
+          <labels>
+            <label description="Shipment (TMS sandbox)" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="50%">
+              <sections>
+                <section showlabel="true" showbar="false" IsUserDefined="0" id="{251c764a-3cf3-4ddb-aea0-f80e8e2d7268}">
+                  <labels>
+                    <label description="General" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{17eeac19-c141-4398-9e55-06c733fcac4a}">
+                        <labels>
+                          <label description="Shipment number" languagecode="1033" />
+                        </labels>
+                        <control id="crl_shipmentno" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="crl_shipmentno" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{f6e4d8ac-f437-44ac-8c94-34748bc6ecd4}">
+                        <labels>
+                          <label description="Account" languagecode="1033" />
+                        </labels>
+                        <control id="crl_account" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="crl_account" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{df01ede3-82f1-4412-87c9-afa0c7549c0d}">
+                        <labels>
+                          <label description="Account code" languagecode="1033" />
+                        </labels>
+                        <control id="crl_accountcode" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="crl_accountcode" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{9c86560c-b487-4eeb-af64-f7e56d92407b}">
+                        <labels>
+                          <label description="Customer reference" languagecode="1033" />
+                        </labels>
+                        <control id="crl_customerref" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="crl_customerref" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{fd3334f4-4d0d-409c-8e9b-32109215e1cd}">
+                        <labels>
+                          <label description="CMR number" languagecode="1033" />
+                        </labels>
+                        <control id="crl_cmr" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="crl_cmr" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{bbbe58c3-7a9d-4dbd-9def-bda1e7fa69a8}">
+                        <labels>
+                          <label description="Status" languagecode="1033" />
+                        </labels>
+                        <control id="crl_status" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="crl_status" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{70cd3e22-1dcf-4503-919e-e842dd62c8aa}">
+                        <labels>
+                          <label description="Carrier" languagecode="1033" />
+                        </labels>
+                        <control id="crl_carrier" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="crl_carrier" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{cc2e71c0-0afb-47a0-b75e-d96a16c5f33d}">
+                        <labels>
+                          <label description="Subcontractor (haulier)" languagecode="1033" />
+                        </labels>
+                        <control id="crl_haulier" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="crl_haulier" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{b93b3f42-26a7-40f7-aa3c-e949971edd47}">
+                        <labels>
+                          <label description="Last event at" languagecode="1033" />
+                        </labels>
+                        <control id="crl_lasteventat" classid="{5B773807-9FB2-42db-97C3-7A91EFF8ADFF}" datafieldname="crl_lasteventat" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{cbbb2a04-5d1f-4b1d-8985-a0b6b6cb3197}">
+                        <labels>
+                          <label description="Last event location" languagecode="1033" />
+                        </labels>
+                        <control id="crl_lasteventlocation" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="crl_lasteventlocation" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{b0264864-5025-40bc-9382-bbbca6c75004}">
+                        <labels>
+                          <label description="ETA from" languagecode="1033" />
+                        </labels>
+                        <control id="crl_etafrom" classid="{5B773807-9FB2-42db-97C3-7A91EFF8ADFF}" datafieldname="crl_etafrom" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+            <column width="50%">
+              <sections>
+                <section showlabel="true" showbar="false" IsUserDefined="0" id="{222af97a-ec60-4c0d-a24c-193151701686}">
+                  <labels>
+                    <label description="Details" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{96601313-2362-4c8b-b67b-f7f1b1d2c8d5}">
+                        <labels>
+                          <label description="ETA to" languagecode="1033" />
+                        </labels>
+                        <control id="crl_etato" classid="{5B773807-9FB2-42db-97C3-7A91EFF8ADFF}" datafieldname="crl_etato" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{0fb284ae-3224-47ae-b05c-28368bb1a810}">
+                        <labels>
+                          <label description="Promised slot from" languagecode="1033" />
+                        </labels>
+                        <control id="crl_promisedfrom" classid="{5B773807-9FB2-42db-97C3-7A91EFF8ADFF}" datafieldname="crl_promisedfrom" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{1f5f7dfc-a2b1-4238-82c7-d3a90a3de1cb}">
+                        <labels>
+                          <label description="Promised slot to" languagecode="1033" />
+                        </labels>
+                        <control id="crl_promisedto" classid="{5B773807-9FB2-42db-97C3-7A91EFF8ADFF}" datafieldname="crl_promisedto" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{4ee9bf07-9048-4453-bf18-63ed1a95437a}">
+                        <labels>
+                          <label description="Pickup date" languagecode="1033" />
+                        </labels>
+                        <control id="crl_pickupdate" classid="{5B773807-9FB2-42db-97C3-7A91EFF8ADFF}" datafieldname="crl_pickupdate" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{ef25c3be-1168-4952-a824-09f30c27b771}">
+                        <labels>
+                          <label description="Delivered at" languagecode="1033" />
+                        </labels>
+                        <control id="crl_deliveredat" classid="{5B773807-9FB2-42db-97C3-7A91EFF8ADFF}" datafieldname="crl_deliveredat" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{aaceee22-2ef4-473c-bf0a-237ca6916130}">
+                        <labels>
+                          <label description="Consignee name" languagecode="1033" />
+                        </labels>
+                        <control id="crl_consigneename" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="crl_consigneename" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{734e93c0-f8e8-4ae2-beeb-4fe85d0b6e7e}">
+                        <labels>
+                          <label description="Consignee email" languagecode="1033" />
+                        </labels>
+                        <control id="crl_consigneeemail" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="crl_consigneeemail" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{70d47fc1-9120-428f-bcd2-8d2d1d778ca4}">
+                        <labels>
+                          <label description="Exception code" languagecode="1033" />
+                        </labels>
+                        <control id="crl_exceptioncode" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="crl_exceptioncode" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{c77c1087-ae70-4c95-895f-0e1405bbe149}">
+                        <labels>
+                          <label description="Exception note" languagecode="1033" />
+                        </labels>
+                        <control id="crl_exceptionnote" classid="{E0DECE4B-6FC8-4a8f-A065-082708572369}" datafieldname="crl_exceptionnote" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{31c6df6f-8bb1-4977-890b-72dd73521137}">
+                        <labels>
+                          <label description="Received by" languagecode="1033" />
+                        </labels>
+                        <control id="crl_receivedby" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="crl_receivedby" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+      </tabs>
+    </form>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <LocalizedNames>
+      <LocalizedName description="Shipment (TMS sandbox)" languagecode="1033" />
+    </LocalizedNames>
+    <Descriptions>
+      <Description description="A form for this entity." languagecode="1033" />
+    </Descriptions>
+  </systemform>
+</forms>

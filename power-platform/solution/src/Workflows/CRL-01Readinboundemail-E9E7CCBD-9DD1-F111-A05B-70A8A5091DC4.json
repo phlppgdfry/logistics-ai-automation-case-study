@@ -1,0 +1,359 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "crl_dataverse"
+        },
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        }
+      },
+      "shared_approvals": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "crl_approvals"
+        },
+        "api": {
+          "name": "shared_approvals"
+        }
+      },
+      "shared_microsoftcopilotstudio": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "crl_copilotstudio"
+        },
+        "api": {
+          "name": "shared_microsoftcopilotstudio"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        }
+      },
+      "triggers": {
+        "Email_received": {
+          "type": "OpenApiConnectionWebhook",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "SubscribeWebhookTrigger",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "subscriptionRequest/message": 1,
+              "subscriptionRequest/entityname": "crl_inboundemail",
+              "subscriptionRequest/scope": 4
+            },
+            "authentication": "@parameters('$authentication')"
+          },
+          "runtimeConfiguration": {
+            "concurrency": {
+              "runs": 1
+            }
+          }
+        }
+      },
+      "actions": {
+        "Read_mode": {
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "ListRecords",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "entityName": "environmentvariabledefinitions",
+              "$select": "schemaname,defaultvalue",
+              "$filter": "schemaname eq 'crl_Mode'",
+              "$expand": "environmentvariabledefinition_environmentvariablevalue($select=value)"
+            },
+            "authentication": "@parameters('$authentication')"
+          },
+          "runAfter": {}
+        },
+        "Kill_switch": {
+          "type": "If",
+          "expression": {
+            "equals": [
+              "@toLower(coalesce(first(first(outputs('Read_mode')?['body/value'])?['environmentvariabledefinition_environmentvariablevalue'])?['value'], first(outputs('Read_mode')?['body/value'])?['defaultvalue'], 'graduated'))",
+              "off"
+            ]
+          },
+          "actions": {
+            "Stop_automation_is_off": {
+              "type": "Terminate",
+              "inputs": {
+                "runStatus": "Cancelled"
+              }
+            }
+          },
+          "else": {
+            "actions": {}
+          },
+          "runAfter": {
+            "Read_mode": [
+              "Succeeded"
+            ]
+          }
+        },
+        "Answer_init": {
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "Answer",
+                "type": "string",
+                "value": ""
+              }
+            ]
+          },
+          "runAfter": {
+            "Kill_switch": [
+              "Succeeded"
+            ]
+          }
+        },
+        "Attempt_init": {
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "Attempt",
+                "type": "integer",
+                "value": 0
+              }
+            ]
+          },
+          "runAfter": {
+            "Answer_init": [
+              "Succeeded"
+            ]
+          }
+        },
+        "Automated_mail": {
+          "type": "Compose",
+          "inputs": "@if(and(not(empty(toLower(string(coalesce(json(coalesce(triggerOutputs()?['body/crl_headers'], '{}'))?['Auto-Submitted'], ''))))), not(equals(toLower(string(coalesce(json(coalesce(triggerOutputs()?['body/crl_headers'], '{}'))?['Auto-Submitted'], ''))), 'no'))), concat('Auto-Submitted: ', toLower(string(coalesce(json(coalesce(triggerOutputs()?['body/crl_headers'], '{}'))?['Auto-Submitted'], '')))), if(contains(createArray('bulk', 'list', 'junk'), toLower(string(coalesce(json(coalesce(triggerOutputs()?['body/crl_headers'], '{}'))?['Precedence'], '')))), concat('Precedence: ', toLower(string(coalesce(json(coalesce(triggerOutputs()?['body/crl_headers'], '{}'))?['Precedence'], '')))), if(not(empty(toLower(string(coalesce(json(coalesce(triggerOutputs()?['body/crl_headers'], '{}'))?['List-Unsubscribe'], ''))))), 'List-Unsubscribe header (newsletter)', if(or(startsWith(toLower(coalesce(triggerOutputs()?['body/crl_from'], '')), 'mailer-daemon@'), startsWith(toLower(coalesce(triggerOutputs()?['body/crl_from'], '')), 'postmaster@'), startsWith(toLower(coalesce(triggerOutputs()?['body/crl_from'], '')), 'noreply@'), startsWith(toLower(coalesce(triggerOutputs()?['body/crl_from'], '')), 'no-reply@')), concat('system sender ', toLower(coalesce(triggerOutputs()?['body/crl_from'], ''))), if(or(startsWith(toLower(coalesce(triggerOutputs()?['body/crl_subject'], '')), 'automatic reply'), startsWith(toLower(coalesce(triggerOutputs()?['body/crl_subject'], '')), 'automatisch antwoord'), startsWith(toLower(coalesce(triggerOutputs()?['body/crl_subject'], '')), 'afwezig'), startsWith(toLower(coalesce(triggerOutputs()?['body/crl_subject'], '')), 'absence'), startsWith(toLower(coalesce(triggerOutputs()?['body/crl_subject'], '')), 'réponse automatique'), startsWith(toLower(coalesce(triggerOutputs()?['body/crl_subject'], '')), 'out of office'), startsWith(toLower(coalesce(triggerOutputs()?['body/crl_subject'], '')), 'abwesenheit')), 'out-of-office subject', '')))))",
+          "runAfter": {
+            "Attempt_init": [
+              "Succeeded"
+            ]
+          }
+        },
+        "Screen": {
+          "type": "If",
+          "expression": {
+            "not": {
+              "equals": [
+                "@outputs('Automated_mail')",
+                ""
+              ]
+            }
+          },
+          "actions": {
+            "Ignore_R01": {
+              "type": "OpenApiConnection",
+              "inputs": {
+                "host": {
+                  "connectionName": "shared_commondataserviceforapps",
+                  "operationId": "UpdateOnlyRecord",
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                },
+                "parameters": {
+                  "entityName": "crl_inboundemails",
+                  "recordId": "@triggerOutputs()?['body/crl_inboundemailid']",
+                  "item/crl_status": 103450002,
+                  "item/crl_action": 103450003,
+                  "item/crl_rules": "R01",
+                  "item/crl_findings": "@{string(createArray(addProperty(addProperty(addProperty(addProperty(json('{}'), 'id', 'R01'), 'effect', 'ignore'), 'queue', null), 'detail', outputs('Automated_mail'))))}"
+                },
+                "authentication": "@parameters('$authentication')"
+              },
+              "runAfter": {}
+            }
+          },
+          "else": {
+            "actions": {
+              "Which_reader": {
+                "type": "If",
+                "expression": {
+                  "equals": [
+                    "@triggerOutputs()?['body/crl_reader']",
+                    103450001
+                  ]
+                },
+                "actions": {
+                  "Ask_until_answered": {
+                    "type": "Until",
+                    "expression": "@or(not(contains(variables('Answer'), 'RateLimitReached')), greaterOrEquals(variables('Attempt'), 5))",
+                    "limit": {
+                      "count": 6,
+                      "timeout": "PT20M"
+                    },
+                    "actions": {
+                      "Count_attempt": {
+                        "type": "IncrementVariable",
+                        "inputs": {
+                          "name": "Attempt",
+                          "value": 1
+                        }
+                      },
+                      "Agent_reads_the_email": {
+                        "type": "OpenApiConnectionWebhook",
+                        "inputs": {
+                          "host": {
+                            "connectionName": "shared_microsoftcopilotstudio",
+                            "operationId": "ExecuteCopilotAsyncV2",
+                            "apiId": "/providers/Microsoft.PowerApps/apis/shared_microsoftcopilotstudio"
+                          },
+                          "parameters": {
+                            "Copilot": "crl_corlaanMailReader",
+                            "body/message": "@{string(addProperty(addProperty(addProperty(addProperty(json('{}'), 'subject', coalesce(triggerOutputs()?['body/crl_subject'], '')), 'freshText', coalesce(triggerOutputs()?['body/crl_freshtext'], '')), 'quotedText', coalesce(triggerOutputs()?['body/crl_quotedtext'], '')), 'senderDomain', last(split(toLower(coalesce(triggerOutputs()?['body/crl_from'], '')), '@'))))}"
+                          },
+                          "authentication": "@parameters('$authentication')"
+                        },
+                        "limit": {
+                          "timeout": "PT5M"
+                        },
+                        "runAfter": {
+                          "Count_attempt": [
+                            "Succeeded"
+                          ]
+                        }
+                      },
+                      "Keep_answer": {
+                        "type": "SetVariable",
+                        "inputs": {
+                          "name": "Answer",
+                          "value": "@{if(equals(actions('Agent_reads_the_email')?['status'], 'Succeeded'), coalesce(body('Agent_reads_the_email')?['lastResponse'], ''), 'AGENT_FAILED')}"
+                        },
+                        "runAfter": {
+                          "Agent_reads_the_email": [
+                            "Succeeded",
+                            "Failed",
+                            "TimedOut"
+                          ]
+                        }
+                      },
+                      "Wait_on_rate_limit": {
+                        "type": "If",
+                        "expression": {
+                          "and": [
+                            {
+                              "contains": [
+                                "@variables('Answer')",
+                                "RateLimitReached"
+                              ]
+                            },
+                            {
+                              "less": [
+                                "@variables('Attempt')",
+                                5
+                              ]
+                            }
+                          ]
+                        },
+                        "actions": {
+                          "Wait_a_minute": {
+                            "type": "Wait",
+                            "inputs": {
+                              "interval": {
+                                "count": 1,
+                                "unit": "Minute"
+                              }
+                            }
+                          }
+                        },
+                        "else": {
+                          "actions": {}
+                        },
+                        "runAfter": {
+                          "Keep_answer": [
+                            "Succeeded"
+                          ]
+                        }
+                      }
+                    }
+                  },
+                  "Reading": {
+                    "type": "Compose",
+                    "inputs": "@if(startsWith(trim(replace(replace(variables('Answer'), '```json', ''), '```', '')), '{'), trim(replace(replace(variables('Answer'), '```json', ''), '```', '')), if(contains(trim(replace(replace(variables('Answer'), '```json', ''), '```', '')), 'ContentFiltered'), '{\"blocked\":true,\"blockedBy\":[\"content filter (Copilot Studio)\"]}', '{\"language\":\"unknown\",\"intent\":\"unknown\",\"confidence\":0,\"references\":[],\"referencesFromQuoted\":false,\"sensitive\":[],\"instructionSignals\":[]}'))",
+                    "runAfter": {
+                      "Ask_until_answered": [
+                        "Succeeded"
+                      ]
+                    }
+                  },
+                  "Store_reading": {
+                    "type": "OpenApiConnection",
+                    "inputs": {
+                      "host": {
+                        "connectionName": "shared_commondataserviceforapps",
+                        "operationId": "UpdateOnlyRecord",
+                        "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                      },
+                      "parameters": {
+                        "entityName": "crl_inboundemails",
+                        "recordId": "@triggerOutputs()?['body/crl_inboundemailid']",
+                        "item/crl_agentoutput": "@{outputs('Reading')}",
+                        "item/crl_status": 103450001,
+                        "item/crl_error": "@{if(startsWith(trim(replace(replace(variables('Answer'), '```json', ''), '```', '')), '{'), null, concat(if(contains(trim(replace(replace(variables('Answer'), '```json', ''), '```', '')), 'ContentFiltered'), 'Refused by the content filter, routed to security: ', 'Agent answer was not JSON, safe reading used: '), substring(trim(replace(replace(variables('Answer'), '```json', ''), '```', '')), 0, min(length(trim(replace(replace(variables('Answer'), '```json', ''), '```', ''))), 500))))}"
+                      },
+                      "authentication": "@parameters('$authentication')"
+                    },
+                    "runAfter": {
+                      "Reading": [
+                        "Succeeded"
+                      ]
+                    }
+                  }
+                },
+                "else": {
+                  "actions": {
+                    "Reading_on_record": {
+                      "type": "OpenApiConnection",
+                      "inputs": {
+                        "host": {
+                          "connectionName": "shared_commondataserviceforapps",
+                          "operationId": "UpdateOnlyRecord",
+                          "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                        },
+                        "parameters": {
+                          "entityName": "crl_inboundemails",
+                          "recordId": "@triggerOutputs()?['body/crl_inboundemailid']",
+                          "item/crl_status": 103450001
+                        },
+                        "authentication": "@parameters('$authentication')"
+                      },
+                      "runAfter": {}
+                    }
+                  }
+                },
+                "runAfter": {}
+              }
+            }
+          },
+          "runAfter": {
+            "Automated_mail": [
+              "Succeeded"
+            ]
+          }
+        }
+      }
+    },
+    "templateName": null
+  },
+  "schemaVersion": "1.0.0.0"
+}

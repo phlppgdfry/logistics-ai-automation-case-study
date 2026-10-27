@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>1</isdefault>
+    <savedqueryid>{e0e00566-0d9e-4e09-839b-609e255556da}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="crl_email" select="1" icon="1" preview="1">
+        <row name="result" id="crl_customercontactid">
+          <cell name="crl_email" width="140" />
+          <cell name="crl_account" width="130" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="crl_customercontact">
+          <attribute name="crl_email" />
+          <attribute name="crl_account" />
+          <attribute name="crl_customercontactid" />
+          <order attribute="createdon" descending="true" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="0" />
+          </filter>
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Active Customer contacts" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

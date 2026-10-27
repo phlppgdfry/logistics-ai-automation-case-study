@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <systemform>
+    <formid>{fc5f1789-19a8-456b-b13a-122df6003d9f}</formid>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <FormPresentation>1</FormPresentation>
+    <FormActivationState>1</FormActivationState>
+    <form>
+      <tabs>
+        <tab verticallayout="true" id="{2f50976e-24d4-43bf-b760-52d3a0597443}" IsUserDefined="1">
+          <labels>
+            <label description="Reply template set" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="50%">
+              <sections>
+                <section showlabel="true" showbar="false" IsUserDefined="0" id="{6070d2e9-b842-4d12-a39d-bb87ce7918fa}">
+                  <labels>
+                    <label description="General" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{021bacc3-2ed6-4d99-a851-a9aac544d777}">
+                        <labels>
+                          <label description="Language" languagecode="1033" />
+                        </labels>
+                        <control id="crl_language" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="crl_language" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+            <column width="50%">
+              <sections>
+                <section showlabel="true" showbar="false" IsUserDefined="0" id="{112047dc-24d1-4d8c-890a-b4a6045d45c9}">
+                  <labels>
+                    <label description="Details" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{cc6f52de-7433-4493-b2c8-717946b67efa}">
+                        <labels>
+                          <label description="Templates (JSON, from src/compose.mjs)" languagecode="1033" />
+                        </labels>
+                        <control id="crl_templates" classid="{E0DECE4B-6FC8-4a8f-A065-082708572369}" datafieldname="crl_templates" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+      </tabs>
+    </form>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <LocalizedNames>
+      <LocalizedName description="Reply template set" languagecode="1033" />
+    </LocalizedNames>
+    <Descriptions>
+      <Description description="A form for this entity." languagecode="1033" />
+    </Descriptions>
+  </systemform>
+</forms>

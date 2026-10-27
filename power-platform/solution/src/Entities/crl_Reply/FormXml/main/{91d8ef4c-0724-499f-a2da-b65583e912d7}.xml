@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <systemform>
+    <formid>{91d8ef4c-0724-499f-a2da-b65583e912d7}</formid>
+    <IntroducedVersion>1.0.0.0</IntroducedVersion>
+    <FormPresentation>1</FormPresentation>
+    <FormActivationState>1</FormActivationState>
+    <form>
+      <tabs>
+        <tab verticallayout="true" id="{49edce4f-978d-465e-ba12-ade7ec220bf4}" IsUserDefined="1">
+          <labels>
+            <label description="Reply" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="50%">
+              <sections>
+                <section showlabel="true" showbar="false" IsUserDefined="0" id="{5b39a368-c342-4e22-8a2c-533ba72359ea}">
+                  <labels>
+                    <label description="General" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{d6d9f226-870a-403a-8e9f-d991ffd5d3c2}">
+                        <labels>
+                          <label description="Reply ID" languagecode="1033" />
+                        </labels>
+                        <control id="crl_name" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="crl_name" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{5e454209-4bb6-4a46-ac37-3dbab728c10a}">
+                        <labels>
+                          <label description="Inbound email" languagecode="1033" />
+                        </labels>
+                        <control id="crl_inboundemail" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="crl_inboundemail" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{1b56b2e4-fea4-46bc-89a9-02bbc6fc3f5c}">
+                        <labels>
+                          <label description="To" languagecode="1033" />
+                        </labels>
+                        <control id="crl_to" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="crl_to" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{7fbf68d4-6201-4f48-82b3-d307dc971c68}">
+                        <labels>
+                          <label description="Subject" languagecode="1033" />
+                        </labels>
+                        <control id="crl_subject" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="crl_subject" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{085dbb87-4978-4e05-b693-27ede453a846}">
+                        <labels>
+                          <label description="Reply text" languagecode="1033" />
+                        </labels>
+                        <control id="crl_text" classid="{E0DECE4B-6FC8-4a8f-A065-082708572369}" datafieldname="crl_text" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{1d21cc31-8fa8-44bb-8eef-03fe9e5d2ecc}">
+                        <labels>
+                          <label description="Language" languagecode="1033" />
+                        </labels>
+                        <control id="crl_language" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="crl_language" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+            <column width="50%">
+              <sections>
+                <section showlabel="true" showbar="false" IsUserDefined="0" id="{280b0383-4e8f-4e80-aa7d-e5e4f7fe196a}">
+                  <labels>
+                    <label description="Details" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{859430e3-073b-4020-b7bc-86cbb4e1792c}">
+                        <labels>
+                          <label description="Status" languagecode="1033" />
+                        </labels>
+                        <control id="crl_status" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="crl_status" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{aa058e84-2133-42e0-95e8-e07bc93a6970}">
+                        <labels>
+                          <label description="Held by rules" languagecode="1033" />
+                        </labels>
+                        <control id="crl_heldby" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="crl_heldby" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{dc74e8d6-a4bb-4b8f-ba3a-d38e4cff408a}">
+                        <labels>
+                          <label description="Reviewed by" languagecode="1033" />
+                        </labels>
+                        <control id="crl_reviewedby" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="crl_reviewedby" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{38d654ca-f33a-4145-a667-1098896b2065}">
+                        <labels>
+                          <label description="Reviewed on" languagecode="1033" />
+                        </labels>
+                        <control id="crl_reviewedon" classid="{5B773807-9FB2-42db-97C3-7A91EFF8ADFF}" datafieldname="crl_reviewedon" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{6a85d845-08ef-4b0e-8112-d4949768f61d}">
+                        <labels>
+                          <label description="Review comment" languagecode="1033" />
+                        </labels>
+                        <control id="crl_reviewcomment" classid="{E0DECE4B-6FC8-4a8f-A065-082708572369}" datafieldname="crl_reviewcomment" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+      </tabs>
+    </form>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <LocalizedNames>
+      <LocalizedName description="Reply" languagecode="1033" />
+    </LocalizedNames>
+    <Descriptions>
+      <Description description="A form for this entity." languagecode="1033" />
+    </Descriptions>
+  </systemform>
+</forms>

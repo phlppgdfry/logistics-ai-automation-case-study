@@ -1,0 +1,120 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "crl_dataverse"
+        },
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        }
+      },
+      "shared_approvals": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "crl_approvals"
+        },
+        "api": {
+          "name": "shared_approvals"
+        }
+      },
+      "shared_microsoftcopilotstudio": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "crl_copilotstudio"
+        },
+        "api": {
+          "name": "shared_microsoftcopilotstudio"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        },
+        "Reviewer for drafts (crl_ReviewerEmail)": {
+          "defaultValue": "",
+          "type": "String",
+          "metadata": {
+            "schemaName": "crl_ReviewerEmail"
+          }
+        }
+      },
+      "triggers": {
+        "Draft_created": {
+          "type": "OpenApiConnectionWebhook",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "SubscribeWebhookTrigger",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "subscriptionRequest/message": 1,
+              "subscriptionRequest/entityname": "crl_reply",
+              "subscriptionRequest/scope": 4,
+              "subscriptionRequest/filterexpression": "crl_status eq 103450001"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        }
+      },
+      "actions": {
+        "Review": {
+          "type": "OpenApiConnectionWebhook",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_approvals",
+              "operationId": "StartAndWaitForAnApproval",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_approvals"
+            },
+            "parameters": {
+              "approvalType": "Basic",
+              "WebhookApprovalCreationInput/title": "@{concat('Reply held (', triggerOutputs()?['body/crl_heldby'], '): ', triggerOutputs()?['body/crl_subject'])}",
+              "WebhookApprovalCreationInput/assignedTo": "@parameters('Reviewer for drafts (crl_ReviewerEmail)')",
+              "WebhookApprovalCreationInput/details": "@{concat('To: ', triggerOutputs()?['body/crl_to'], decodeUriComponent('%0A%0A'), 'Held by rules ', triggerOutputs()?['body/crl_heldby'], ' (see docs/02-design/policy-rules.md). Approve to send this reply as it is; reject to answer yourself.', decodeUriComponent('%0A%0A'), '---', decodeUriComponent('%0A%0A'), triggerOutputs()?['body/crl_text'])}",
+              "WebhookApprovalCreationInput/enableNotifications": true,
+              "WebhookApprovalCreationInput/enableReassignment": true
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        },
+        "Record_review": {
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "UpdateOnlyRecord",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "entityName": "crl_replies",
+              "recordId": "@triggerOutputs()?['body/crl_replyid']",
+              "item/crl_status": "@if(equals(body('Review')?['outcome'], 'Approve'), 103450002, 103450003)",
+              "item/crl_reviewedby": "@{first(body('Review')?['responses'])?['responder']?['email']}",
+              "item/crl_reviewedon": "@{first(body('Review')?['responses'])?['responseDate']}",
+              "item/crl_reviewcomment": "@{first(body('Review')?['responses'])?['comments']}"
+            },
+            "authentication": "@parameters('$authentication')"
+          },
+          "runAfter": {
+            "Review": [
+              "Succeeded"
+            ]
+          }
+        }
+      }
+    },
+    "templateName": null
+  },
+  "schemaVersion": "1.0.0.0"
+}
