@@ -1,0 +1,25 @@
+displayName: Corlaan Mail Reader
+schemaName: crl_corlaanMailReader
+accessControlPolicy: GroupMembership
+authenticationMode: Integrated
+authenticationTrigger: Always
+configuration:
+  settings:
+    GenerativeActionsEnabled: true
+
+  isAgentConnectable: true
+  gPTSettings:
+    defaultSchemaName: crl_corlaanMailReader.gpt.default
+
+  aISettings:
+    useModelKnowledge: true
+    isFileAnalysisEnabled: true
+    isSemanticSearchEnabled: true
+    optInUseLatestModels: false
+
+  recognizer:
+    kind: GenerativeAIRecognizer
+
+publishedOn: 2026-10-27T00:22:00.0000000Z
+template: default-2.1.0
+language: 1033

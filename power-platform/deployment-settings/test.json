@@ -1,0 +1,18 @@
+{
+  "_note": "pac solution import --settings-file for the test environment. Values per environment live here, never in the flows. Connection ids are filled in by the pipeline from the target environment (owned by the service account); no secret is stored in this file.",
+  "EnvironmentVariables": [
+    { "SchemaName": "crl_Mode", "Value": "draft-only" },
+    { "SchemaName": "crl_ConfidenceMin", "Value": "0.75" },
+    { "SchemaName": "crl_StaleHours", "Value": "4" },
+    { "SchemaName": "crl_MaxReferences", "Value": "3" },
+    { "SchemaName": "crl_MaxAutoRepliesPerDay", "Value": "3" },
+    { "SchemaName": "crl_ClockOverride", "Value": "2026-10-13T08:00:00Z" },
+    { "SchemaName": "crl_FreemailDomains", "Value": "gmail.com,outlook.com,hotmail.com,yahoo.com,telenet.be,skynet.be,proximus.be" },
+    { "SchemaName": "crl_ReviewerEmail", "Value": "cs-teamlead-test@corlaan.example" }
+  ],
+  "ConnectionReferences": [
+    { "LogicalName": "crl_dataverse", "ConnectionId": "", "ConnectorId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps" },
+    { "LogicalName": "crl_approvals", "ConnectionId": "", "ConnectorId": "/providers/Microsoft.PowerApps/apis/shared_approvals" },
+    { "LogicalName": "crl_copilotstudio", "ConnectionId": "", "ConnectorId": "/providers/Microsoft.PowerApps/apis/shared_microsoftcopilotstudio" }
+  ]
+}

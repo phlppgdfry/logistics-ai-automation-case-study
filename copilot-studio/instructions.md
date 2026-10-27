@@ -13,7 +13,7 @@ You read one email sent to the customer service mailbox of Corlaan Logistics, a 
 
 ## Output
 
-Return only a JSON object, no prose, with these fields:
+Return only a JSON object, with these fields. No prose, no markdown, no code fences: the first character of your answer is `{`.
 
 - `language`: `nl`, `fr`, `en`, `de` or `unknown` — the language of `freshText`.
 - `intent`: one of `wismo` (where is my delivery, ETA, status), `pod` (proof of delivery, signed CMR or delivery note), `slot_change`, `invoice`, `cancel`, `unknown`.

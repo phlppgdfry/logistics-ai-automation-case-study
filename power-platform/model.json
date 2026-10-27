@@ -1,0 +1,523 @@
+{
+  "_note": "Dataverse model for the solution CorlaanCustomerEmail. Read by scripts/provision-schema.mjs. Columns: [logical name, type, display name, extra]. The shipment tables stand in for the TMS (the real TMS stays behind the custom connector, api/tms-shipments.swagger.json).",
+  "choices": {
+    "shipmentStatus": {
+      "103450000": "BOOKED",
+      "103450001": "PICKED_UP",
+      "103450002": "IN_TRANSIT",
+      "103450003": "OUT_FOR_DELIVERY",
+      "103450004": "DELIVERED",
+      "103450005": "EXCEPTION"
+    },
+    "carrier": {
+      "103450000": "own",
+      "103450001": "subcontractor"
+    },
+    "emailStatus": {
+      "103450000": "Received",
+      "103450001": "Read",
+      "103450002": "Decided",
+      "103450009": "Error"
+    },
+    "reader": {
+      "103450000": "Recorded reading",
+      "103450001": "Copilot Studio agent"
+    },
+    "action": {
+      "103450000": "auto",
+      "103450001": "draft",
+      "103450002": "route",
+      "103450003": "ignore"
+    },
+    "replyStatus": {
+      "103450000": "Sent automatically (outbox)",
+      "103450001": "Awaiting review",
+      "103450002": "Approved and sent",
+      "103450003": "Rejected"
+    }
+  },
+  "tables": [
+    {
+      "name": "crl_customeraccount",
+      "display": "Customer account",
+      "plural": "Customer accounts",
+      "ownership": "OrganizationOwned",
+      "primary": [
+        "crl_name",
+        "Name"
+      ],
+      "columns": [
+        [
+          "crl_code",
+          "text",
+          "Account code",
+          20
+        ],
+        [
+          "crl_domains",
+          "text",
+          "Email domains",
+          400
+        ]
+      ],
+      "keys": [
+        [
+          "crl_code"
+        ]
+      ]
+    },
+    {
+      "name": "crl_customercontact",
+      "display": "Customer contact",
+      "plural": "Customer contacts",
+      "ownership": "OrganizationOwned",
+      "primary": [
+        "crl_email",
+        "Email"
+      ],
+      "lookups": [
+        [
+          "crl_account",
+          "crl_customeraccount",
+          "Account"
+        ]
+      ],
+      "keys": [
+        [
+          "crl_email"
+        ]
+      ]
+    },
+    {
+      "name": "crl_shipment",
+      "display": "Shipment (TMS sandbox)",
+      "plural": "Shipments (TMS sandbox)",
+      "ownership": "OrganizationOwned",
+      "primary": [
+        "crl_shipmentno",
+        "Shipment number"
+      ],
+      "lookups": [
+        [
+          "crl_account",
+          "crl_customeraccount",
+          "Account"
+        ]
+      ],
+      "columns": [
+        [
+          "crl_accountcode",
+          "text",
+          "Account code",
+          20
+        ],
+        [
+          "crl_customerref",
+          "text",
+          "Customer reference",
+          40
+        ],
+        [
+          "crl_cmr",
+          "text",
+          "CMR number",
+          20
+        ],
+        [
+          "crl_status",
+          "choice",
+          "Status",
+          "shipmentStatus"
+        ],
+        [
+          "crl_carrier",
+          "choice",
+          "Carrier",
+          "carrier"
+        ],
+        [
+          "crl_haulier",
+          "text",
+          "Subcontractor (haulier)",
+          100
+        ],
+        [
+          "crl_lasteventat",
+          "datetime",
+          "Last event at"
+        ],
+        [
+          "crl_lasteventlocation",
+          "text",
+          "Last event location",
+          100
+        ],
+        [
+          "crl_etafrom",
+          "datetime",
+          "ETA from"
+        ],
+        [
+          "crl_etato",
+          "datetime",
+          "ETA to"
+        ],
+        [
+          "crl_promisedfrom",
+          "datetime",
+          "Promised slot from"
+        ],
+        [
+          "crl_promisedto",
+          "datetime",
+          "Promised slot to"
+        ],
+        [
+          "crl_pickupdate",
+          "datetime",
+          "Pickup date"
+        ],
+        [
+          "crl_deliveredat",
+          "datetime",
+          "Delivered at"
+        ],
+        [
+          "crl_consigneename",
+          "text",
+          "Consignee name",
+          100
+        ],
+        [
+          "crl_consigneeemail",
+          "text",
+          "Consignee email",
+          100
+        ],
+        [
+          "crl_exceptioncode",
+          "text",
+          "Exception code",
+          40
+        ],
+        [
+          "crl_exceptionnote",
+          "memo",
+          "Exception note",
+          1000
+        ],
+        [
+          "crl_receivedby",
+          "text",
+          "Received by",
+          100
+        ]
+      ],
+      "keys": [
+        [
+          "crl_shipmentno"
+        ]
+      ]
+    },
+    {
+      "name": "crl_inboundemail",
+      "display": "Inbound email",
+      "plural": "Inbound emails",
+      "ownership": "OrganizationOwned",
+      "primary": [
+        "crl_name",
+        "Mail ID",
+        "MAIL-{SEQNUM:5}"
+      ],
+      "columns": [
+        [
+          "crl_testcase",
+          "text",
+          "Test case",
+          10
+        ],
+        [
+          "crl_batch",
+          "text",
+          "Test batch",
+          40
+        ],
+        [
+          "crl_from",
+          "text",
+          "From",
+          200
+        ],
+        [
+          "crl_subject",
+          "text",
+          "Subject",
+          400
+        ],
+        [
+          "crl_body",
+          "memo",
+          "Body",
+          20000
+        ],
+        [
+          "crl_freshtext",
+          "memo",
+          "Fresh text",
+          20000
+        ],
+        [
+          "crl_quotedtext",
+          "memo",
+          "Quoted text",
+          20000
+        ],
+        [
+          "crl_dmarc",
+          "text",
+          "DMARC result",
+          20
+        ],
+        [
+          "crl_headers",
+          "memo",
+          "Headers (JSON)",
+          4000
+        ],
+        [
+          "crl_receivedon",
+          "datetime",
+          "Received on"
+        ],
+        [
+          "crl_autorepliestoday",
+          "int",
+          "Automatic replies to sender today"
+        ],
+        [
+          "crl_status",
+          "choice",
+          "Status",
+          "emailStatus"
+        ],
+        [
+          "crl_reader",
+          "choice",
+          "Reader",
+          "reader"
+        ],
+        [
+          "crl_agentoutput",
+          "memo",
+          "Agent output (JSON)",
+          8000
+        ],
+        [
+          "crl_language",
+          "text",
+          "Language",
+          10
+        ],
+        [
+          "crl_intent",
+          "text",
+          "Intent",
+          20
+        ],
+        [
+          "crl_confidence",
+          "decimal",
+          "Confidence"
+        ],
+        [
+          "crl_action",
+          "choice",
+          "Decision",
+          "action"
+        ],
+        [
+          "crl_template",
+          "text",
+          "Template",
+          20
+        ],
+        [
+          "crl_queue",
+          "text",
+          "Queue",
+          40
+        ],
+        [
+          "crl_rules",
+          "text",
+          "Rules fired",
+          200
+        ],
+        [
+          "crl_findings",
+          "memo",
+          "Findings (JSON)",
+          20000
+        ],
+        [
+          "crl_shipments",
+          "text",
+          "Shipments answered",
+          400
+        ],
+        [
+          "crl_error",
+          "memo",
+          "Error",
+          4000
+        ]
+      ]
+    },
+    {
+      "name": "crl_reply",
+      "display": "Reply",
+      "plural": "Replies",
+      "ownership": "OrganizationOwned",
+      "primary": [
+        "crl_name",
+        "Reply ID",
+        "RE-{SEQNUM:5}"
+      ],
+      "lookups": [
+        [
+          "crl_inboundemail",
+          "crl_inboundemail",
+          "Inbound email"
+        ]
+      ],
+      "columns": [
+        [
+          "crl_to",
+          "text",
+          "To",
+          200
+        ],
+        [
+          "crl_subject",
+          "text",
+          "Subject",
+          400
+        ],
+        [
+          "crl_text",
+          "memo",
+          "Reply text",
+          20000
+        ],
+        [
+          "crl_language",
+          "text",
+          "Language",
+          10
+        ],
+        [
+          "crl_status",
+          "choice",
+          "Status",
+          "replyStatus"
+        ],
+        [
+          "crl_heldby",
+          "text",
+          "Held by rules",
+          200
+        ],
+        [
+          "crl_reviewedby",
+          "text",
+          "Reviewed by",
+          200
+        ],
+        [
+          "crl_reviewedon",
+          "datetime",
+          "Reviewed on"
+        ],
+        [
+          "crl_reviewcomment",
+          "memo",
+          "Review comment",
+          4000
+        ]
+      ]
+    },
+    {
+      "name": "crl_replytemplate",
+      "display": "Reply template set",
+      "plural": "Reply template sets",
+      "ownership": "OrganizationOwned",
+      "primary": [
+        "crl_language",
+        "Language"
+      ],
+      "columns": [
+        [
+          "crl_templates",
+          "memo",
+          "Templates (JSON, from src/compose.mjs)",
+          10000
+        ]
+      ],
+      "keys": [
+        [
+          "crl_language"
+        ]
+      ]
+    }
+  ],
+  "environmentVariables": [
+    {
+      "schemaName": "crl_Mode",
+      "display": "Automation mode: graduated, draft-only or off (kill switch)",
+      "type": "string",
+      "value": "graduated"
+    },
+    {
+      "schemaName": "crl_ConfidenceMin",
+      "display": "Minimum intent confidence (R05)",
+      "type": "decimal",
+      "value": "0.75"
+    },
+    {
+      "schemaName": "crl_StaleHours",
+      "display": "Stale status after hours (R14)",
+      "type": "decimal",
+      "value": "4"
+    },
+    {
+      "schemaName": "crl_MaxReferences",
+      "display": "Maximum references per email (R09)",
+      "type": "decimal",
+      "value": "3"
+    },
+    {
+      "schemaName": "crl_MaxAutoRepliesPerDay",
+      "display": "Automatic replies per sender per day (R16)",
+      "type": "decimal",
+      "value": "3"
+    },
+    {
+      "schemaName": "crl_ClockOverride",
+      "display": "Test clock (empty = real time)",
+      "type": "string",
+      "value": "2026-10-13T08:00:00Z"
+    },
+    {
+      "schemaName": "crl_FreemailDomains",
+      "display": "Free-mail domains",
+      "type": "string",
+      "value": "gmail.com,outlook.com,hotmail.com,yahoo.com,telenet.be,skynet.be,proximus.be,mailbox.example"
+    },
+    {
+      "schemaName": "crl_ReviewerEmail",
+      "display": "Reviewer for drafts",
+      "type": "string",
+      "value": "reviewer@corlaan.example"
+    }
+  ]
+}

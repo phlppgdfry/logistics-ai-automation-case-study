@@ -1,0 +1,11 @@
+mcs.metadata:
+  componentName: Fallback
+  description: This system topic triggers when the agent cannot read the message. It returns a safe reading (unknown, confidence 0), which the flow turns into a draft for a colleague (rule R05).
+kind: AdaptiveDialog
+beginDialog:
+  kind: OnUnknownIntent
+  id: main
+  actions:
+    - kind: SendActivity
+      id: sendMessage_QZreqo
+      activity: '{Char(123)}"language": "unknown", "intent": "unknown", "confidence": 0, "references": [], "referencesFromQuoted": false, "sensitive": [], "instructionSignals": []{Char(125)}'

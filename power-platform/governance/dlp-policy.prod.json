@@ -1,0 +1,40 @@
+{
+  "_note": "Data loss prevention policy for the production environment, in the shape of the Power Platform admin API (policies v2). Checked by tests/governance.test.mjs: every connector the solution uses must be in the business group, and nothing may reach the HTTP connectors. Not applied to a tenant from this repository; an admin applies it (admin center or the API) to the environments listed.",
+  "displayName": "Corlaan customer service: production",
+  "environmentType": "OnlyEnvironments",
+  "environments": [{ "name": "corlaan-cs-prod", "type": "Microsoft.BusinessAppPlatform/scopes/environments" }],
+  "defaultConnectorsClassification": "Blocked",
+  "connectorGroups": [
+    {
+      "classification": "Confidential",
+      "_meaning": "Business: these may be combined with each other",
+      "connectors": [
+        { "id": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps", "name": "Microsoft Dataverse" },
+        { "id": "/providers/Microsoft.PowerApps/apis/shared_microsoftcopilotstudio", "name": "Microsoft Copilot Studio" },
+        { "id": "/providers/Microsoft.PowerApps/apis/shared_approvals", "name": "Approvals" },
+        { "id": "/providers/Microsoft.PowerApps/apis/shared_office365", "name": "Office 365 Outlook" },
+        { "id": "/providers/Microsoft.PowerApps/apis/shared_teams", "name": "Microsoft Teams" },
+        { "id": "/providers/Microsoft.PowerApps/apis/shared_crl-5ftms-20shipments", "name": "Corlaan TMS shipments (custom connector)" }
+      ]
+    },
+    { "classification": "General", "_meaning": "Non-business: empty on purpose", "connectors": [] },
+    {
+      "classification": "Blocked",
+      "_meaning": "Named explicitly so a later change of the default does not unblock them",
+      "connectors": [
+        { "id": "/providers/Microsoft.PowerApps/apis/shared_sendmail", "name": "Mail (send without a mailbox)" },
+        { "id": "/providers/Microsoft.PowerApps/apis/shared_gmail", "name": "Gmail" },
+        { "id": "/providers/Microsoft.PowerApps/apis/shared_dropbox", "name": "Dropbox" },
+        { "id": "/providers/Microsoft.PowerApps/apis/shared_webcontents", "name": "HTTP with Microsoft Entra ID" }
+      ]
+    }
+  ],
+  "builtInActionsBlocked": ["Http", "HttpWebhook", "Request"],
+  "customConnectorUrlPatterns": [
+    { "order": 1, "pattern": "https://tms-api.corlaan.example/*", "classification": "Confidential" },
+    { "order": 2, "pattern": "*", "classification": "Blocked" }
+  ],
+  "endpointFilteringOn": [
+    { "connector": "shared_commondataserviceforapps", "allow": ["https://corlaan-cs-prod.crm4.dynamics.com"], "deny": ["*"] }
+  ]
+}

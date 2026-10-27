@@ -1,0 +1,6 @@
+{
+  "_note": "Connections in the lab environment, owned by the maker. A connection holds no secret here; the connection references in the solution point to them.",
+  "shared_commondataserviceforapps": "e1ba58a73fa0489c81cbe0fe7791fc2c",
+  "shared_approvals": "23853cb9a9f645b696e6f2edae69d6d2",
+  "shared_microsoftcopilotstudio": "464d5eb5b48a430e97c8ccc171e3aef6"
+}

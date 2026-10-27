@@ -1,0 +1,7 @@
+{
+  "_note": "Shared developer environment for portfolio cases (type Developer, fictional data only). One solution per case; this case is CorlaanCustomerEmail. The environment URL and tenant id are kept out of git: environment.local.json (ignored).",
+  "name": "Portfolio lab (shared developer environment)",
+  "environmentId": "69ecb43a-b9e5-e781-bd23-71302e51755d",
+  "solution": "CorlaanCustomerEmail",
+  "publisher": { "uniquename": "corlaan", "friendlyname": "Corlaan Logistics (fictional)", "prefix": "crl", "optionPrefix": 10345 }
+}

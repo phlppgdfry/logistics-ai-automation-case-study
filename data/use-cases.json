@@ -1,0 +1,19 @@
+{
+  "_note": "Use cases from the discovery workshop (docs/08-workshops-and-training/discovery-workshop.md), scored 1–5 by the room. Weights are agreed at the start of the workshop. Read by src/prioritise.mjs; the table in docs/08-workshops-and-training/prioritisation.md is generated from this file.",
+  "weights": { "value": 0.45, "feasibility": 0.35, "risk": 0.2 },
+  "criteria": {
+    "value": "hours saved, faster answers, fewer complaints — 5 = large and measurable",
+    "feasibility": "data available, API exists, rules can be written down, the team can run it — 5 = can start next week",
+    "risk": "harm if it goes wrong: data to the wrong person, money, relationship — 5 = low risk"
+  },
+  "useCases": [
+    { "id": "UC1", "name": "Status replies from the TMS", "value": 5, "feasibility": 4, "risk": 3, "owner": "Customer service team lead", "note": "38% of the mailbox; API exists; risk is data to the wrong person, handled by authorisation per shipment", "decision": "phase 1" },
+    { "id": "UC2", "name": "Proof-of-delivery retrieval", "value": 3, "feasibility": 4, "risk": 3, "owner": "Customer service team lead", "note": "11% of the mailbox; a POD carries a signature, so registered contacts only", "decision": "phase 1" },
+    { "id": "UC3", "name": "Triage of the whole mailbox to queues", "value": 4, "feasibility": 4, "risk": 5, "owner": "Customer service team lead", "note": "comes free with the reading step; misrouting costs minutes, not trust", "decision": "phase 1" },
+    { "id": "UC4", "name": "Slot changes", "value": 4, "feasibility": 2, "risk": 3, "owner": "Planning", "note": "needs planning rules written down and a write API", "decision": "phase 2" },
+    { "id": "UC5", "name": "Claims intake (form + photos)", "value": 3, "feasibility": 3, "risk": 2, "owner": "Claims", "note": "money and relationships; with the claims team, after phase 1", "decision": "phase 3" },
+    { "id": "UC6", "name": "Generative free-text replies", "value": 2, "feasibility": 4, "risk": 1, "owner": "—", "note": "every sentence must be approved once; see ADR-003", "decision": "rejected" },
+    { "id": "UC7", "name": "'Chat with the TMS' for agents in Teams", "value": 2, "feasibility": 4, "risk": 4, "owner": "IT", "note": "nice, but the email still has to be answered by hand", "decision": "backlog" },
+    { "id": "UC8", "name": "Invoice copies on request", "value": 2, "feasibility": 3, "risk": 4, "owner": "Finance", "note": "low volume (4%); Business Central already has a portal", "decision": "backlog" }
+  ]
+}

@@ -14,6 +14,7 @@ import { evaluate, STALE_HOURS, CONFIDENCE_MIN, MAX_REFERENCES, MAX_AUTO_REPLIES
 import { RULES } from "../src/rules.mjs";
 import { values, compute, scenarios, sensitivity } from "../src/business-case.mjs";
 import { modelEvaluation } from "../src/model-eval.mjs";
+import { prioritise } from "../src/prioritise.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const read = (p) => JSON.parse(readFileSync(join(ROOT, p), "utf8"));
@@ -72,6 +73,17 @@ const ruleTable = [
 const rulesDoc = "docs/02-design/policy-rules.md";
 const rulesText = readFileSync(join(ROOT, rulesDoc), "utf8");
 writeIfChanged(rulesDoc, rulesText.replace(/<!-- rules:start -->[\s\S]*?<!-- rules:end -->/, `<!-- rules:start -->\n${ruleTable}\n<!-- rules:end -->`));
+
+// 3b. use-case prioritisation table (discovery workshop)
+const useCases = read("data/use-cases.json");
+writeIfChanged("site/data/use-cases.json", `${JSON.stringify(useCases, null, 1)}\n`);
+const ucTable = [
+  "| Rank | Use case | Value | Feasibility | Risk (5 = low) | Score | Decision | Owner | Why |",
+  "|---|---|---|---|---|---|---|---|---|",
+  ...prioritise(useCases).map((u, i) => `| ${i + 1} | ${u.id} ${u.name} | ${u.value} | ${u.feasibility} | ${u.risk} | ${u.score} | ${u.decision} | ${u.owner} | ${u.note}${u.gate ? ` · **${u.gate}**` : ""} |`),
+].join("\n");
+const ucDoc = "docs/08-workshops-and-training/prioritisation.md";
+writeIfChanged(ucDoc, readFileSync(join(ROOT, ucDoc), "utf8").replace(/<!-- usecases:start -->[\s\S]*?<!-- usecases:end -->/, `<!-- usecases:start -->\n${ucTable}\n<!-- usecases:end -->`));
 
 // 4. numbers
 const int = (n) => Math.round(n).toLocaleString("en-GB");
